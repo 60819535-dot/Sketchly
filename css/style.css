@@ -13,6 +13,8 @@ body {
 
 }
 
+/* HEADER */
+
 header {
 
     display: flex;
@@ -54,6 +56,8 @@ nav a:hover {
 
 }
 
+/* HERO */
+
 .hero {
 
     height: 80vh;
@@ -88,6 +92,8 @@ nav a:hover {
 
 }
 
+/* BOTONES */
+
 button {
 
     padding: 15px 35px;
@@ -111,6 +117,8 @@ button:hover {
     background: #531db1;
 
 }
+
+/* SERVICIOS */
 
 .servicios {
 
@@ -183,6 +191,105 @@ button:hover {
     color: #666;
 
 }
+
+/* CONTENIDO */
+
+main {
+
+    max-width: 900px;
+
+    margin: 50px auto;
+
+    padding: 20px;
+
+}
+
+main h2 {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+
+    color: #6d28d9;
+
+}
+
+/* FORMULARIOS */
+
+form {
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+}
+
+input,
+select,
+textarea {
+
+    padding: 15px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+}
+
+label {
+
+    font-weight: bold;
+
+}
+
+/* TABLAS */
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: white;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+}
+
+th {
+
+    background: #6d28d9;
+
+    color: white;
+
+}
+
+th,
+td {
+
+    padding: 15px;
+
+    border: 1px solid #ddd;
+
+    text-align: center;
+
+}
+
+/* FOOTER */
 
 footer {
 
