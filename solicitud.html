@@ -1,26 +1,76 @@
-<h2>Solicitar diseño</h2>
+<!DOCTYPE html>
+<html lang="es">
 
-<form>
+<head>
 
-    <input type="text" placeholder="Nombre completo">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <input type="email" placeholder="Correo electrónico">
+    <title>Solicitar diseño | Sketchly</title>
 
-    <select>
+    <link rel="stylesheet" href="css/style.css">
 
-        <option>Diseño de personaje</option>
-        <option>Pixel art</option>
-        <option>Ilustración</option>
-        <option>Logo</option>
+</head>
 
-    </select>
+<body>
 
-    <textarea placeholder="Describe tu idea"></textarea>
+    <header>
 
-    <input type="date">
+        <h1>Sketchly</h1>
 
-    <input type="file" multiple>
+        <nav>
 
-    <button>Enviar solicitud</button>
+            <a href="index.html">Inicio</a>
+            <a href="portafolio.html">Portafolio</a>
+            <a href="solicitud.html">Solicitar diseño</a>
+            <a href="historial.html">Historial</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="login.html">Iniciar sesión</a>
+            <a href="registro.html">Registrarse</a>
 
-</form>
+        </nav>
+
+    </header>
+
+    <main>
+
+        <h2>Solicitar diseño</h2>
+
+        <form>
+
+            <input type="text" placeholder="Nombre completo" required>
+
+            <input type="email" placeholder="Correo electrónico" required>
+
+            <select required>
+
+                <option value="">Selecciona un tipo de diseño</option>
+                <option>Diseño de personaje</option>
+                <option>Pixel art</option>
+                <option>Ilustración</option>
+                <option>Logo</option>
+                <option>Otro</option>
+
+            </select>
+
+            <textarea placeholder="Describe tu idea" rows="6" required></textarea>
+
+            <label>Fecha límite:</label>
+
+            <input type="date">
+
+            <label>Imágenes de referencia (opcional):</label>
+
+            <input type="file" multiple accept="image/*">
+
+            <button type="submit">Enviar solicitud</button>
+
+        </form>
+
+    </main>
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
