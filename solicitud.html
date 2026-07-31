@@ -23,10 +23,8 @@
             <a href="index.html">Inicio</a>
             <a href="portafolio.html">Portafolio</a>
             <a href="solicitud.html">Solicitar diseño</a>
-            <a href="historial.html">Historial</a>
             <a href="contacto.html">Contacto</a>
             <a href="login.html">Iniciar sesión</a>
-            <a href="registro.html">Registrarse</a>
 
         </nav>
 
@@ -34,42 +32,54 @@
 
     <main>
 
-        <h2>Solicitar diseño</h2>
+        <div class="formulario">
 
-        <form>
+            <h2>Solicitar diseño 🎨</h2>
 
-            <input type="text" placeholder="Nombre completo" required>
+            <p class="subtitulo">
+                Cuéntanos tu idea y sube imágenes de referencia.
+            </p>
 
-            <input type="email" placeholder="Correo electrónico" required>
+            <form>
 
-            <select required>
+                <label>Nombre completo</label>
+                <input type="text" placeholder="Ingresa tu nombre" required>
 
-                <option value="">Selecciona un tipo de diseño</option>
-                <option>Diseño de personaje</option>
-                <option>Pixel art</option>
-                <option>Ilustración</option>
-                <option>Logo</option>
-                <option>Otro</option>
+                <label>Correo electrónico</label>
+                <input type="email" placeholder="ejemplo@gmail.com" required>
 
-            </select>
+                <label>Tipo de diseño</label>
 
-            <textarea placeholder="Describe tu idea" rows="6" required></textarea>
+                <select required>
 
-            <label>Fecha límite:</label>
+                    <option value="">Selecciona una opción</option>
+                    <option>Diseño de personaje</option>
+                    <option>Pixel art</option>
+                    <option>Ilustración</option>
+                    <option>Logo</option>
+                    <option>Otro</option>
 
-            <input type="date">
+                </select>
 
-            <label>Imágenes de referencia (opcional):</label>
+                <label>Describe tu idea</label>
 
-            <input type="file" multiple accept="image/*">
+                <textarea placeholder="Describe cómo quieres tu diseño..." rows="6" required></textarea>
 
-            <button type="submit">Enviar solicitud</button>
+                <label>Fecha límite</label>
 
-        </form>
+                <input type="date">
+
+                <label>Imágenes de referencia (opcional)</label>
+
+                <input type="file" multiple accept="image/*">
+
+                <button type="submit">Enviar solicitud</button>
+
+            </form>
+
+        </div>
 
     </main>
-
-    <script src="js/script.js"></script>
 
 </body>
 
