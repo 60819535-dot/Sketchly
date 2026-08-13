@@ -1,105 +1,336 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Sketchly</title>
+    <title>Sketchly | Dale vida a tus ideas</title>
 
     <link rel="stylesheet" href="css/style.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <header>
+<!-- ================= HEADER ================= -->
 
-        <h1>Sketchly</h1>
+<header class="header">
 
-        <nav>
+    <a href="index.html" class="brand">
 
-            <a href="index.html">Inicio</a>
-            <a href="portafolio.html">Portafolio</a>
-            <a href="solicitud.html">Solicitar diseño</a>
-            <a href="historial.html">Historial</a>
-            <a href="contacto.html">Contacto</a>
-            <a href="login.html">Iniciar sesión</a>
-            <a href="registro.html">Registrarse</a>
+        <div class="logo-box">
+            <img src="img/gato.png" alt="Sketchly">
+        </div>
 
-        </nav>
+        <div class="brand-text">
+            <strong>Sketch<span>ly</span></strong>
+            <small>Dale vida a tus ideas</small>
+        </div>
 
-    </header>
+    </a>
 
-    <section class="hero">
 
-        <h2>Donde tus ideas cobran vida</h2>
+    <nav class="nav">
 
-        <p>
-            Explora el portafolio y solicita diseños personalizados.
-        </p>
+        <a href="index.html" class="active">Inicio</a>
 
-        <a href="solicitud.html">
-            <button>Solicitar diseño</button>
+        <a href="portafolio.html">
+            Portafolio
         </a>
 
-    </section>
+        <a href="solicitud.html">
+            Solicitar diseño
+        </a>
 
-    <section class="servicios">
+        <a href="historial.html">
+            Historial
+        </a>
 
-        <h2>Nuestros servicios</h2>
+        <a href="contacto.html">
+            Contacto
+        </a>
 
-        <div class="cards">
+    </nav>
 
-            <div class="card">
 
-                <h3>Diseño de personajes</h3>
+    <a href="login.html" class="user-button">
 
-                <div class="placeholder">
-                    Imagen
-                </div>
+        <span class="user-head"></span>
+        <span class="user-body"></span>
 
-                <p>Personajes originales y personalizados.</p>
+    </a>
 
-            </div>
+</header>
 
-            <div class="card">
 
-                <h3>Pixel Art</h3>
+<!-- ================= HERO ================= -->
 
-                <div class="placeholder">
-                    Imagen
-                </div>
+<main>
 
-                <p>Sprites y diseños retro.</p>
+<section class="hero">
 
-            </div>
+    <div class="hero-background bg-one"></div>
+    <div class="hero-background bg-two"></div>
 
-            <div class="card">
 
-                <h3>Ilustraciones</h3>
+    <div class="hero-content">
 
-                <div class="placeholder">
-                    Imagen
-                </div>
+        <div class="hero-text">
 
-                <p>Arte digital para proyectos creativos.</p>
+            <h1>
+                Donde tus ideas
+                <br>
+                cobran <span>vida</span>
+            </h1>
+
+
+            <p>
+                Explora el portafolio y solicita
+                <br>
+                diseños personalizados.
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a href="solicitud.html" class="btn btn-primary">
+                    ✦ &nbsp; Solicitar diseño
+                </a>
+
+                <a href="portafolio.html" class="btn btn-secondary">
+                    Ver portafolio
+                </a>
 
             </div>
 
         </div>
 
-    </section>
 
-    <footer>
+        <!-- GATO -->
 
-        <p>© 2026 Sketchly. Todos los derechos reservados.</p>
+        <div class="hero-cat">
 
-    </footer>
+            <div class="cat-glow"></div>
 
-    <script src="js/script.js"></script>
+            <img src="img/gato.png"
+                 alt="Mascota de Sketchly">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SERVICIOS ================= -->
+
+<section class="services">
+
+    <div class="section-title">
+
+        <span>¿QUÉ PUEDES HACER?</span>
+
+        <h2>
+            Convierte una idea
+            <br>
+            en algo <strong>visual.</strong>
+        </h2>
+
+    </div>
+
+
+    <div class="service-grid">
+
+        <a href="portafolio.html" class="service-card">
+
+            <div class="service-icon">
+                ✦
+            </div>
+
+            <h3>Explora el portafolio</h3>
+
+            <p>
+                Descubre diferentes estilos y
+                trabajos realizados anteriormente.
+            </p>
+
+            <span class="card-link">
+                Ver trabajos →
+            </span>
+
+        </a>
+
+
+        <a href="solicitud.html" class="service-card">
+
+            <div class="service-icon">
+                ✎
+            </div>
+
+            <h3>Solicita tu diseño</h3>
+
+            <p>
+                Cuéntanos tu idea, agrega referencias
+                y solicita un diseño personalizado.
+            </p>
+
+            <span class="card-link">
+                Crear solicitud →
+            </span>
+
+        </a>
+
+
+        <a href="historial.html" class="service-card">
+
+            <div class="service-icon">
+                ◷
+            </div>
+
+            <h3>Consulta tus pedidos</h3>
+
+            <p>
+                Revisa tus solicitudes, pagos y
+                el estado de tus diseños.
+            </p>
+
+            <span class="card-link">
+                Ver historial →
+            </span>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PORTAFOLIO DESTACADO ================= -->
+
+<section class="featured">
+
+    <div class="featured-header">
+
+        <div>
+
+            <span>TRABAJOS DESTACADOS</span>
+
+            <h2>
+                Algunas ideas que
+                <strong>ya cobraron vida.</strong>
+            </h2>
+
+        </div>
+
+        <a href="portafolio.html" class="outline-link">
+            Ver todo →
+        </a>
+
+    </div>
+
+
+    <div class="portfolio-preview">
+
+        <div class="portfolio-item item-purple">
+            <div class="fake-art">
+                <span>PERSONAJES</span>
+            </div>
+        </div>
+
+
+        <div class="portfolio-item item-dark">
+            <div class="fake-art">
+                <span>PIXEL ART</span>
+            </div>
+        </div>
+
+
+        <div class="portfolio-item item-light">
+            <div class="fake-art">
+                <span>LOGOTIPOS</span>
+            </div>
+        </div>
+
+
+        <div class="portfolio-item item-pink">
+            <div class="fake-art">
+                <span>ESCENARIOS</span>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+    <div>
+
+        <span>¿TIENES UNA IDEA?</span>
+
+        <h2>
+            Hagámosla realidad.
+        </h2>
+
+        <p>
+            Cuéntanos qué tienes en mente
+            y empieza tu proyecto.
+        </p>
+
+    </div>
+
+
+    <a href="solicitud.html" class="btn btn-white">
+        Solicitar diseño →
+    </a>
+
+</section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-brand">
+
+        <strong>
+            Sketch<span>ly</span>
+        </strong>
+
+        <p>
+            Dale vida a tus ideas.
+        </p>
+
+    </div>
+
+
+    <div class="footer-links">
+
+        <a href="index.html">Inicio</a>
+        <a href="portafolio.html">Portafolio</a>
+        <a href="solicitud.html">Solicitar diseño</a>
+        <a href="contacto.html">Contacto</a>
+
+    </div>
+
+
+    <p class="copyright">
+        © 2026 Sketchly. Todos los derechos reservados.
+    </p>
+
+</footer>
+
+
+<script src="js/script.js"></script>
 
 </body>
-
 </html>
