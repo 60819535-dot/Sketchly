@@ -4,82 +4,616 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Solicitar diseño | Sketchly</title>
 
-    <link rel="stylesheet" href="css/style.css">
+
+    <!-- FUENTE -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- CSS GENERAL -->
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+
+    <!-- CSS EXCLUSIVO DE SOLICITAR DISEÑO -->
+
+    <link
+        rel="stylesheet"
+        href="css/solicitud.css"
+    >
 
 </head>
 
+
 <body>
 
-    <header>
 
-        <h1>Sketchly</h1>
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-        <nav>
+<header class="solicitud-header">
 
-            <a href="index.html">Inicio</a>
-            <a href="portafolio.html">Portafolio</a>
-            <a href="solicitud.html">Solicitar diseño</a>
-            <a href="contacto.html">Contacto</a>
-            <a href="login.html">Iniciar sesión</a>
 
-        </nav>
+    <!-- LOGO -->
 
-    </header>
+    <a
+        href="index.html"
+        class="solicitud-logo"
+    >
 
-    <main>
+        <img
+            src="img/logo.png"
+            alt="Sketchly"
+        >
 
-        <div class="formulario">
+    </a>
 
-            <h2>Solicitar diseño 🎨</h2>
 
-            <p class="subtitulo">
-                Cuéntanos tu idea y sube imágenes de referencia.
-            </p>
+    <!-- MENÚ -->
 
-            <form>
+    <nav class="solicitud-nav">
 
-                <label>Nombre completo</label>
-                <input type="text" placeholder="Ingresa tu nombre" required>
+        <a href="index.html">
+            Inicio
+        </a>
 
-                <label>Correo electrónico</label>
-                <input type="email" placeholder="ejemplo@gmail.com" required>
+        <a href="portafolio.html">
+            Portafolio
+        </a>
 
-                <label>Tipo de diseño</label>
+        <a
+            href="solicitud.html"
+            class="active"
+        >
+            Solicitar diseño
+        </a>
 
-                <select required>
+        <a href="historial.html">
+            Historial
+        </a>
 
-                    <option value="">Selecciona una opción</option>
-                    <option>Diseño de personaje</option>
-                    <option>Pixel art</option>
-                    <option>Ilustración</option>
-                    <option>Logo</option>
-                    <option>Otro</option>
+        <a href="contacto.html">
+            Contacto
+        </a>
 
-                </select>
+    </nav>
 
-                <label>Describe tu idea</label>
 
-                <textarea placeholder="Describe cómo quieres tu diseño..." rows="6" required></textarea>
+    <!-- LOGIN -->
 
-                <label>Fecha límite</label>
+    <a
+        href="login.html"
+        class="solicitud-login"
+    >
 
-                <input type="date">
+        <img
+            src="img/login.png"
+            alt="Iniciar sesión"
+        >
 
-                <label>Imágenes de referencia (opcional)</label>
+    </a>
 
-                <input type="file" multiple accept="image/*">
+</header>
 
-                <button type="submit">Enviar solicitud</button>
+
+
+<!-- =====================================================
+     CONTENIDO PRINCIPAL
+===================================================== -->
+
+<main class="solicitud-page">
+
+
+    <!-- DECORACIONES DEL FONDO -->
+
+    <div class="solicitud-bg bg-left"></div>
+
+    <div class="solicitud-bg bg-right"></div>
+
+
+
+    <section class="solicitud-container">
+
+
+        <!-- =================================================
+             PARTE IZQUIERDA
+        ================================================== -->
+
+        <div class="solicitud-left">
+
+
+            <div class="solicitud-title">
+
+                <h1>
+                    Solicitar
+                    <span>diseño</span>
+                </h1>
+
+                <p>
+                    Cuéntanos tu idea y sube imágenes
+                    <br>
+                    de referencia.
+                </p>
+
+            </div>
+
+
+            <!-- GATO -->
+
+            <div class="solicitud-cat">
+
+                <div class="cat-light"></div>
+
+                <img
+                    src="img/gato.png"
+                    alt="Mascota de Sketchly"
+                >
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             FORMULARIO
+        ================================================== -->
+
+        <div class="solicitud-form-box">
+
+
+            <form
+                id="solicitudForm"
+                class="solicitud-form"
+            >
+
+
+                <!-- FILA 1 -->
+
+                <div class="form-row">
+
+
+                    <!-- NOMBRE -->
+
+                    <div class="form-group">
+
+                        <label for="nombre">
+                            Nombre completo
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nombre"
+                            name="nombre"
+                            placeholder="Ingresa tu nombre"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="correo">
+                            Correo electrónico
+                        </label>
+
+                        <input
+                            type="email"
+                            id="correo"
+                            name="correo"
+                            placeholder="ejemplo@gmail.com"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- TIPO DE DISEÑO -->
+
+                <div class="form-group">
+
+                    <label for="tipo">
+                        Tipo de diseño
+                    </label>
+
+                    <div class="select-wrapper">
+
+                        <select
+                            id="tipo"
+                            name="tipo"
+                            required
+                        >
+
+                            <option
+                                value=""
+                                selected
+                                disabled
+                            >
+                                Selecciona una opción
+                            </option>
+
+                            <option value="personajes">
+                                Personajes
+                            </option>
+
+                            <option value="escenarios">
+                                Escenarios
+                            </option>
+
+                            <option value="logotipos">
+                                Logotipos
+                            </option>
+
+                            <option value="pixel-art">
+                                Pixel Art
+                            </option>
+
+                            <option value="ilustracion">
+                                Ilustración
+                            </option>
+
+                            <option value="otro">
+                                Otro
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- DESCRIPCIÓN -->
+
+                <div class="form-group">
+
+                    <label for="descripcion">
+                        Describe tu idea
+                    </label>
+
+                    <textarea
+                        id="descripcion"
+                        name="descripcion"
+                        placeholder="Describe cómo quieres tu diseño..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+
+                <!-- FECHA -->
+
+                <div class="form-group">
+
+                    <label for="fecha">
+                        Fecha límite
+                    </label>
+
+                    <input
+                        type="date"
+                        id="fecha"
+                        name="fecha"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- ARCHIVOS -->
+
+                <div class="form-group">
+
+                    <label for="referencias">
+
+                        Imágenes de referencia
+
+                        <span>
+                            (opcional)
+                        </span>
+
+                    </label>
+
+
+                    <div class="file-input">
+
+                        <div class="file-icon">
+                            ▧
+                        </div>
+
+                        <span id="fileText">
+                            Ningún archivo seleccionado
+                        </span>
+
+                        <input
+                            type="file"
+                            id="referencias"
+                            name="referencias"
+                            accept="image/*"
+                            multiple
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BOTÓN -->
+
+                <button
+                    type="submit"
+                    class="submit-button"
+                >
+
+                    <span>
+                        ➤
+                    </span>
+
+                    Enviar solicitud
+
+                </button>
+
+
+                <!-- MENSAJE -->
+
+                <div
+                    id="formMessage"
+                    class="form-message"
+                ></div>
+
 
             </form>
 
         </div>
 
-    </main>
+    </section>
+
+</main>
+
+
+
+<!-- =====================================================
+     CHATBOT
+===================================================== -->
+
+<div class="chatbot">
+
+
+    <button
+        class="chatbot-button"
+        id="chatbotButton"
+        aria-label="Abrir asistente"
+    >
+
+        <span>✦</span>
+
+    </button>
+
+
+
+    <div
+        class="chatbot-window"
+        id="chatbotWindow"
+    >
+
+
+        <div class="chatbot-header">
+
+            <div>
+
+                <strong>
+                    Sketchly
+                </strong>
+
+                <small>
+                    Asistente virtual
+                </small>
+
+            </div>
+
+
+            <button
+                id="closeChat"
+                aria-label="Cerrar"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <div
+            class="chatbot-messages"
+            id="chatMessages"
+        >
+
+            <div class="bot-message">
+
+                ¡Hola! 👋
+
+                <br><br>
+
+                Soy el asistente de Sketchly.
+                ¿En qué puedo ayudarte?
+
+            </div>
+
+        </div>
+
+
+
+        <div class="chatbot-options">
+
+            <button
+                onclick="botReply('portafolio')"
+            >
+                🎨 Ver estilos
+            </button>
+
+
+            <button
+                onclick="botReply('solicitud')"
+            >
+                ✎ Solicitar diseño
+            </button>
+
+
+            <button
+                onclick="botReply('contacto')"
+            >
+                💬 Contactar artista
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="js/script.js"></script>
+
+
+
+<!-- JAVASCRIPT DE ESTA PÁGINA -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        /* ==========================================
+           ARCHIVOS
+        ========================================== */
+
+        const fileInput =
+            document.getElementById("referencias");
+
+        const fileText =
+            document.getElementById("fileText");
+
+
+        if (fileInput) {
+
+            fileInput.addEventListener(
+                "change",
+                function () {
+
+                    if (this.files.length === 0) {
+
+                        fileText.textContent =
+                            "Ningún archivo seleccionado";
+
+                    }
+
+                    else if (this.files.length === 1) {
+
+                        fileText.textContent =
+                            this.files[0].name;
+
+                    }
+
+                    else {
+
+                        fileText.textContent =
+                            this.files.length +
+                            " archivos seleccionados";
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        /* ==========================================
+           FORMULARIO
+        ========================================== */
+
+        const form =
+            document.getElementById("solicitudForm");
+
+        const message =
+            document.getElementById("formMessage");
+
+
+        if (form) {
+
+            form.addEventListener(
+                "submit",
+                function (event) {
+
+                    event.preventDefault();
+
+
+                    message.textContent =
+                        "✓ Solicitud preparada correctamente.";
+
+                    message.classList.add("show");
+
+
+                    /*
+                       Por ahora GitHub Pages no tiene
+                       una base de datos conectada.
+
+                       Más adelante podemos conectar
+                       este formulario con tu sistema.
+                    */
+
+                }
+            );
+
+        }
+
+    }
+
+);
+
+</script>
+
 
 </body>
 
