@@ -4,39 +4,615 @@
 <head>
 
     <meta charset="UTF-8">
-    <title>Portafolio | Sketchly</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Sketchly | Portafolio</title>
+
+    <!-- CSS GENERAL -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- CSS EXCLUSIVO DEL PORTAFOLIO -->
+    <link rel="stylesheet" href="css/portafolio.css">
+
+    <!-- FUENTE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 
 </head>
 
+
 <body>
 
-    <header>
 
-        <h1>Sketchly</h1>
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-        <nav>
+<header class="header">
 
-            <a href="index.html">Inicio</a>
-            <a href="portafolio.html">Portafolio</a>
-            <a href="solicitud.html">Solicitar diseño</a>
-            <a href="historial.html">Historial</a>
-            <a href="contacto.html">Contacto</a>
-            <a href="login.html">Iniciar sesión</a>
-            <a href="registro.html">Registrarse</a>
+    <a href="index.html" class="brand">
 
-        </nav>
+        <img
+            src="img/logo.png"
+            alt="Sketchly"
+            class="main-logo"
+        >
 
-    </header>
+    </a>
 
-    <main>
 
-        <h2>Portafolio</h2>
+    <nav class="nav">
 
-    </main>
+        <a href="index.html">
+            Inicio
+        </a>
 
-    <script src="js/script.js"></script>
+        <a href="portafolio.html" class="active">
+            Portafolio
+        </a>
+
+        <a href="solicitud.html">
+            Solicitar diseño
+        </a>
+
+        <a href="historial.html">
+            Historial
+        </a>
+
+        <a href="contacto.html">
+            Contacto
+        </a>
+
+    </nav>
+
+
+    <!-- LOGIN -->
+
+    <a
+        href="login.html"
+        class="user-button"
+        title="Iniciar sesión"
+    >
+
+        <img
+            src="img/login.png"
+            alt="Iniciar sesión"
+        >
+
+    </a>
+
+</header>
+
+
+
+<!-- =====================================================
+     PORTAFOLIO
+===================================================== -->
+
+<main class="portfolio-page">
+
+
+    <!-- =================================================
+         HERO DEL PORTAFOLIO
+    ================================================== -->
+
+    <section class="portfolio-hero">
+
+
+        <!-- DECORACIÓN -->
+
+        <div class="portfolio-decoration decoration-left"></div>
+
+        <div class="portfolio-decoration decoration-right"></div>
+
+
+        <div class="portfolio-hero-content">
+
+
+            <!-- TEXTO -->
+
+            <div class="portfolio-text">
+
+                <span class="portfolio-label">
+                    PORTAFOLIO
+                </span>
+
+
+                <h1>
+
+                    Explora nuestros
+                    <br>
+
+                    <strong>estilos.</strong>
+
+                </h1>
+
+
+                <p>
+
+                    Descubre diferentes estilos de diseño
+                    <br>
+                    y encuentra la inspiración para tu idea.
+
+                </p>
+
+
+                <a
+                    href="#trabajos"
+                    class="portfolio-button"
+                >
+
+                    Ver portafolio
+
+                    <span>→</span>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- ILUSTRACIÓN -->
+
+            <div class="portfolio-cat">
+
+
+                <div class="cat-purple-glow"></div>
+
+
+                <!-- GATO -->
+
+                <img
+                    src="img/gato.png"
+                    alt="Mascota de Sketchly"
+                >
+
+
+                <!-- CUADERNO -->
+
+                <div class="portfolio-notebook">
+
+                    <div class="notebook-ring ring-1"></div>
+                    <div class="notebook-ring ring-2"></div>
+                    <div class="notebook-ring ring-3"></div>
+                    <div class="notebook-ring ring-4"></div>
+                    <div class="notebook-ring ring-5"></div>
+                    <div class="notebook-ring ring-6"></div>
+
+
+                    <span class="notebook-star">
+                        ☆
+                    </span>
+
+                    <span class="notebook-smile">
+                        ☺
+                    </span>
+
+                    <span class="notebook-heart">
+                        ♡
+                    </span>
+
+                </div>
+
+
+                <!-- DETALLES -->
+
+                <div class="spark spark-1">
+                    ✦
+                </div>
+
+                <div class="spark spark-2">
+                    ✦
+                </div>
+
+                <div class="spark spark-3">
+                    ✦
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         TRABAJOS
+    ================================================== -->
+
+    <section
+        class="portfolio-works"
+        id="trabajos"
+    >
+
+
+        <div class="portfolio-grid">
+
+
+            <!-- ==========================================
+                 PERSONAJES
+            =========================================== -->
+
+            <a
+                href="solicitud.html"
+                class="portfolio-card"
+            >
+
+                <div class="portfolio-number">
+                    01
+                </div>
+
+
+                <div class="portfolio-image">
+
+                    <img
+                        src="img/portfolio/personajes.png"
+                        alt="Diseño de personajes"
+                    >
+
+                </div>
+
+
+                <div class="portfolio-card-content">
+
+                    <h2>
+                        Personajes
+                    </h2>
+
+                    <p>
+                        Diseños personalizados para
+                        dar vida a tus personajes.
+                    </p>
+
+                </div>
+
+
+                <span class="portfolio-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <!-- ==========================================
+                 ESCENARIOS
+            =========================================== -->
+
+            <a
+                href="solicitud.html"
+                class="portfolio-card"
+            >
+
+                <div class="portfolio-number">
+                    02
+                </div>
+
+
+                <div class="portfolio-image">
+
+                    <img
+                        src="img/portfolio/escenarios.png"
+                        alt="Diseño de escenarios"
+                    >
+
+                </div>
+
+
+                <div class="portfolio-card-content">
+
+                    <h2>
+                        Escenarios
+                    </h2>
+
+                    <p>
+                        Crea lugares y ambientes
+                        para acompañar tus ideas.
+                    </p>
+
+                </div>
+
+
+                <span class="portfolio-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <!-- ==========================================
+                 LOGOTIPOS
+            =========================================== -->
+
+            <a
+                href="solicitud.html"
+                class="portfolio-card"
+            >
+
+                <div class="portfolio-number">
+                    03
+                </div>
+
+
+                <div class="portfolio-image">
+
+                    <img
+                        src="img/portfolio/logotipos.png"
+                        alt="Diseño de logotipos"
+                    >
+
+                </div>
+
+
+                <div class="portfolio-card-content">
+
+                    <h2>
+                        Logotipos
+                    </h2>
+
+                    <p>
+                        Identidades visuales pensadas
+                        para representar tu proyecto.
+                    </p>
+
+                </div>
+
+
+                <span class="portfolio-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+
+            <!-- ==========================================
+                 PIXEL ART
+            =========================================== -->
+
+            <a
+                href="solicitud.html"
+                class="portfolio-card"
+            >
+
+                <div class="portfolio-number">
+                    04
+                </div>
+
+
+                <div class="portfolio-image">
+
+                    <img
+                        src="img/portfolio/pixelart.png"
+                        alt="Diseño Pixel Art"
+                    >
+
+                </div>
+
+
+                <div class="portfolio-card-content">
+
+                    <h2>
+                        Pixel Art
+                    </h2>
+
+                    <p>
+                        Diseños con una estética retro
+                        y llena de personalidad.
+                    </p>
+
+                </div>
+
+
+                <span class="portfolio-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         CTA
+    ================================================== -->
+
+    <section class="portfolio-cta">
+
+        <div>
+
+            <span>
+                ¿TIENES UNA IDEA?
+            </span>
+
+            <h2>
+                Hagámosla realidad.
+            </h2>
+
+            <p>
+                Cuéntanos qué tienes en mente
+                y empieza tu proyecto.
+            </p>
+
+        </div>
+
+
+        <a
+            href="solicitud.html"
+            class="portfolio-cta-button"
+        >
+
+            Solicitar diseño →
+
+        </a>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+
+    <div class="footer-brand">
+
+        <img
+            src="img/logo.png"
+            alt="Sketchly"
+        >
+
+        <p>
+            Dale vida a tus ideas.
+        </p>
+
+    </div>
+
+
+    <div class="footer-links">
+
+        <a href="index.html">
+            Inicio
+        </a>
+
+        <a href="portafolio.html">
+            Portafolio
+        </a>
+
+        <a href="solicitud.html">
+            Solicitar diseño
+        </a>
+
+        <a href="contacto.html">
+            Contacto
+        </a>
+
+    </div>
+
+
+    <p class="copyright">
+
+        © 2026 Sketchly.
+        Todos los derechos reservados.
+
+    </p>
+
+
+</footer>
+
+
+
+<!-- =====================================================
+     CHATBOT
+===================================================== -->
+
+<div class="chatbot">
+
+
+    <button
+        class="chatbot-button"
+        id="chatbotButton"
+    >
+
+        <span>✦</span>
+
+    </button>
+
+
+    <div
+        class="chatbot-window"
+        id="chatbotWindow"
+    >
+
+
+        <div class="chatbot-header">
+
+            <div>
+
+                <strong>
+                    Sketchly
+                </strong>
+
+                <small>
+                    Asistente virtual
+                </small>
+
+            </div>
+
+
+            <button id="closeChat">
+                ×
+            </button>
+
+        </div>
+
+
+
+        <div
+            class="chatbot-messages"
+            id="chatMessages"
+        >
+
+            <div class="bot-message">
+
+                ¡Hola! 👋
+
+                <br><br>
+
+                Soy el asistente de Sketchly.
+                ¿En qué puedo ayudarte?
+
+            </div>
+
+        </div>
+
+
+
+        <div class="chatbot-options">
+
+            <button onclick="botReply('portafolio')">
+                🎨 Ver estilos
+            </button>
+
+            <button onclick="botReply('solicitud')">
+                ✎ Solicitar diseño
+            </button>
+
+            <button onclick="botReply('contacto')">
+                💬 Contactar artista
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="js/script.js"></script>
+
 
 </body>
 
