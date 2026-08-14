@@ -1,1 +1,885 @@
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Historial | Sketchly</title>
+
+    <!-- CSS GENERAL -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- CSS DEL HISTORIAL -->
+    <link rel="stylesheet" href="css/historial.css">
+
+    <!-- FUENTE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER ORIGINAL
+===================================================== -->
+
+<header class="header">
+
+    <a href="index.html" class="brand">
+
+        <img
+            src="img/logo.png"
+            alt="Sketchly"
+            class="main-logo"
+        >
+
+    </a>
+
+
+    <nav class="nav">
+
+        <a href="index.html">
+            Inicio
+        </a>
+
+        <a href="portafolio.html">
+            Portafolio
+        </a>
+
+        <a href="solicitud.html">
+            Solicitar diseño
+        </a>
+
+        <a href="historial.html" class="active">
+            Historial
+        </a>
+
+        <a href="contacto.html">
+            Contacto
+        </a>
+
+    </nav>
+
+
+    <a
+        href="login.html"
+        class="user-button"
+        title="Iniciar sesión"
+    >
+
+        <img
+            src="img/login.png"
+            alt="Iniciar sesión"
+        >
+
+    </a>
+
+</header>
+
+
+
+<!-- =====================================================
+     HISTORIAL
+===================================================== -->
+
+<main class="history-page">
+
+
+    <!-- DECORACIONES -->
+
+    <div class="history-bg history-bg-left"></div>
+
+    <div class="history-bg history-bg-right"></div>
+
+
+
+    <!-- =================================================
+         ENCABEZADO
+    ================================================== -->
+
+    <section class="history-header">
+
+        <div>
+
+            <span class="history-label">
+                MIS SOLICITUDES
+            </span>
+
+            <h1>
+                Tu historial
+                <span>de diseños.</span>
+            </h1>
+
+            <p>
+                Consulta tus pedidos, revisa su progreso
+                y conoce el estado de cada diseño.
+            </p>
+
+        </div>
+
+
+        <a
+            href="solicitud.html"
+            class="new-request-button"
+        >
+
+            <span>✦</span>
+
+            Nueva solicitud
+
+        </a>
+
+    </section>
+
+
+
+    <!-- =================================================
+         RESUMEN
+    ================================================== -->
+
+    <section class="history-summary">
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                ✦
+            </div>
+
+            <div>
+
+                <span>
+                    PEDIDOS
+                </span>
+
+                <strong id="totalOrders">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                ◷
+            </div>
+
+            <div>
+
+                <span>
+                    EN PROCESO
+                </span>
+
+                <strong id="activeOrders">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    FINALIZADOS
+                </span>
+
+                <strong id="finishedOrders">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         LISTA DE PEDIDOS
+    ================================================== -->
+
+    <section class="orders-section">
+
+
+        <div class="orders-title">
+
+            <div>
+
+                <span>
+                    SEGUIMIENTO
+                </span>
+
+                <h2>
+                    Tus pedidos
+                </h2>
+
+            </div>
+
+            <span
+                class="demo-note"
+                id="demoNote"
+            >
+                Vista de demostración
+            </span>
+
+        </div>
+
+
+
+        <div
+            class="orders-list"
+            id="ordersList"
+        >
+
+            <!-- LOS PEDIDOS SE CREAN CON JAVASCRIPT -->
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     CHATBOT
+===================================================== -->
+
+<div class="chatbot">
+
+    <button
+        class="chatbot-button"
+        id="chatbotButton"
+        type="button"
+        aria-label="Abrir asistente"
+    >
+
+        <span>✦</span>
+
+    </button>
+
+
+    <div
+        class="chatbot-window"
+        id="chatbotWindow"
+    >
+
+        <div class="chatbot-header">
+
+            <div>
+
+                <strong>
+                    Sketchly
+                </strong>
+
+                <small>
+                    Asistente virtual
+                </small>
+
+            </div>
+
+            <button
+                id="closeChat"
+                type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div
+            class="chatbot-messages"
+            id="chatMessages"
+        >
+
+            <div class="bot-message">
+
+                ¡Hola! 👋
+                <br><br>
+
+                Puedes consultar aquí el estado
+                de tus solicitudes.
+
+            </div>
+
+        </div>
+
+
+        <div class="chatbot-options">
+
+            <button
+                type="button"
+                onclick="historyBot('estado')"
+            >
+                ◷ ¿Cómo va mi pedido?
+            </button>
+
+            <button
+                type="button"
+                onclick="historyBot('solicitud')"
+            >
+                ✎ Nueva solicitud
+            </button>
+
+            <button
+                type="button"
+                onclick="historyBot('contacto')"
+            >
+                💬 Contactar artista
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   PEDIDOS DE DEMOSTRACIÓN
+===================================================== */
+
+const demoOrders = [
+
+    {
+        id: "SK-001",
+        type: "Personaje",
+        description: "Diseño personalizado de un personaje con estilo ilustración.",
+        requestDate: "10/08/2026",
+        deadline: "20/08/2026",
+        status: "En proceso",
+        progress: 65,
+        estimated: "3 días aproximadamente",
+        demo: true
+    },
+
+    {
+        id: "SK-002",
+        type: "Logotipo",
+        description: "Diseño de una identidad visual para un proyecto personal.",
+        requestDate: "04/08/2026",
+        deadline: "12/08/2026",
+        status: "Finalizado",
+        progress: 100,
+        estimated: "Pedido terminado",
+        demo: true
+    }
+
+];
+
+
+
+/* =====================================================
+   OBTENER PEDIDOS
+===================================================== */
+
+function getOrders() {
+
+    const savedOrders =
+        JSON.parse(
+            localStorage.getItem("sketchlySolicitudes")
+        );
+
+
+    if (
+        savedOrders &&
+        Array.isArray(savedOrders) &&
+        savedOrders.length > 0
+    ) {
+
+        return savedOrders;
+
+    }
+
+
+    return demoOrders;
+
+}
+
+
+
+/* =====================================================
+   ICONO SEGÚN ESTADO
+===================================================== */
+
+function getStatusIcon(status) {
+
+    if (status === "Finalizado") {
+
+        return "✓";
+
+    }
+
+    if (status === "En proceso") {
+
+        return "◷";
+
+    }
+
+    return "•";
+
+}
+
+
+
+/* =====================================================
+   MOSTRAR PEDIDOS
+===================================================== */
+
+function renderOrders() {
+
+    const orders =
+        getOrders();
+
+
+    const ordersList =
+        document.getElementById("ordersList");
+
+
+    ordersList.innerHTML = "";
+
+
+
+    orders.forEach((order, index) => {
+
+
+        const card =
+            document.createElement("article");
+
+
+        card.className =
+            "order-card";
+
+
+        let statusClass =
+            "status-pending";
+
+
+        if (order.status === "En proceso") {
+
+            statusClass =
+                "status-process";
+
+        }
+
+
+        if (order.status === "Finalizado") {
+
+            statusClass =
+                "status-finished";
+
+        }
+
+
+
+        card.innerHTML = `
+
+            <div class="order-top">
+
+                <div>
+
+                    <span class="order-number">
+                        PEDIDO #${order.id || "SK-" + (index + 1)}
+                    </span>
+
+                    <h3>
+                        ${order.type || "Diseño personalizado"}
+                    </h3>
+
+                </div>
+
+
+                <span class="order-status ${statusClass}">
+
+                    <span>
+                        ${getStatusIcon(order.status)}
+                    </span>
+
+                    ${order.status || "Recibido"}
+
+                </span>
+
+            </div>
+
+
+
+            <p class="order-description">
+
+                ${order.description || "Sin descripción disponible."}
+
+            </p>
+
+
+
+            <div class="order-info">
+
+                <div>
+
+                    <span>
+                        SOLICITADO
+                    </span>
+
+                    <strong>
+                        ${order.requestDate || "Pendiente"}
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        FECHA LÍMITE
+                    </span>
+
+                    <strong>
+                        ${order.deadline || "Pendiente"}
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        TIEMPO ESTIMADO
+                    </span>
+
+                    <strong>
+                        ${order.estimated || "Por confirmar"}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="progress-area">
+
+                <div class="progress-header">
+
+                    <span>
+                        Progreso del pedido
+                    </span>
+
+                    <strong>
+                        ${order.progress || 0}%
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress-fill"
+                        style="width: ${order.progress || 0}%"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="order-timeline">
+
+                <div class="timeline-step completed">
+
+                    <div class="timeline-dot">
+                        ✓
+                    </div>
+
+                    <span>
+                        Solicitud recibida
+                    </span>
+
+                </div>
+
+
+                <div class="timeline-line
+                    ${order.progress >= 30 ? "line-active" : ""}">
+                </div>
+
+
+                <div class="timeline-step
+                    ${order.progress >= 30 ? "completed" : ""}">
+
+                    <div class="timeline-dot">
+                        ${order.progress >= 30 ? "✓" : "2"}
+                    </div>
+
+                    <span>
+                        En revisión
+                    </span>
+
+                </div>
+
+
+                <div class="timeline-line
+                    ${order.progress >= 60 ? "line-active" : ""}">
+                </div>
+
+
+                <div class="timeline-step
+                    ${order.progress >= 60 ? "completed" : ""}">
+
+                    <div class="timeline-dot">
+                        ${order.progress >= 60 ? "✓" : "3"}
+                    </div>
+
+                    <span>
+                        En proceso
+                    </span>
+
+                </div>
+
+
+                <div class="timeline-line
+                    ${order.progress >= 100 ? "line-active" : ""}">
+                </div>
+
+
+                <div class="timeline-step
+                    ${order.progress >= 100 ? "completed" : ""}">
+
+                    <div class="timeline-dot">
+                        ${order.progress >= 100 ? "✓" : "4"}
+                    </div>
+
+                    <span>
+                        Finalizado
+                    </span>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        ordersList.appendChild(card);
+
+    });
+
+
+
+    updateSummary(orders);
+
+}
+
+
+
+/* =====================================================
+   RESUMEN
+===================================================== */
+
+function updateSummary(orders) {
+
+    const total =
+        orders.length;
+
+
+    const active =
+        orders.filter(
+            order =>
+                order.status === "En proceso"
+        ).length;
+
+
+    const finished =
+        orders.filter(
+            order =>
+                order.status === "Finalizado"
+        ).length;
+
+
+    document.getElementById("totalOrders")
+        .textContent = total;
+
+
+    document.getElementById("activeOrders")
+        .textContent = active;
+
+
+    document.getElementById("finishedOrders")
+        .textContent = finished;
+
+
+    const saved =
+        localStorage.getItem(
+            "sketchlySolicitudes"
+        );
+
+
+    const demoNote =
+        document.getElementById("demoNote");
+
+
+    if (saved) {
+
+        demoNote.textContent =
+            "Pedidos guardados en este navegador";
+
+    } else {
+
+        demoNote.textContent =
+            "Vista de demostración";
+
+    }
+
+}
+
+
+
+/* =====================================================
+   CHATBOT
+===================================================== */
+
+const chatbotButton =
+    document.getElementById("chatbotButton");
+
+
+const chatbotWindow =
+    document.getElementById("chatbotWindow");
+
+
+const closeChat =
+    document.getElementById("closeChat");
+
+
+chatbotButton.addEventListener(
+    "click",
+    function () {
+
+        chatbotWindow.classList.toggle("show");
+
+    }
+);
+
+
+closeChat.addEventListener(
+    "click",
+    function () {
+
+        chatbotWindow.classList.remove("show");
+
+    }
+);
+
+
+
+function historyBot(type) {
+
+    const messages =
+        document.getElementById("chatMessages");
+
+
+    let userText = "";
+
+    let botText = "";
+
+
+    if (type === "estado") {
+
+        userText =
+            "¿Cómo va mi pedido?";
+
+        botText =
+            "Puedes revisar el progreso de tus pedidos directamente en esta página. ✦";
+
+    }
+
+
+    if (type === "solicitud") {
+
+        userText =
+            "Quiero hacer una nueva solicitud.";
+
+        botText =
+            '¡Perfecto! Puedes crearla desde <a href="solicitud.html">Solicitar diseño →</a>';
+
+    }
+
+
+    if (type === "contacto") {
+
+        userText =
+            "Quiero contactar a la artista.";
+
+        botText =
+            'Puedes comunicarte desde <a href="contacto.html">Contacto →</a>';
+
+    }
+
+
+    messages.innerHTML += `
+
+        <div class="user-message">
+            ${userText}
+        </div>
+
+        <div class="bot-message chatbot-answer">
+            ${botText}
+        </div>
+
+    `;
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+}
+
+
+
+/* =====================================================
+   INICIAR
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    renderOrders
+);
+
+</script>
+
+
+</body>
+
+</html>
