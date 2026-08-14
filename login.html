@@ -1,1 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Iniciar sesión | Sketchly</title>
+
+    <!-- CSS GENERAL -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- CSS EXCLUSIVO DEL LOGIN -->
+    <link rel="stylesheet" href="css/login.css">
+
+    <!-- FUENTE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER ORIGINAL DE SKETCHLY
+===================================================== -->
+
+<header class="header">
+
+    <a href="index.html" class="brand">
+
+        <img
+            src="img/logo.png"
+            alt="Sketchly"
+            class="main-logo"
+        >
+
+    </a>
+
+
+    <nav class="nav">
+
+        <a href="index.html">
+            Inicio
+        </a>
+
+        <a href="portafolio.html">
+            Portafolio
+        </a>
+
+        <a href="solicitud.html">
+            Solicitar diseño
+        </a>
+
+        <a href="historial.html">
+            Historial
+        </a>
+
+        <a href="contacto.html">
+            Contacto
+        </a>
+
+    </nav>
+
+
+    <!-- LOGIN ORIGINAL -->
+
+    <a
+        href="login.html"
+        class="user-button"
+        title="Iniciar sesión"
+    >
+
+        <img
+            src="img/login.png"
+            alt="Iniciar sesión"
+        >
+
+    </a>
+
+</header>
+
+
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
+<main class="login-page">
+
+
+    <!-- DECORACIONES DEL FONDO -->
+
+    <div class="login-bg bg-left"></div>
+
+    <div class="login-bg bg-right"></div>
+
+
+    <div class="login-container">
+
+
+        <!-- =================================================
+             COLUMNA IZQUIERDA
+        ================================================== -->
+
+        <section class="login-intro">
+
+
+            <span class="login-label">
+                BIENVENIDO DE NUEVO
+            </span>
+
+
+            <h1>
+
+                Bienvenido a
+                <br>
+
+                Sketch<span>ly</span>
+
+            </h1>
+
+
+            <p>
+
+                Inicia sesión o crea tu cuenta para comenzar
+                <br class="desktop-break">
+
+                a dar vida a tus ideas.
+
+            </p>
+
+
+
+            <!-- GATO -->
+
+            <div class="login-cat">
+
+                <div class="login-cat-glow"></div>
+
+                <img
+                    src="img/gato.png"
+                    alt="Mascota de Sketchly"
+                >
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             TARJETA LOGIN
+        ================================================== -->
+
+        <section class="login-card">
+
+
+            <!-- TABS -->
+
+            <div class="login-tabs">
+
+                <a
+                    href="login.html"
+                    class="login-tab active"
+                >
+                    Iniciar sesión
+                </a>
+
+
+                <a
+                    href="registro.html"
+                    class="login-tab"
+                >
+                    Crear cuenta
+                </a>
+
+            </div>
+
+
+
+            <!-- FORMULARIO -->
+
+            <form id="loginForm">
+
+
+                <!-- CORREO -->
+
+                <div class="login-group">
+
+                    <label for="email">
+                        Correo electrónico
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            ✉
+                        </span>
+
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="ejemplo@gmail.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CONTRASEÑA -->
+
+                <div class="login-group">
+
+                    <label for="password">
+                        Contraseña
+                    </label>
+
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            🔒
+                        </span>
+
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Ingresa tu contraseña"
+                            autocomplete="current-password"
+                            required
+                        >
+
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="passwordToggle"
+                            aria-label="Mostrar contraseña"
+                        >
+                            ◉
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- OPCIONES -->
+
+                <div class="login-options">
+
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            id="remember"
+                        >
+
+                        <span class="custom-checkbox"></span>
+
+                        <span>
+                            Recordarme
+                        </span>
+
+                    </label>
+
+
+                    <a
+                        href="#"
+                        id="forgotPassword"
+                    >
+                        ¿Olvidaste tu contraseña?
+                    </a>
+
+
+                </div>
+
+
+
+                <!-- BOTÓN -->
+
+                <button
+                    type="submit"
+                    class="login-submit"
+                >
+
+                    <span>
+                        ➜
+                    </span>
+
+                    Iniciar sesión
+
+                </button>
+
+
+
+                <!-- SEPARADOR -->
+
+                <div class="login-divider">
+
+                    <span></span>
+
+                    <p>
+                        o continúa con
+                    </p>
+
+                    <span></span>
+
+                </div>
+
+
+
+                <!-- GOOGLE -->
+
+                <button
+                    type="button"
+                    class="google-button"
+                    id="googleButton"
+                >
+
+                    <span class="google-icon">
+                        G
+                    </span>
+
+                    <span>
+                        Continuar con Google
+                    </span>
+
+                </button>
+
+
+
+                <!-- REGISTRO -->
+
+                <p class="register-text">
+
+                    ¿No tienes cuenta?
+
+                    <a href="registro.html">
+                        Crear cuenta
+                    </a>
+
+                </p>
+
+
+            </form>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /* =================================================
+       MOSTRAR / OCULTAR CONTRASEÑA
+    ================================================= */
+
+    const password =
+        document.getElementById("password");
+
+    const passwordToggle =
+        document.getElementById("passwordToggle");
+
+
+    passwordToggle.addEventListener("click", function () {
+
+        if (password.type === "password") {
+
+            password.type = "text";
+
+            passwordToggle.textContent = "◉";
+
+        } else {
+
+            password.type = "password";
+
+            passwordToggle.textContent = "◉";
+
+        }
+
+    });
+
+
+
+    /* =================================================
+       LOGIN
+    ================================================= */
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+
+    loginForm.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+
+        const email =
+            document.getElementById("email").value.trim();
+
+
+        const passwordValue =
+            document.getElementById("password").value.trim();
+
+
+        if (!email || !passwordValue) {
+
+            alert(
+                "Completa tu correo y contraseña."
+            );
+
+            return;
+
+        }
+
+
+        alert(
+            "¡Inicio de sesión realizado correctamente! ✦"
+        );
+
+    });
+
+
+
+    /* =================================================
+       GOOGLE
+    ================================================= */
+
+    const googleButton =
+        document.getElementById("googleButton");
+
+
+    googleButton.addEventListener("click", function () {
+
+        alert(
+            "El inicio de sesión con Google estará disponible próximamente."
+        );
+
+    });
+
+
+
+    /* =================================================
+       RECUPERAR CONTRASEÑA
+    ================================================= */
+
+    const forgotPassword =
+        document.getElementById("forgotPassword");
+
+
+    forgotPassword.addEventListener("click", function (event) {
+
+        event.preventDefault();
+
+
+        alert(
+            "Aquí podrás recuperar tu contraseña."
+        );
+
+    });
+
+
+});
+
+</script>
+
+
+</body>
+
+</html>
