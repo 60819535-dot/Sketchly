@@ -71,7 +71,7 @@
     </nav>
 
 
-    <!-- LOGIN ORIGINAL -->
+    <!-- LOGIN -->
 
     <a
         href="login.html"
@@ -91,284 +91,485 @@
 
 
 <!-- =====================================================
-     LOGIN
+     LOGIN / REGISTRO
 ===================================================== -->
 
-<main class="login-page">
+<main>
+
+<section class="auth-section">
 
 
-    <!-- DECORACIONES DEL FONDO -->
+    <!-- DECORACIONES -->
 
-    <div class="login-bg bg-left"></div>
+    <div class="auth-bg auth-bg-left"></div>
 
-    <div class="login-bg bg-right"></div>
+    <div class="auth-bg auth-bg-right"></div>
 
 
-    <div class="login-container">
+
+    <!-- =================================================
+         COLUMNA IZQUIERDA
+    ================================================== -->
+
+    <div class="auth-intro">
+
+
+        <h1>
+            Bienvenido a
+            <br>
+            Sketch<span>ly</span>
+        </h1>
+
+
+        <p id="introText">
+
+            Inicia sesión o crea tu cuenta
+            <br>
+            para comenzar a dar vida
+            <br>
+            a tus ideas.
+
+        </p>
+
+
+        <!-- GATO -->
+
+        <div class="auth-cat">
+
+            <div class="auth-cat-glow"></div>
+
+            <img
+                src="img/gato.png"
+                alt="Mascota de Sketchly"
+            >
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         TARJETA
+    ================================================== -->
+
+    <div class="auth-card">
 
 
         <!-- =================================================
-             COLUMNA IZQUIERDA
+             PESTAÑAS
         ================================================== -->
 
-        <section class="login-intro">
+        <div class="auth-tabs">
 
 
-            <span class="login-label">
-                BIENVENIDO DE NUEVO
-            </span>
+            <button
+                type="button"
+                class="auth-tab active"
+                id="loginTab"
+            >
+
+                Iniciar sesión
+
+            </button>
 
 
-            <h1>
+            <button
+                type="button"
+                class="auth-tab"
+                id="registerTab"
+            >
 
-                Bienvenido a
-                <br>
+                Crear cuenta
 
-                Sketch<span>ly</span>
-
-            </h1>
+            </button>
 
 
-            <p>
+        </div>
 
-                Inicia sesión o crea tu cuenta para comenzar
-                <br class="desktop-break">
 
-                a dar vida a tus ideas.
+
+        <!-- =================================================
+             FORMULARIO LOGIN
+        ================================================== -->
+
+        <form
+            id="loginForm"
+            class="auth-form active-form"
+        >
+
+
+            <!-- CORREO -->
+
+            <div class="form-group">
+
+                <label for="loginEmail">
+                    Correo electrónico
+                </label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon">
+                        ✉
+                    </span>
+
+                    <input
+                        type="email"
+                        id="loginEmail"
+                        placeholder="ejemplo@gmail.com"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CONTRASEÑA -->
+
+            <div class="form-group">
+
+                <label for="loginPassword">
+                    Contraseña
+                </label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon">
+                        ♙
+                    </span>
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Ingresa tu contraseña"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        onclick="togglePassword('loginPassword', this)"
+                    >
+                        ◉
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- OPCIONES -->
+
+            <div class="login-options">
+
+
+                <label class="remember">
+
+                    <input
+                        type="checkbox"
+                        id="remember"
+                    >
+
+                    <span>
+                        Recordarme
+                    </span>
+
+                </label>
+
+
+                <a
+                    href="#"
+                    id="forgotPassword"
+                >
+                    ¿Olvidaste tu contraseña?
+                </a>
+
+
+            </div>
+
+
+
+            <!-- BOTÓN -->
+
+            <button
+                type="submit"
+                class="auth-button"
+            >
+
+                <span>
+                    ➜
+                </span>
+
+                Iniciar sesión
+
+            </button>
+
+
+
+            <!-- SEPARADOR -->
+
+            <div class="separator">
+
+                <span></span>
+
+                <p>
+                    o continúa con
+                </p>
+
+                <span></span>
+
+            </div>
+
+
+
+            <!-- GOOGLE -->
+
+            <button
+                type="button"
+                class="google-button"
+                id="googleButton"
+            >
+
+                <span class="google-icon">
+                    G
+                </span>
+
+                Continuar con Google
+
+            </button>
+
+
+
+            <!-- CAMBIO A REGISTRO -->
+
+            <p class="bottom-text">
+
+                ¿No tienes cuenta?
+
+                <button
+                    type="button"
+                    class="switch-button"
+                    id="goRegister"
+                >
+                    Crear cuenta
+                </button>
 
             </p>
 
 
-
-            <!-- GATO -->
-
-            <div class="login-cat">
-
-                <div class="login-cat-glow"></div>
-
-                <img
-                    src="img/gato.png"
-                    alt="Mascota de Sketchly"
-                >
-
-            </div>
-
-
-        </section>
+        </form>
 
 
 
         <!-- =================================================
-             TARJETA LOGIN
+             FORMULARIO REGISTRO
         ================================================== -->
 
-        <section class="login-card">
+        <form
+            id="registerForm"
+            class="auth-form"
+        >
 
 
-            <!-- TABS -->
+            <!-- NOMBRE -->
 
-            <div class="login-tabs">
+            <div class="form-group">
 
-                <a
-                    href="login.html"
-                    class="login-tab active"
-                >
-                    Iniciar sesión
-                </a>
+                <label for="registerName">
+                    Nombre completo
+                </label>
 
+                <div class="input-wrapper">
 
-                <a
-                    href="registro.html"
-                    class="login-tab"
-                >
-                    Crear cuenta
-                </a>
+                    <span class="input-icon">
+                        ●
+                    </span>
+
+                    <input
+                        type="text"
+                        id="registerName"
+                        placeholder="Ingresa tu nombre"
+                        required
+                    >
+
+                </div>
 
             </div>
 
 
 
-            <!-- FORMULARIO -->
+            <!-- CORREO -->
 
-            <form id="loginForm">
+            <div class="form-group">
 
+                <label for="registerEmail">
+                    Correo electrónico
+                </label>
 
-                <!-- CORREO -->
+                <div class="input-wrapper">
 
-                <div class="login-group">
-
-                    <label for="email">
-                        Correo electrónico
-                    </label>
-
-
-                    <div class="input-wrapper">
-
-                        <span class="input-icon">
-                            ✉
-                        </span>
-
-
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="ejemplo@gmail.com"
-                            autocomplete="email"
-                            required
-                        >
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- CONTRASEÑA -->
-
-                <div class="login-group">
-
-                    <label for="password">
-                        Contraseña
-                    </label>
-
-
-                    <div class="input-wrapper">
-
-                        <span class="input-icon">
-                            🔒
-                        </span>
-
-
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="Ingresa tu contraseña"
-                            autocomplete="current-password"
-                            required
-                        >
-
-
-                        <button
-                            type="button"
-                            class="password-toggle"
-                            id="passwordToggle"
-                            aria-label="Mostrar contraseña"
-                        >
-                            ◉
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- OPCIONES -->
-
-                <div class="login-options">
-
-
-                    <label class="remember">
-
-                        <input
-                            type="checkbox"
-                            id="remember"
-                        >
-
-                        <span class="custom-checkbox"></span>
-
-                        <span>
-                            Recordarme
-                        </span>
-
-                    </label>
-
-
-                    <a
-                        href="#"
-                        id="forgotPassword"
-                    >
-                        ¿Olvidaste tu contraseña?
-                    </a>
-
-
-                </div>
-
-
-
-                <!-- BOTÓN -->
-
-                <button
-                    type="submit"
-                    class="login-submit"
-                >
-
-                    <span>
-                        ➜
+                    <span class="input-icon">
+                        ✉
                     </span>
 
-                    Iniciar sesión
-
-                </button>
-
-
-
-                <!-- SEPARADOR -->
-
-                <div class="login-divider">
-
-                    <span></span>
-
-                    <p>
-                        o continúa con
-                    </p>
-
-                    <span></span>
+                    <input
+                        type="email"
+                        id="registerEmail"
+                        placeholder="ejemplo@gmail.com"
+                        required
+                    >
 
                 </div>
 
+            </div>
 
 
-                <!-- GOOGLE -->
+
+            <!-- CONTRASEÑA -->
+
+            <div class="form-group">
+
+                <label for="registerPassword">
+                    Contraseña
+                </label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon">
+                        ♙
+                    </span>
+
+                    <input
+                        type="password"
+                        id="registerPassword"
+                        placeholder="Crea una contraseña"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        onclick="togglePassword('registerPassword', this)"
+                    >
+                        ◉
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CONFIRMAR CONTRASEÑA -->
+
+            <div class="form-group">
+
+                <label for="confirmPassword">
+                    Confirmar contraseña
+                </label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon">
+                        ♙
+                    </span>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Repite tu contraseña"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        onclick="togglePassword('confirmPassword', this)"
+                    >
+                        ◉
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BOTÓN REGISTRO -->
+
+            <button
+                type="submit"
+                class="auth-button"
+            >
+
+                <span>
+                    ✦
+                </span>
+
+                Crear cuenta
+
+            </button>
+
+
+
+            <!-- GOOGLE -->
+
+            <div class="separator">
+
+                <span></span>
+
+                <p>
+                    o continúa con
+                </p>
+
+                <span></span>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="google-button"
+                id="googleRegisterButton"
+            >
+
+                <span class="google-icon">
+                    G
+                </span>
+
+                Registrarse con Google
+
+            </button>
+
+
+
+            <!-- CAMBIO A LOGIN -->
+
+            <p class="bottom-text">
+
+                ¿Ya tienes una cuenta?
 
                 <button
                     type="button"
-                    class="google-button"
-                    id="googleButton"
+                    class="switch-button"
+                    id="goLogin"
                 >
-
-                    <span class="google-icon">
-                        G
-                    </span>
-
-                    <span>
-                        Continuar con Google
-                    </span>
-
+                    Iniciar sesión
                 </button>
 
+            </p>
 
 
-                <!-- REGISTRO -->
+        </form>
 
-                <p class="register-text">
-
-                    ¿No tienes cuenta?
-
-                    <a href="registro.html">
-                        Crear cuenta
-                    </a>
-
-                </p>
-
-
-            </form>
-
-        </section>
 
     </div>
+
+</section>
 
 </main>
 
@@ -380,65 +581,171 @@
 
 <script>
 
-document.addEventListener("DOMContentLoaded", function () {
 
+/* =====================================================
+   ELEMENTOS
+===================================================== */
 
-    /* =================================================
-       MOSTRAR / OCULTAR CONTRASEÑA
-    ================================================= */
+const loginTab =
+    document.getElementById("loginTab");
 
-    const password =
-        document.getElementById("password");
+const registerTab =
+    document.getElementById("registerTab");
 
-    const passwordToggle =
-        document.getElementById("passwordToggle");
+const loginForm =
+    document.getElementById("loginForm");
 
+const registerForm =
+    document.getElementById("registerForm");
 
-    passwordToggle.addEventListener("click", function () {
+const goRegister =
+    document.getElementById("goRegister");
 
-        if (password.type === "password") {
+const goLogin =
+    document.getElementById("goLogin");
 
-            password.type = "text";
-
-            passwordToggle.textContent = "◉";
-
-        } else {
-
-            password.type = "password";
-
-            passwordToggle.textContent = "◉";
-
-        }
-
-    });
+const introText =
+    document.getElementById("introText");
 
 
 
-    /* =================================================
-       LOGIN
-    ================================================= */
+/* =====================================================
+   CAMBIAR A LOGIN
+===================================================== */
 
-    const loginForm =
-        document.getElementById("loginForm");
+function showLogin() {
+
+    loginTab.classList.add("active");
+
+    registerTab.classList.remove("active");
+
+    loginForm.classList.add("active-form");
+
+    registerForm.classList.remove("active-form");
 
 
-    loginForm.addEventListener("submit", function (event) {
+    introText.innerHTML = `
+
+        Inicia sesión o crea tu cuenta
+        <br>
+        para comenzar a dar vida
+        <br>
+        a tus ideas.
+
+    `;
+
+}
+
+
+
+/* =====================================================
+   CAMBIAR A REGISTRO
+===================================================== */
+
+function showRegister() {
+
+    registerTab.classList.add("active");
+
+    loginTab.classList.remove("active");
+
+    registerForm.classList.add("active-form");
+
+    loginForm.classList.remove("active-form");
+
+
+    introText.innerHTML = `
+
+        Crea tu cuenta y comienza
+        <br>
+        a convertir tus ideas
+        <br>
+        en diseños únicos.
+
+    `;
+
+}
+
+
+
+/* =====================================================
+   EVENTOS DE PESTAÑAS
+===================================================== */
+
+loginTab.addEventListener(
+    "click",
+    showLogin
+);
+
+
+registerTab.addEventListener(
+    "click",
+    showRegister
+);
+
+
+goRegister.addEventListener(
+    "click",
+    showRegister
+);
+
+
+goLogin.addEventListener(
+    "click",
+    showLogin
+);
+
+
+
+/* =====================================================
+   MOSTRAR / OCULTAR CONTRASEÑA
+===================================================== */
+
+function togglePassword(inputId, button) {
+
+    const input =
+        document.getElementById(inputId);
+
+
+    if (input.type === "password") {
+
+        input.type = "text";
+
+        button.textContent = "◉";
+
+    } else {
+
+        input.type = "password";
+
+        button.textContent = "◉";
+
+    }
+
+}
+
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+loginForm.addEventListener(
+    "submit",
+    function(event) {
 
         event.preventDefault();
 
 
         const email =
-            document.getElementById("email").value.trim();
+            document.getElementById("loginEmail").value;
+
+        const password =
+            document.getElementById("loginPassword").value;
 
 
-        const passwordValue =
-            document.getElementById("password").value.trim();
-
-
-        if (!email || !passwordValue) {
+        if (!email || !password) {
 
             alert(
-                "Completa tu correo y contraseña."
+                "Completa todos los campos."
             );
 
             return;
@@ -450,49 +757,150 @@ document.addEventListener("DOMContentLoaded", function () {
             "¡Inicio de sesión realizado correctamente! ✦"
         );
 
-    });
+    }
+);
 
 
 
-    /* =================================================
-       GOOGLE
-    ================================================= */
+/* =====================================================
+   REGISTRO
+===================================================== */
 
-    const googleButton =
-        document.getElementById("googleButton");
-
-
-    googleButton.addEventListener("click", function () {
-
-        alert(
-            "El inicio de sesión con Google estará disponible próximamente."
-        );
-
-    });
-
-
-
-    /* =================================================
-       RECUPERAR CONTRASEÑA
-    ================================================= */
-
-    const forgotPassword =
-        document.getElementById("forgotPassword");
-
-
-    forgotPassword.addEventListener("click", function (event) {
+registerForm.addEventListener(
+    "submit",
+    function(event) {
 
         event.preventDefault();
 
 
+        const name =
+            document.getElementById("registerName").value.trim();
+
+        const email =
+            document.getElementById("registerEmail").value.trim();
+
+        const password =
+            document.getElementById("registerPassword").value;
+
+        const confirmPassword =
+            document.getElementById("confirmPassword").value;
+
+
+        /* VALIDAR */
+
+        if (
+            !name ||
+            !email ||
+            !password ||
+            !confirmPassword
+        ) {
+
+            alert(
+                "Completa todos los campos."
+            );
+
+            return;
+
+        }
+
+
+        if (password.length < 6) {
+
+            alert(
+                "La contraseña debe tener al menos 6 caracteres."
+            );
+
+            return;
+
+        }
+
+
+        if (password !== confirmPassword) {
+
+            alert(
+                "Las contraseñas no coinciden."
+            );
+
+            return;
+
+        }
+
+
+        /* REGISTRO DE DEMOSTRACIÓN */
+
         alert(
-            "Aquí podrás recuperar tu contraseña."
+            "¡Cuenta creada correctamente! ✦"
         );
 
-    });
+
+        registerForm.reset();
 
 
-});
+        showLogin();
+
+
+        document.getElementById(
+            "loginEmail"
+        ).value = email;
+
+
+    }
+);
+
+
+
+/* =====================================================
+   GOOGLE
+===================================================== */
+
+document.getElementById(
+    "googleButton"
+).addEventListener(
+    "click",
+    function() {
+
+        alert(
+            "La conexión con Google estará disponible cuando se conecte el sistema de autenticación."
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "googleRegisterButton"
+).addEventListener(
+    "click",
+    function() {
+
+        alert(
+            "El registro con Google estará disponible cuando se conecte el sistema de autenticación."
+        );
+
+    }
+);
+
+
+
+/* =====================================================
+   RECUPERAR CONTRASEÑA
+===================================================== */
+
+document.getElementById(
+    "forgotPassword"
+).addEventListener(
+    "click",
+    function(event) {
+
+        event.preventDefault();
+
+        alert(
+            "La recuperación de contraseña estará disponible cuando se conecte el sistema de autenticación."
+        );
+
+    }
+);
+
 
 </script>
 
