@@ -1,1 +1,1114 @@
+/* =====================================================
+   SKETCHLY
+   PORTAFOLIO
+===================================================== */
 
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+:root {
+
+    --portfolio-purple: #6137d9;
+    --portfolio-purple-dark: #4f29bd;
+
+    --portfolio-light: #f4efff;
+    --portfolio-background: #faf8ff;
+
+    --portfolio-text: #111111;
+    --portfolio-gray: #666575;
+
+    --portfolio-border: #e9e4f4;
+
+}
+
+
+
+/* =====================================================
+   PÁGINA
+===================================================== */
+
+.portfolio-page {
+
+    width: 100%;
+
+    overflow: hidden;
+
+}
+
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.portfolio-hero {
+
+    position: relative;
+
+    min-height: 375px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            120deg,
+            #f5efff 0%,
+            #faf8ff 55%,
+            #f3edff 100%
+        );
+
+}
+
+
+
+/* =====================================================
+   DECORACIONES
+===================================================== */
+
+.portfolio-decoration {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    background:
+        rgba(178, 151, 239, 0.18);
+
+}
+
+
+
+.decoration-left {
+
+    width: 300px;
+
+    height: 170px;
+
+    left: -100px;
+
+    top: -95px;
+
+}
+
+
+
+.decoration-right {
+
+    width: 330px;
+
+    height: 190px;
+
+    right: -100px;
+
+    bottom: -120px;
+
+}
+
+
+
+/* =====================================================
+   CONTENIDO HERO
+===================================================== */
+
+.portfolio-hero-content {
+
+    width: min(1200px, 90%);
+
+    min-height: 375px;
+
+    margin: auto;
+
+    padding: 45px 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+
+/* =====================================================
+   TEXTO
+===================================================== */
+
+.portfolio-text {
+
+    position: relative;
+
+    z-index: 5;
+
+}
+
+
+
+.portfolio-label {
+
+    display: block;
+
+    margin-bottom: 10px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    color: var(--portfolio-purple);
+
+}
+
+
+
+.portfolio-text h1 {
+
+    margin: 0;
+
+    font-size: clamp(
+        44px,
+        5vw,
+        65px
+    );
+
+    line-height: 0.98;
+
+    letter-spacing: -3px;
+
+    font-weight: 800;
+
+    color: #090909;
+
+}
+
+
+
+.portfolio-text h1 strong {
+
+    color: var(--portfolio-purple);
+
+}
+
+
+
+.portfolio-text p {
+
+    margin-top: 20px;
+
+    color: var(--portfolio-gray);
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+}
+
+
+
+/* =====================================================
+   BOTÓN HERO
+===================================================== */
+
+.portfolio-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 25px;
+
+    padding: 14px 25px;
+
+    border-radius: 10px;
+
+    background: var(--portfolio-purple);
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 10px 25px
+        rgba(97, 55, 217, 0.22);
+
+    transition: 0.25s ease;
+
+}
+
+
+
+.portfolio-button span {
+
+    font-size: 20px;
+
+    line-height: 1;
+
+}
+
+
+
+.portfolio-button:hover {
+
+    background:
+        var(--portfolio-purple-dark);
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 14px 30px
+        rgba(97, 55, 217, 0.28);
+
+}
+
+
+
+/* =====================================================
+   GATO / ILUSTRACIÓN
+===================================================== */
+
+.portfolio-cat {
+
+    width: 520px;
+
+    height: 330px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+
+/* GLOW */
+
+.cat-purple-glow {
+
+    width: 300px;
+
+    height: 250px;
+
+    position: absolute;
+
+    right: 60px;
+
+    top: 45px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(160, 132, 235, 0.18);
+
+    filter: blur(35px);
+
+}
+
+
+
+/* =====================================================
+   CUADERNO
+===================================================== */
+
+.portfolio-notebook {
+
+    position: absolute;
+
+    width: 390px;
+
+    height: 245px;
+
+    right: 15px;
+
+    top: 75px;
+
+    border-radius: 13px;
+
+    transform:
+        rotate(10deg);
+
+    background:
+        linear-gradient(
+            135deg,
+            #d8ceff,
+            #c6b8fa
+        );
+
+    border:
+        1px solid
+        rgba(110, 78, 200, 0.35);
+
+    box-shadow:
+        0 20px 40px
+        rgba(90, 60, 170, 0.12);
+
+    z-index: 1;
+
+}
+
+
+
+/* =====================================================
+   ESPIRAL DEL CUADERNO
+===================================================== */
+
+.notebook-ring {
+
+    position: absolute;
+
+    width: 20px;
+
+    height: 20px;
+
+    left: -9px;
+
+    border-left:
+        3px solid #222;
+
+    border-bottom:
+        3px solid #222;
+
+    border-radius: 50%;
+
+}
+
+
+
+.ring-1 {
+    top: 15px;
+}
+
+.ring-2 {
+    top: 47px;
+}
+
+.ring-3 {
+    top: 79px;
+}
+
+.ring-4 {
+    top: 111px;
+}
+
+.ring-5 {
+    top: 143px;
+}
+
+.ring-6 {
+    top: 175px;
+}
+
+
+
+/* =====================================================
+   DIBUJOS DEL CUADERNO
+===================================================== */
+
+.notebook-star {
+
+    position: absolute;
+
+    top: 55px;
+
+    left: 110px;
+
+    color: rgba(255,255,255,0.65);
+
+    font-size: 38px;
+
+}
+
+
+
+.notebook-smile {
+
+    position: absolute;
+
+    left: 195px;
+
+    top: 105px;
+
+    color: rgba(255,255,255,0.60);
+
+    font-size: 42px;
+
+}
+
+
+
+.notebook-heart {
+
+    position: absolute;
+
+    right: 70px;
+
+    bottom: 45px;
+
+    color: rgba(255,255,255,0.60);
+
+    font-size: 40px;
+
+}
+
+
+
+/* =====================================================
+   GATO
+===================================================== */
+
+.portfolio-cat > img {
+
+    position: absolute;
+
+    width: 245px;
+
+    max-width: none;
+
+    right: 60px;
+
+    top: 0;
+
+    z-index: 4;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 15px 18px
+            rgba(30,20,50,0.18)
+        );
+
+}
+
+
+
+/* =====================================================
+   BRILLOS
+===================================================== */
+
+.spark {
+
+    position: absolute;
+
+    color:
+        var(--portfolio-purple);
+
+    font-size: 30px;
+
+    font-weight: 800;
+
+    z-index: 6;
+
+}
+
+
+
+.spark-1 {
+
+    top: 35px;
+
+    right: 285px;
+
+    transform:
+        rotate(-15deg);
+
+}
+
+
+
+.spark-2 {
+
+    top: 10px;
+
+    right: 255px;
+
+    transform:
+        rotate(15deg);
+
+}
+
+
+
+.spark-3 {
+
+    top: 55px;
+
+    right: 225px;
+
+    font-size: 20px;
+
+}
+
+
+
+/* =====================================================
+   TRABAJOS
+===================================================== */
+
+.portfolio-works {
+
+    padding:
+        55px 5%
+        85px;
+
+    background:
+        var(--portfolio-background);
+
+}
+
+
+
+.portfolio-grid {
+
+    width: min(1200px, 100%);
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+
+}
+
+
+
+/* =====================================================
+   TARJETAS
+===================================================== */
+
+.portfolio-card {
+
+    position: relative;
+
+    min-height: 500px;
+
+    padding: 25px;
+
+    border:
+        1px solid
+        var(--portfolio-border);
+
+    border-radius: 16px;
+
+    background: white;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+
+}
+
+
+
+.portfolio-card:hover {
+
+    transform:
+        translateY(-8px);
+
+    border-color:
+        #d4c6ef;
+
+    box-shadow:
+        0 20px 45px
+        rgba(50, 30, 90, 0.10);
+
+}
+
+
+
+/* =====================================================
+   NÚMERO
+===================================================== */
+
+.portfolio-number {
+
+    margin-bottom: 12px;
+
+    color:
+        var(--portfolio-purple);
+
+    font-size: 24px;
+
+    font-weight: 800;
+
+}
+
+
+
+/* =====================================================
+   IMAGEN
+===================================================== */
+
+.portfolio-image {
+
+    width: 100%;
+
+    height: 250px;
+
+    overflow: hidden;
+
+    border-radius: 12px;
+
+    background:
+        #eee8fa;
+
+}
+
+
+
+.portfolio-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.45s ease;
+
+}
+
+
+
+.portfolio-card:hover
+.portfolio-image img {
+
+    transform:
+        scale(1.05);
+
+}
+
+
+
+/* =====================================================
+   CONTENIDO TARJETA
+===================================================== */
+
+.portfolio-card-content {
+
+    padding-top: 20px;
+
+    padding-right: 20px;
+
+}
+
+
+
+.portfolio-card-content h2 {
+
+    margin: 0;
+
+    font-size: 19px;
+
+    font-weight: 800;
+
+    color: #111;
+
+}
+
+
+
+.portfolio-card-content p {
+
+    margin-top: 9px;
+
+    color:
+        var(--portfolio-gray);
+
+    font-size: 13px;
+
+    line-height: 1.55;
+
+}
+
+
+
+/* =====================================================
+   FLECHA
+===================================================== */
+
+.portfolio-arrow {
+
+    position: absolute;
+
+    right: 22px;
+
+    bottom: 22px;
+
+    width: 50px;
+
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        2px solid
+        var(--portfolio-purple);
+
+    border-radius: 50%;
+
+    color:
+        var(--portfolio-purple);
+
+    font-size: 25px;
+
+    font-weight: 600;
+
+    transition:
+        0.25s ease;
+
+}
+
+
+
+.portfolio-card:hover
+.portfolio-arrow {
+
+    background:
+        var(--portfolio-purple);
+
+    color: white;
+
+    transform:
+        translateX(4px);
+
+}
+
+
+
+/* =====================================================
+   CTA
+===================================================== */
+
+.portfolio-cta {
+
+    width: min(1150px, 90%);
+
+    margin:
+        0 auto 80px;
+
+    padding:
+        50px 60px;
+
+    border-radius: 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #7563b8,
+            #8878c5
+        );
+
+    box-shadow:
+        0 20px 50px
+        rgba(95, 75, 150, 0.15);
+
+}
+
+
+
+.portfolio-cta span {
+
+    color: #eeeaff;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+}
+
+
+
+.portfolio-cta h2 {
+
+    margin-top: 8px;
+
+    color: white;
+
+    font-size: 35px;
+
+    letter-spacing: -1px;
+
+}
+
+
+
+.portfolio-cta p {
+
+    margin-top: 9px;
+
+    color: #eeeaf7;
+
+    font-size: 14px;
+
+}
+
+
+
+.portfolio-cta-button {
+
+    padding:
+        14px 23px;
+
+    border-radius: 9px;
+
+    background: white;
+
+    color: #5e4b9e;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition:
+        0.25s ease;
+
+}
+
+
+
+.portfolio-cta-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,0.12);
+
+}
+
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1000px) {
+
+
+    .portfolio-hero-content {
+
+        padding:
+            40px 20px;
+
+    }
+
+
+    .portfolio-cat {
+
+        width: 440px;
+
+        transform:
+            scale(0.9);
+
+    }
+
+
+    .portfolio-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+
+@media (max-width: 800px) {
+
+
+    .portfolio-hero {
+
+        min-height: auto;
+
+    }
+
+
+    .portfolio-hero-content {
+
+        flex-direction: column;
+
+        text-align: center;
+
+        padding:
+            55px 20px 20px;
+
+    }
+
+
+    .portfolio-text {
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+    }
+
+
+    .portfolio-cat {
+
+        width: 100%;
+
+        max-width: 520px;
+
+        margin-top: 10px;
+
+        transform:
+            scale(0.85);
+
+    }
+
+
+    .portfolio-text h1 {
+
+        font-size: 50px;
+
+    }
+
+
+    .portfolio-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .portfolio-cta {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        padding:
+            40px 35px;
+
+    }
+
+}
+
+
+
+@media (max-width: 600px) {
+
+
+    .portfolio-text h1 {
+
+        font-size: 42px;
+
+        letter-spacing: -2px;
+
+    }
+
+
+    .portfolio-text p br {
+
+        display: none;
+
+    }
+
+
+    .portfolio-cat {
+
+        height: 280px;
+
+        transform:
+            scale(0.70);
+
+        margin-top: -10px;
+
+    }
+
+
+    .portfolio-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .portfolio-card {
+
+        min-height: 480px;
+
+    }
+
+
+    .portfolio-image {
+
+        height: 260px;
+
+    }
+
+
+    .portfolio-works {
+
+        padding:
+            45px 20px 65px;
+
+    }
+
+
+    .portfolio-cta {
+
+        width:
+            calc(100% - 40px);
+
+        margin-bottom: 55px;
+
+    }
+
+
+    .portfolio-cta h2 {
+
+        font-size: 29px;
+
+    }
+
+}
