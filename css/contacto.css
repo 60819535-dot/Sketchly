@@ -1,1 +1,934 @@
+/* =====================================================
+   SKETCHLY
+   CONTACTO
+===================================================== */
 
+
+/* =====================================================
+   SECCIÓN PRINCIPAL
+===================================================== */
+
+.contact-section {
+
+    min-height: calc(100vh - 76px);
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(500px, 0.9fr)
+        minmax(450px, 0.8fr);
+
+    align-items: center;
+
+    gap: 30px;
+
+    padding:
+        60px 7% 70px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #f5efff,
+            #fbf9ff
+        );
+
+}
+
+
+
+/* =====================================================
+   DECORACIONES
+===================================================== */
+
+.contact-bg {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    background:
+        rgba(178, 151, 239, 0.17);
+
+    pointer-events: none;
+
+}
+
+
+.contact-bg-left {
+
+    width: 430px;
+
+    height: 250px;
+
+    left: -120px;
+
+    top: -130px;
+
+}
+
+
+.contact-bg-right {
+
+    width: 480px;
+
+    height: 280px;
+
+    right: -150px;
+
+    bottom: -160px;
+
+}
+
+
+
+/* =====================================================
+   CONTENIDO
+===================================================== */
+
+.contact-content {
+
+    position: relative;
+
+    z-index: 5;
+
+    max-width: 610px;
+
+    justify-self: center;
+
+    width: 100%;
+
+}
+
+
+.contact-label {
+
+    display: inline-block;
+
+    margin-bottom: 15px;
+
+    color: #6137d9;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+}
+
+
+.contact-content h1 {
+
+    margin: 0;
+
+    font-size:
+        clamp(46px, 5vw, 66px);
+
+    line-height: 1.02;
+
+    letter-spacing: -3px;
+
+    font-weight: 800;
+
+    color: #111;
+
+}
+
+
+.contact-content h1 span {
+
+    color: #6137d9;
+
+}
+
+
+
+.contact-intro {
+
+    max-width: 560px;
+
+    margin-top: 24px;
+
+    margin-bottom: 12px;
+
+    color: #5f5d70;
+
+    font-size: 20px;
+
+    line-height: 1.55;
+
+    font-weight: 500;
+
+}
+
+
+.contact-description {
+
+    max-width: 560px;
+
+    margin-top: 12px;
+
+    color: #777486;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+}
+
+
+
+/* =====================================================
+   INFORMACIÓN DE CONTACTO
+===================================================== */
+
+.contact-info {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+    margin-top: 30px;
+
+}
+
+
+.contact-item {
+
+    min-height: 95px;
+
+    padding: 17px 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    text-decoration: none;
+
+    background:
+        rgba(255,255,255,0.82);
+
+    border:
+        1px solid rgba(205,188,244,0.75);
+
+    border-radius: 13px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(70,40,130,0.05);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+
+}
+
+
+.contact-item:hover {
+
+    transform:
+        translateY(-4px);
+
+    border-color:
+        #bba5ee;
+
+    box-shadow:
+        0 14px 30px
+        rgba(70,40,130,0.10);
+
+}
+
+
+.contact-icon {
+
+    width: 40px;
+
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background:
+        #f0eaff;
+
+    color:
+        #6137d9;
+
+    font-size: 18px;
+
+}
+
+
+.contact-item span {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #888393;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+
+.contact-item strong {
+
+    display: block;
+
+    color: #25222d;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    word-break: break-word;
+
+}
+
+
+
+/* =====================================================
+   MENSAJE
+===================================================== */
+
+.contact-note {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 22px;
+
+    color: #6d687b;
+
+    font-size: 13px;
+
+}
+
+
+.contact-note span {
+
+    color: #7650df;
+
+    font-size: 18px;
+
+}
+
+
+
+/* =====================================================
+   PERSONAJE / GATO
+===================================================== */
+
+.contact-character {
+
+    min-height: 530px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.contact-cat {
+
+    width: 455px;
+
+    max-width: 100%;
+
+    position: relative;
+
+    z-index: 3;
+
+    filter:
+        drop-shadow(
+            0 20px 25px
+            rgba(76,43,140,0.18)
+        );
+
+    animation:
+        contactCatFloat 4.5s
+        ease-in-out
+        infinite;
+
+}
+
+
+@keyframes contactCatFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-15px)
+            rotate(1deg);
+
+    }
+
+}
+
+
+
+/* =====================================================
+   GLOW
+===================================================== */
+
+.contact-cat-glow {
+
+    position: absolute;
+
+    width: 350px;
+
+    height: 350px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(174,145,238,0.23);
+
+    filter:
+        blur(40px);
+
+    z-index: 1;
+
+    animation:
+        glowPulse 4.5s
+        ease-in-out
+        infinite;
+
+}
+
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+
+        transform:
+            scale(0.95);
+
+        opacity: 0.7;
+
+    }
+
+    50% {
+
+        transform:
+            scale(1.08);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   FLECHA HACIA EL GATO
+===================================================== */
+
+.contact-arrow {
+
+    position: absolute;
+
+    top: 65px;
+
+    left: 5px;
+
+    z-index: 6;
+
+    transform:
+        rotate(-8deg);
+
+}
+
+
+.contact-arrow span {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #6137d9;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    font-style: italic;
+
+}
+
+
+.arrow-line {
+
+    width: 110px;
+
+    height: 2px;
+
+    background:
+        #8d6ce3;
+
+    transform:
+        rotate(18deg);
+
+    transform-origin:
+        left center;
+
+}
+
+
+.arrow-head {
+
+    position: absolute;
+
+    left: 98px;
+
+    top: 30px;
+
+    width: 10px;
+
+    height: 10px;
+
+    border-right:
+        2px solid #8d6ce3;
+
+    border-bottom:
+        2px solid #8d6ce3;
+
+    transform:
+        rotate(-25deg);
+
+}
+
+
+
+/* =====================================================
+   BRILLOS
+===================================================== */
+
+.sparkle {
+
+    position: absolute;
+
+    z-index: 5;
+
+    color: #9575e9;
+
+    font-size: 28px;
+
+    animation:
+        sparkleFloat 3s
+        ease-in-out
+        infinite;
+
+}
+
+
+.sparkle-one {
+
+    top: 120px;
+
+    right: 60px;
+
+}
+
+
+.sparkle-two {
+
+    left: 35px;
+
+    bottom: 110px;
+
+    font-size: 22px;
+
+    animation-delay: 0.8s;
+
+}
+
+
+.sparkle-three {
+
+    right: 15px;
+
+    bottom: 160px;
+
+    font-size: 18px;
+
+    animation-delay: 1.4s;
+
+}
+
+
+@keyframes sparkleFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            scale(1);
+
+        opacity: 0.65;
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-10px)
+            scale(1.12);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SECCIÓN FINAL
+===================================================== */
+
+.contact-bottom {
+
+    min-height: 190px;
+
+    padding:
+        45px 8%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    background:
+        #eee8fb;
+
+    border-top:
+        1px solid #e3dcf2;
+
+}
+
+
+.contact-bottom span {
+
+    color: #6137d9;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+}
+
+
+.contact-bottom h2 {
+
+    margin-top: 7px;
+
+    color: #171717;
+
+    font-size: 30px;
+
+    letter-spacing: -1px;
+
+}
+
+
+.contact-button {
+
+    padding:
+        14px 24px;
+
+    border-radius: 10px;
+
+    background:
+        #6137d9;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 10px 25px
+        rgba(97,55,217,0.18);
+
+    transition:
+        0.25s ease;
+
+}
+
+
+.contact-button:hover {
+
+    background:
+        #4f29bd;
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1100px) {
+
+    .contact-section {
+
+        grid-template-columns:
+            1fr;
+
+        padding:
+            55px 7% 70px;
+
+    }
+
+
+    .contact-content {
+
+        text-align: center;
+
+        justify-self: center;
+
+    }
+
+
+    .contact-intro,
+    .contact-description {
+
+        margin-left: auto;
+
+        margin-right: auto;
+
+    }
+
+
+    .contact-info {
+
+        max-width: 700px;
+
+        margin-left: auto;
+
+        margin-right: auto;
+
+    }
+
+
+    .contact-note {
+
+        justify-content: center;
+
+    }
+
+
+    .contact-character {
+
+        min-height: 460px;
+
+    }
+
+
+    .contact-arrow {
+
+        left: 18%;
+
+    }
+
+
+    .contact-cat {
+
+        width: 420px;
+
+    }
+
+}
+
+
+
+@media (max-width: 700px) {
+
+    .contact-section {
+
+        padding:
+            45px 20px 50px;
+
+    }
+
+
+    .contact-content h1 {
+
+        font-size: 43px;
+
+        letter-spacing: -2px;
+
+    }
+
+
+    .contact-intro {
+
+        font-size: 17px;
+
+    }
+
+
+    .contact-description {
+
+        font-size: 14px;
+
+    }
+
+
+    .contact-info {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .contact-item {
+
+        min-height: 75px;
+
+        justify-content: flex-start;
+
+    }
+
+
+    .contact-character {
+
+        min-height: 370px;
+
+    }
+
+
+    .contact-cat {
+
+        width: 330px;
+
+    }
+
+
+    .contact-cat-glow {
+
+        width: 270px;
+
+        height: 270px;
+
+    }
+
+
+    .contact-arrow {
+
+        top: 15px;
+
+        left: 8%;
+
+        transform:
+            rotate(-5deg)
+            scale(0.8);
+
+        transform-origin:
+            left top;
+
+    }
+
+
+    .sparkle-one {
+
+        right: 5px;
+
+        top: 80px;
+
+    }
+
+
+    .sparkle-two {
+
+        left: 10px;
+
+        bottom: 60px;
+
+    }
+
+
+    .contact-bottom {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        padding:
+            40px 25px;
+
+    }
+
+
+    .contact-bottom h2 {
+
+        font-size: 25px;
+
+    }
+
+
+    .contact-button {
+
+        width: 100%;
+
+        text-align: center;
+
+    }
+
+}
