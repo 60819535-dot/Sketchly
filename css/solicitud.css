@@ -1,1 +1,1605 @@
+/* =====================================================
+   SKETCHLY
+   SOLICITAR DISEÑO
+===================================================== */
 
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+
+    font-family: 'Inter', sans-serif;
+
+    color: #151515;
+
+    background: #f8f5ff;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.solicitud-header {
+
+    width: 100%;
+
+    height: 101px;
+
+    padding: 0 5.3%;
+
+    background: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-top: 4px solid #242424;
+
+    position: relative;
+
+    z-index: 50;
+
+    box-shadow:
+        0 3px 12px rgba(40, 30, 60, 0.03);
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.solicitud-logo {
+
+    display: flex;
+
+    align-items: center;
+
+    width: 245px;
+
+    height: 75px;
+}
+
+
+.solicitud-logo img {
+
+    width: 190px;
+
+    height: auto;
+
+    display: block;
+
+    object-fit: contain;
+}
+
+
+/* =====================================================
+   NAV
+===================================================== */
+
+.solicitud-nav {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 42px;
+
+    margin-left: auto;
+
+    margin-right: 42px;
+
+    height: 100%;
+}
+
+
+.solicitud-nav a {
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    position: relative;
+
+    color: #111111;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    transition: color 0.25s ease;
+}
+
+
+.solicitud-nav a:hover {
+
+    color: #6137d9;
+}
+
+
+.solicitud-nav a.active {
+
+    color: #6137d9;
+}
+
+
+.solicitud-nav a.active::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 27px;
+
+    height: 3px;
+
+    border-radius: 5px;
+
+    background: #6137d9;
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+.solicitud-login {
+
+    width: 50px;
+
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    transition:
+        transform 0.25s ease;
+}
+
+
+.solicitud-login img {
+
+    width: 50px;
+
+    height: 50px;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+
+.solicitud-login:hover {
+
+    transform: scale(1.06);
+}
+
+
+/* =====================================================
+   PÁGINA
+===================================================== */
+
+.solicitud-page {
+
+    min-height: calc(100vh - 101px);
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            120deg,
+            #f7f2ff 0%,
+            #fbf9ff 48%,
+            #f5efff 100%
+        );
+}
+
+
+/* =====================================================
+   DECORACIONES
+===================================================== */
+
+.solicitud-bg {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+
+.bg-left {
+
+    width: 420px;
+
+    height: 210px;
+
+    left: -100px;
+
+    top: -115px;
+
+    background:
+        rgba(184, 157, 239, 0.25);
+
+    transform:
+        rotate(-10deg);
+}
+
+
+.bg-right {
+
+    width: 430px;
+
+    height: 270px;
+
+    right: -120px;
+
+    bottom: -155px;
+
+    background:
+        rgba(184, 157, 239, 0.20);
+}
+
+
+/* =====================================================
+   CONTENEDOR PRINCIPAL
+===================================================== */
+
+.solicitud-container {
+
+    width: min(
+        1330px,
+        92%
+    );
+
+    min-height: 800px;
+
+    margin: 0 auto;
+
+    padding:
+        60px
+        20px
+        65px;
+
+    display: grid;
+
+    grid-template-columns:
+        0.85fr
+        1.15fr;
+
+    align-items: center;
+
+    gap: 45px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* =====================================================
+   IZQUIERDA
+===================================================== */
+
+.solicitud-left {
+
+    min-height: 700px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    position: relative;
+}
+
+
+/* =====================================================
+   TÍTULO
+===================================================== */
+
+.solicitud-title {
+
+    position: relative;
+
+    z-index: 5;
+
+    margin-left: 12px;
+
+    margin-top: -25px;
+}
+
+
+.solicitud-title h1 {
+
+    margin: 0;
+
+    font-size:
+        clamp(
+            48px,
+            4.3vw,
+            68px
+        );
+
+    line-height: 1;
+
+    letter-spacing: -3px;
+
+    font-weight: 800;
+
+    color: #101010;
+}
+
+
+.solicitud-title h1 span {
+
+    color: #6137d9;
+}
+
+
+.solicitud-title p {
+
+    margin-top: 20px;
+
+    font-size: 21px;
+
+    line-height: 1.55;
+
+    color: #686678;
+
+    font-weight: 400;
+}
+
+
+/* =====================================================
+   GATO
+===================================================== */
+
+.solicitud-cat {
+
+    width: 590px;
+
+    max-width: 100%;
+
+    height: 430px;
+
+    margin-top: 15px;
+
+    margin-left: -5px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    animation:
+        solicitudCatFloat
+        4.2s
+        ease-in-out
+        infinite;
+}
+
+
+/* LUZ DEL GATO */
+
+.cat-light {
+
+    position: absolute;
+
+    width: 390px;
+
+    height: 300px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(175, 144, 238, 0.20);
+
+    filter: blur(35px);
+
+    z-index: 0;
+}
+
+
+/* IMAGEN */
+
+.solicitud-cat img {
+
+    width: 570px;
+
+    max-width: 100%;
+
+    height: auto;
+
+    display: block;
+
+    position: relative;
+
+    z-index: 2;
+
+    filter:
+        drop-shadow(
+            0 24px 25px
+            rgba(72, 48, 130, 0.18)
+        );
+}
+
+
+/* =====================================================
+   ANIMACIÓN DEL GATO
+===================================================== */
+
+@keyframes solicitudCatFloat {
+
+    0% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+    }
+
+    25% {
+
+        transform:
+            translateY(-7px)
+            rotate(-0.8deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-17px)
+            rotate(0.7deg);
+
+    }
+
+    75% {
+
+        transform:
+            translateY(-7px)
+            rotate(-0.5deg);
+
+    }
+
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+    }
+
+}
+
+
+/* =====================================================
+   FORMULARIO BLANCO
+===================================================== */
+
+/*
+   IMPORTANTE:
+
+   Este es el rectángulo principal.
+   Lo mantenemos grande, blanco y redondeado.
+*/
+
+.solicitud-form-box {
+
+    width: 100%;
+
+    min-height: 790px;
+
+    padding:
+        42px
+        40px
+        38px;
+
+    background: rgba(
+        255,
+        255,
+        255,
+        0.92
+    );
+
+    border-radius: 17px;
+
+    box-shadow:
+        0 18px 45px
+        rgba(
+            70,
+            50,
+            110,
+            0.08
+        );
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.8
+        );
+
+    position: relative;
+
+    z-index: 5;
+}
+
+
+/* =====================================================
+   FORMULARIO
+===================================================== */
+
+.solicitud-form {
+
+    width: 100%;
+}
+
+
+/* =====================================================
+   FILAS
+===================================================== */
+
+.form-row {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap: 28px;
+
+    margin-bottom: 28px;
+}
+
+
+.form-group {
+
+    width: 100%;
+
+    margin-bottom: 27px;
+}
+
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #151515;
+
+    font-size: 16px;
+
+    font-weight: 700;
+}
+
+
+.form-group label span {
+
+    color: #77727f;
+
+    font-size: 15px;
+
+    font-weight: 500;
+}
+
+
+/* =====================================================
+   INPUTS
+===================================================== */
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+
+    width: 100%;
+
+    border:
+        1.5px solid
+        #cbb6f4;
+
+    border-radius: 11px;
+
+    background: #ffffff;
+
+    color: #34313c;
+
+    font-family: 'Inter', sans-serif;
+
+    font-size: 16px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* INPUT */
+
+.form-group input {
+
+    height: 53px;
+
+    padding:
+        0 18px;
+}
+
+
+/* SELECT */
+
+.form-group select {
+
+    height: 53px;
+
+    padding:
+        0 48px
+        0 18px;
+
+    appearance: none;
+
+    cursor: pointer;
+}
+
+
+/* SELECT WRAPPER */
+
+.select-wrapper {
+
+    position: relative;
+}
+
+
+.select-wrapper::after {
+
+    content: "";
+
+    width: 9px;
+
+    height: 9px;
+
+    border-right:
+        2px solid
+        #8059e9;
+
+    border-bottom:
+        2px solid
+        #8059e9;
+
+    transform:
+        rotate(45deg);
+
+    position: absolute;
+
+    right: 21px;
+
+    top: 19px;
+
+    pointer-events: none;
+}
+
+
+/* TEXTAREA */
+
+.form-group textarea {
+
+    height: 140px;
+
+    padding:
+        16px
+        18px;
+
+    resize: vertical;
+
+    min-height: 120px;
+}
+
+
+/* PLACEHOLDER */
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+
+    color: #777684;
+
+    opacity: 1;
+}
+
+
+/* FOCUS */
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+
+    border-color: #865ce8;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(
+            125,
+            82,
+            220,
+            0.08
+        );
+}
+
+
+/* =====================================================
+   FECHA
+===================================================== */
+
+input[type="date"] {
+
+    color: #777684;
+
+    cursor: pointer;
+}
+
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+
+    width: 20px;
+
+    height: 20px;
+
+    cursor: pointer;
+
+    opacity: 0.9;
+}
+
+
+/* =====================================================
+   ARCHIVOS
+===================================================== */
+
+.file-input {
+
+    width: 100%;
+
+    height: 53px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    padding:
+        0 16px;
+
+    border:
+        1.5px solid
+        #cbb6f4;
+
+    border-radius: 11px;
+
+    background: white;
+
+    overflow: hidden;
+}
+
+
+.file-icon {
+
+    width: 28px;
+
+    height: 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #8963e8;
+
+    font-size: 24px;
+}
+
+
+.file-input span {
+
+    color: #777684;
+
+    font-size: 15px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+.file-input input[type="file"] {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    opacity: 0;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   BOTÓN
+===================================================== */
+
+.submit-button {
+
+    min-width: 250px;
+
+    height: 58px;
+
+    margin-top: -1px;
+
+    padding:
+        0 27px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6330e8,
+            #5425d2
+        );
+
+    color: white;
+
+    font-family: 'Inter', sans-serif;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    box-shadow:
+        0 10px 22px
+        rgba(
+            91,
+            48,
+            208,
+            0.22
+        );
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.submit-button span {
+
+    font-size: 20px;
+
+    transform:
+        rotate(-8deg);
+}
+
+
+.submit-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 14px 27px
+        rgba(
+            91,
+            48,
+            208,
+            0.28
+        );
+}
+
+
+.submit-button:active {
+
+    transform:
+        translateY(0);
+}
+
+
+/* =====================================================
+   MENSAJE
+===================================================== */
+
+.form-message {
+
+    margin-top: 15px;
+
+    color: #5c46a0;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    opacity: 0;
+
+    transition: opacity 0.25s ease;
+}
+
+
+.form-message.show {
+
+    opacity: 1;
+}
+
+
+/* =====================================================
+   CHATBOT
+===================================================== */
+
+.chatbot {
+
+    position: fixed;
+
+    right: 28px;
+
+    bottom: 28px;
+
+    z-index: 9999;
+}
+
+
+.chatbot-button {
+
+    width: 60px;
+
+    height: 60px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        #6137d9;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    font-size: 24px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(
+            80,
+            50,
+            160,
+            0.3
+        );
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+}
+
+
+.chatbot-button:hover {
+
+    transform:
+        scale(1.08);
+
+    background:
+        #4f29bd;
+}
+
+
+.chatbot-button span {
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   VENTANA
+===================================================== */
+
+.chatbot-window {
+
+    width: 330px;
+
+    position: absolute;
+
+    right: 0;
+
+    bottom: 73px;
+
+    background: white;
+
+    border:
+        1px solid
+        #e5def2;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 50px
+        rgba(
+            30,
+            20,
+            60,
+            0.18
+        );
+
+    display: none;
+}
+
+
+.chatbot-window.show {
+
+    display: block;
+
+    animation:
+        chatAppear
+        0.25s
+        ease;
+}
+
+
+@keyframes chatAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(12px)
+            scale(0.97);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* =====================================================
+   CHAT HEADER
+===================================================== */
+
+.chatbot-header {
+
+    padding:
+        16px
+        18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    background:
+        #f5f0ff;
+}
+
+
+.chatbot-header strong {
+
+    display: block;
+
+    font-size: 15px;
+}
+
+
+.chatbot-header small {
+
+    color: #777;
+
+    font-size: 11px;
+}
+
+
+.chatbot-header button {
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    color: #333;
+}
+
+
+/* =====================================================
+   MENSAJES
+===================================================== */
+
+.chatbot-messages {
+
+    padding: 18px;
+
+    min-height: 120px;
+
+    max-height: 230px;
+
+    overflow-y: auto;
+}
+
+
+.bot-message {
+
+    max-width: 92%;
+
+    padding:
+        12px
+        14px;
+
+    border-radius: 12px;
+
+    background:
+        #f2eefb;
+
+    color: #393342;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+.chatbot-answer {
+
+    margin-top: 10px;
+}
+
+
+.chatbot-answer a {
+
+    color: #6137d9;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   OPCIONES
+===================================================== */
+
+.chatbot-options {
+
+    padding: 12px;
+
+    border-top:
+        1px solid
+        #eeeeee;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.chatbot-options button {
+
+    padding: 10px;
+
+    border:
+        1px solid
+        #e3dcef;
+
+    border-radius: 9px;
+
+    background: white;
+
+    color: #4e3a91;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.chatbot-options button:hover {
+
+    background:
+        #f5f1ff;
+
+    border-color:
+        #cfc1ea;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1100px) {
+
+
+    .solicitud-header {
+
+        padding:
+            0 30px;
+    }
+
+
+    .solicitud-nav {
+
+        gap: 23px;
+
+        margin-right: 25px;
+    }
+
+
+    .solicitud-nav a {
+
+        font-size: 14px;
+    }
+
+
+    .solicitud-container {
+
+        width: 94%;
+
+        grid-template-columns:
+            0.8fr
+            1.2fr;
+
+        gap: 25px;
+
+        padding:
+            45px
+            10px
+            55px;
+    }
+
+
+    .solicitud-form-box {
+
+        padding:
+            35px
+            30px;
+    }
+
+
+    .solicitud-cat img {
+
+        width: 500px;
+    }
+
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 850px) {
+
+
+    .solicitud-header {
+
+        height: auto;
+
+        min-height: 85px;
+
+        padding:
+            12px
+            25px;
+
+        flex-wrap: wrap;
+    }
+
+
+    .solicitud-logo {
+
+        width: 190px;
+    }
+
+
+    .solicitud-logo img {
+
+        width: 170px;
+    }
+
+
+    .solicitud-nav {
+
+        order: 3;
+
+        width: 100%;
+
+        height: 45px;
+
+        margin: 0;
+
+        gap: 25px;
+
+        overflow-x: auto;
+
+        justify-content: center;
+    }
+
+
+    .solicitud-nav a {
+
+        height: 45px;
+
+        flex-shrink: 0;
+    }
+
+
+    .solicitud-nav a.active::after {
+
+        bottom: 2px;
+    }
+
+
+    .solicitud-container {
+
+        grid-template-columns: 1fr;
+
+        padding-top: 55px;
+    }
+
+
+    .solicitud-left {
+
+        min-height: auto;
+
+        text-align: center;
+    }
+
+
+    .solicitud-title {
+
+        margin:
+            0 auto;
+    }
+
+
+    .solicitud-title h1 {
+
+        font-size: 52px;
+    }
+
+
+    .solicitud-cat {
+
+        margin:
+            10px auto
+            0;
+
+        height: 350px;
+    }
+
+
+    .solicitud-form-box {
+
+        min-height: auto;
+    }
+
+}
+
+
+/* =====================================================
+   CELULAR
+===================================================== */
+
+@media (max-width: 600px) {
+
+
+    .solicitud-header {
+
+        padding:
+            10px
+            18px;
+    }
+
+
+    .solicitud-logo {
+
+        width: 160px;
+
+        height: 55px;
+    }
+
+
+    .solicitud-logo img {
+
+        width: 150px;
+    }
+
+
+    .solicitud-login,
+    .solicitud-login img {
+
+        width: 43px;
+
+        height: 43px;
+    }
+
+
+    .solicitud-nav {
+
+        justify-content: flex-start;
+
+        gap: 20px;
+    }
+
+
+    .solicitud-page {
+
+        min-height: auto;
+    }
+
+
+    .solicitud-container {
+
+        width: 100%;
+
+        padding:
+            45px
+            15px
+            50px;
+    }
+
+
+    .solicitud-title h1 {
+
+        font-size: 43px;
+
+        letter-spacing: -2px;
+    }
+
+
+    .solicitud-title p {
+
+        font-size: 17px;
+    }
+
+
+    .solicitud-cat {
+
+        width: 100%;
+
+        height: 290px;
+    }
+
+
+    .solicitud-cat img {
+
+        width: 360px;
+    }
+
+
+    .solicitud-form-box {
+
+        padding:
+            28px
+            20px;
+
+        border-radius: 15px;
+    }
+
+
+    .form-row {
+
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+
+
+    .form-group label {
+
+        font-size: 14px;
+    }
+
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+
+        font-size: 14px;
+    }
+
+
+    .submit-button {
+
+        width: 100%;
+    }
+
+
+    .chatbot {
+
+        right: 18px;
+
+        bottom: 18px;
+    }
+
+
+    .chatbot-window {
+
+        width:
+            calc(100vw - 36px);
+
+        right: -2px;
+    }
+
+}
