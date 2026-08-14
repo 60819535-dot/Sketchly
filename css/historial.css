@@ -1,1 +1,1198 @@
+/* =====================================================
+   SKETCHLY
+   HISTORIAL
+===================================================== */
 
+
+/* =====================================================
+   PÁGINA
+===================================================== */
+
+.history-page {
+
+    min-height: calc(100vh - 76px);
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 65px 7% 90px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #f5efff,
+            #fbf9ff
+        );
+
+}
+
+
+
+/* =====================================================
+   DECORACIONES
+===================================================== */
+
+.history-bg {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    background:
+        rgba(178, 151, 239, 0.17);
+
+    pointer-events: none;
+
+}
+
+
+.history-bg-left {
+
+    width: 420px;
+
+    height: 230px;
+
+    left: -110px;
+
+    top: -120px;
+
+}
+
+
+.history-bg-right {
+
+    width: 430px;
+
+    height: 250px;
+
+    right: -130px;
+
+    bottom: -130px;
+
+}
+
+
+
+/* =====================================================
+   ENCABEZADO
+===================================================== */
+
+.history-header {
+
+    max-width: 1180px;
+
+    margin: 0 auto 38px;
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+}
+
+
+.history-label {
+
+    display: inline-block;
+
+    margin-bottom: 13px;
+
+    color: #6137d9;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+}
+
+
+.history-header h1 {
+
+    margin: 0;
+
+    font-size:
+        clamp(42px, 5vw, 62px);
+
+    line-height: 1;
+
+    letter-spacing: -3px;
+
+    font-weight: 800;
+
+    color: #101010;
+
+}
+
+
+.history-header h1 span {
+
+    color: #6137d9;
+
+}
+
+
+.history-header p {
+
+    max-width: 600px;
+
+    margin-top: 18px;
+
+    color: #686679;
+
+    font-size: 17px;
+
+    line-height: 1.6;
+
+}
+
+
+
+/* =====================================================
+   BOTÓN NUEVA SOLICITUD
+===================================================== */
+
+.new-request-button {
+
+    flex-shrink: 0;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 14px 21px;
+
+    border-radius: 10px;
+
+    background: #6137d9;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 10px 25px
+        rgba(97,55,217,0.18);
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+
+}
+
+
+.new-request-button:hover {
+
+    background: #5130bd;
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.new-request-button span {
+
+    font-size: 17px;
+
+}
+
+
+
+/* =====================================================
+   RESUMEN
+===================================================== */
+
+.history-summary {
+
+    max-width: 1180px;
+
+    margin: 0 auto 50px;
+
+    position: relative;
+
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+}
+
+
+.summary-card {
+
+    min-height: 105px;
+
+    padding: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 17px;
+
+    background:
+        rgba(255,255,255,0.86);
+
+    border:
+        1px solid rgba(255,255,255,0.9);
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 12px 35px
+        rgba(60,40,100,0.06);
+
+}
+
+
+.summary-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 13px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        #eee7ff;
+
+    color: #6137d9;
+
+    font-size: 21px;
+
+}
+
+
+.summary-card span {
+
+    display: block;
+
+    color: #858193;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.summary-card strong {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: #171717;
+
+    font-size: 27px;
+
+    font-weight: 800;
+
+}
+
+
+
+/* =====================================================
+   PEDIDOS
+===================================================== */
+
+.orders-section {
+
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+.orders-title {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+
+}
+
+
+.orders-title > div > span {
+
+    color: #6137d9;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+}
+
+
+.orders-title h2 {
+
+    margin-top: 7px;
+
+    font-size: 30px;
+
+    letter-spacing: -1px;
+
+}
+
+
+.demo-note {
+
+    padding: 7px 11px;
+
+    border-radius: 20px;
+
+    background: #eee7ff;
+
+    color: #6542bd;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+}
+
+
+
+/* =====================================================
+   TARJETA DEL PEDIDO
+===================================================== */
+
+.order-card {
+
+    margin-bottom: 20px;
+
+    padding: 28px 30px;
+
+    background:
+        rgba(255,255,255,0.93);
+
+    border:
+        1px solid rgba(255,255,255,0.95);
+
+    border-radius: 17px;
+
+    box-shadow:
+        0 16px 45px
+        rgba(55,35,100,0.07);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+
+.order-card:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 20px 50px
+        rgba(55,35,100,0.10);
+
+}
+
+
+
+/* =====================================================
+   PARTE SUPERIOR
+===================================================== */
+
+.order-top {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+}
+
+
+.order-number {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #8066c4;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.order-top h3 {
+
+    margin: 0;
+
+    color: #171717;
+
+    font-size: 22px;
+
+    font-weight: 800;
+
+}
+
+
+
+/* =====================================================
+   ESTADOS
+===================================================== */
+
+.order-status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 8px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+}
+
+
+.status-process {
+
+    background: #eee7ff;
+
+    color: #6137d9;
+
+}
+
+
+.status-finished {
+
+    background: #e8f7ed;
+
+    color: #31834b;
+
+}
+
+
+.status-pending {
+
+    background: #fff4df;
+
+    color: #a36b1b;
+
+}
+
+
+
+/* =====================================================
+   DESCRIPCIÓN
+===================================================== */
+
+.order-description {
+
+    max-width: 800px;
+
+    margin: 17px 0 25px;
+
+    color: #6d6b7a;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+}
+
+
+
+/* =====================================================
+   INFORMACIÓN
+===================================================== */
+
+.order-info {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    padding: 18px 0;
+
+    border-top:
+        1px solid #eeeaf5;
+
+    border-bottom:
+        1px solid #eeeaf5;
+
+}
+
+
+.order-info span {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #8b8896;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+}
+
+
+.order-info strong {
+
+    color: #33313c;
+
+    font-size: 13px;
+
+}
+
+
+
+/* =====================================================
+   PROGRESO
+===================================================== */
+
+.progress-area {
+
+    margin-top: 22px;
+
+}
+
+
+.progress-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 9px;
+
+}
+
+
+.progress-header span {
+
+    color: #666372;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+}
+
+
+.progress-header strong {
+
+    color: #6137d9;
+
+    font-size: 12px;
+
+}
+
+
+.progress-bar {
+
+    width: 100%;
+
+    height: 8px;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background: #ece8f5;
+
+}
+
+
+.progress-fill {
+
+    height: 100%;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #8060df,
+            #6137d9
+        );
+
+    transition:
+        width 0.8s ease;
+
+}
+
+
+
+/* =====================================================
+   LÍNEA DE TIEMPO
+===================================================== */
+
+.order-timeline {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    margin-top: 28px;
+
+}
+
+
+.timeline-step {
+
+    width: 125px;
+
+    flex-shrink: 0;
+
+    text-align: center;
+
+}
+
+
+.timeline-dot {
+
+    width: 28px;
+
+    height: 28px;
+
+    margin: 0 auto 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eeeaf5;
+
+    color: #8b8796;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+.timeline-step.completed
+.timeline-dot {
+
+    background: #6137d9;
+
+    color: white;
+
+}
+
+
+.timeline-step span {
+
+    color: #777483;
+
+    font-size: 10px;
+
+    line-height: 1.3;
+
+}
+
+
+.timeline-line {
+
+    flex: 1;
+
+    height: 3px;
+
+    margin-top: 13px;
+
+    background: #e9e5f0;
+
+}
+
+
+.timeline-line.line-active {
+
+    background: #8b68e8;
+
+}
+
+
+
+/* =====================================================
+   CHATBOT
+===================================================== */
+
+.chatbot {
+
+    position: fixed;
+
+    right: 25px;
+
+    bottom: 25px;
+
+    z-index: 9999;
+
+}
+
+
+.chatbot-button {
+
+    width: 58px;
+
+    height: 58px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #6137d9;
+
+    color: white;
+
+    font-size: 23px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    box-shadow:
+        0 10px 30px
+        rgba(80,50,160,0.30);
+
+    transition:
+        transform 0.25s ease;
+
+}
+
+
+.chatbot-button:hover {
+
+    transform:
+        scale(1.08);
+
+}
+
+
+.chatbot-button span {
+
+    pointer-events: none;
+
+}
+
+
+.chatbot-window {
+
+    width: 320px;
+
+    position: absolute;
+
+    right: 0;
+
+    bottom: 72px;
+
+    background: white;
+
+    border:
+        1px solid #e7e1f2;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 50px
+        rgba(30,20,60,0.18);
+
+    display: none;
+
+}
+
+
+.chatbot-window.show {
+
+    display: block;
+
+    animation:
+        historyChatOpen 0.25s ease;
+
+}
+
+
+@keyframes historyChatOpen {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(10px)
+            scale(.97);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+.chatbot-header {
+
+    padding: 16px 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    background: #f6f2ff;
+
+}
+
+
+.chatbot-header strong {
+
+    display: block;
+
+    font-size: 15px;
+
+}
+
+
+.chatbot-header small {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: #777;
+
+    font-size: 11px;
+
+}
+
+
+.chatbot-header button {
+
+    border: none;
+
+    background: none;
+
+    color: #333;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+}
+
+
+.chatbot-messages {
+
+    padding: 18px;
+
+    min-height: 125px;
+
+    max-height: 220px;
+
+    overflow-y: auto;
+
+}
+
+
+.bot-message {
+
+    max-width: 90%;
+
+    padding: 12px 14px;
+
+    border-radius: 12px;
+
+    background: #f3effb;
+
+    color: #393342;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+}
+
+
+.user-message {
+
+    max-width: 90%;
+
+    margin: 10px 0 0 auto;
+
+    padding: 10px 13px;
+
+    border-radius: 12px;
+
+    background: #6137d9;
+
+    color: white;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+}
+
+
+.chatbot-answer {
+
+    margin-top: 10px;
+
+}
+
+
+.chatbot-answer a {
+
+    color: #6137d9;
+
+    font-weight: 700;
+
+}
+
+
+
+/* =====================================================
+   OPCIONES CHAT
+===================================================== */
+
+.chatbot-options {
+
+    padding: 12px;
+
+    border-top:
+        1px solid #eeeeee;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+}
+
+
+.chatbot-options button {
+
+    padding: 10px;
+
+    border:
+        1px solid #e4dff0;
+
+    border-radius: 9px;
+
+    background: white;
+
+    color: #4e3a91;
+
+    font-family:
+        'Inter', sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    text-align: left;
+
+}
+
+
+.chatbot-options button:hover {
+
+    background: #f5f1ff;
+
+}
+
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .history-page {
+
+        padding:
+            50px 5% 70px;
+
+    }
+
+
+    .history-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+    }
+
+
+    .history-summary {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .order-info {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 18px;
+
+    }
+
+
+    .order-timeline {
+
+        overflow-x: auto;
+
+        padding-bottom: 8px;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .history-header h1 {
+
+        font-size: 43px;
+
+        letter-spacing: -2px;
+
+    }
+
+
+    .history-header p {
+
+        font-size: 15px;
+
+    }
+
+
+    .new-request-button {
+
+        width: 100%;
+
+        justify-content: center;
+
+    }
+
+
+    .order-card {
+
+        padding:
+            22px 19px;
+
+    }
+
+
+    .order-top {
+
+        flex-direction: column;
+
+    }
+
+
+    .order-status {
+
+        align-self: flex-start;
+
+    }
+
+
+    .chatbot-window {
+
+        width:
+            calc(100vw - 40px);
+
+        right:
+            -5px;
+
+    }
+
+}
