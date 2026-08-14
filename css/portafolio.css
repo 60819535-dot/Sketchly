@@ -162,7 +162,8 @@
 
     letter-spacing: 2px;
 
-    color: var(--portfolio-purple);
+    color:
+        var(--portfolio-purple);
 
 }
 
@@ -172,11 +173,12 @@
 
     margin: 0;
 
-    font-size: clamp(
-        44px,
-        5vw,
-        65px
-    );
+    font-size:
+        clamp(
+            44px,
+            5vw,
+            65px
+        );
 
     line-height: 0.98;
 
@@ -192,7 +194,8 @@
 
 .portfolio-text h1 strong {
 
-    color: var(--portfolio-purple);
+    color:
+        var(--portfolio-purple);
 
 }
 
@@ -202,75 +205,12 @@
 
     margin-top: 20px;
 
-    color: var(--portfolio-gray);
+    color:
+        var(--portfolio-gray);
 
     font-size: 15px;
 
     line-height: 1.6;
-
-}
-
-
-
-/* =====================================================
-   BOTÓN HERO
-===================================================== */
-
-.portfolio-button {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 12px;
-
-    margin-top: 25px;
-
-    padding: 14px 25px;
-
-    border-radius: 10px;
-
-    background: var(--portfolio-purple);
-
-    color: white;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    box-shadow:
-        0 10px 25px
-        rgba(97, 55, 217, 0.22);
-
-    transition: 0.25s ease;
-
-}
-
-
-
-.portfolio-button span {
-
-    font-size: 20px;
-
-    line-height: 1;
-
-}
-
-
-
-.portfolio-button:hover {
-
-    background:
-        var(--portfolio-purple-dark);
-
-    transform:
-        translateY(-3px);
-
-    box-shadow:
-        0 14px 30px
-        rgba(97, 55, 217, 0.28);
 
 }
 
@@ -298,7 +238,9 @@
 
 
 
-/* GLOW */
+/* =====================================================
+   GLOW
+===================================================== */
 
 .cat-purple-glow {
 
@@ -429,7 +371,8 @@
 
     left: 110px;
 
-    color: rgba(255,255,255,0.65);
+    color:
+        rgba(255,255,255,0.65);
 
     font-size: 38px;
 
@@ -445,7 +388,8 @@
 
     top: 105px;
 
-    color: rgba(255,255,255,0.60);
+    color:
+        rgba(255,255,255,0.60);
 
     font-size: 42px;
 
@@ -461,7 +405,8 @@
 
     bottom: 45px;
 
-    color: rgba(255,255,255,0.60);
+    color:
+        rgba(255,255,255,0.60);
 
     font-size: 40px;
 
@@ -494,6 +439,66 @@
             0 15px 18px
             rgba(30,20,50,0.18)
         );
+
+    /*
+       Animación suave del gato
+    */
+
+    animation:
+        catFloat
+        4.5s
+        ease-in-out
+        infinite;
+
+}
+
+
+
+/* =====================================================
+   ANIMACIÓN DEL GATO
+===================================================== */
+
+@keyframes catFloat {
+
+    0% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+    }
+
+    25% {
+
+        transform:
+            translateY(-5px)
+            rotate(-0.8deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-8px)
+            rotate(0deg);
+
+    }
+
+    75% {
+
+        transform:
+            translateY(-4px)
+            rotate(0.8deg);
+
+    }
+
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+    }
 
 }
 
@@ -577,7 +582,8 @@
 
 .portfolio-grid {
 
-    width: min(1200px, 100%);
+    width:
+        min(1200px, 100%);
 
     margin: auto;
 
@@ -613,6 +619,8 @@
     background: white;
 
     overflow: hidden;
+
+    cursor: pointer;
 
     transition:
         transform 0.3s ease,
@@ -659,7 +667,7 @@
 
 
 /* =====================================================
-   IMAGEN
+   IMAGEN DE TARJETA
 ===================================================== */
 
 .portfolio-image {
@@ -812,7 +820,8 @@
 
 .portfolio-cta {
 
-    width: min(1150px, 90%);
+    width:
+        min(1150px, 90%);
 
     margin:
         0 auto 80px;
@@ -917,6 +926,252 @@
     box-shadow:
         0 10px 25px
         rgba(0,0,0,0.12);
+
+}
+
+
+
+/* =====================================================
+   VISOR DE IMÁGENES
+===================================================== */
+
+.portfolio-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    /*
+       Oscurecimiento suave.
+       No queda negro total.
+    */
+
+    background:
+        rgba(15, 10, 30, 0.66);
+
+    backdrop-filter:
+        blur(3px);
+
+    -webkit-backdrop-filter:
+        blur(3px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    z-index: 99999;
+
+    transition:
+        opacity 0.28s ease,
+        visibility 0.28s ease;
+
+}
+
+
+
+/* =====================================================
+   MODAL ABIERTO
+===================================================== */
+
+.portfolio-modal.show {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+}
+
+
+
+/* =====================================================
+   CONTENIDO DEL MODAL
+===================================================== */
+
+.portfolio-modal-content {
+
+    position: relative;
+
+    max-width: 1000px;
+
+    max-height: 90vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transform:
+        scale(0.86)
+        translateY(15px);
+
+    opacity: 0;
+
+    transition:
+        transform 0.32s
+        cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        ),
+
+        opacity 0.25s ease;
+
+}
+
+
+
+/* =====================================================
+   ANIMACIÓN DE ENTRADA
+===================================================== */
+
+.portfolio-modal.show
+.portfolio-modal-content {
+
+    transform:
+        scale(1)
+        translateY(0);
+
+    opacity: 1;
+
+}
+
+
+
+/* =====================================================
+   IMAGEN GRANDE
+===================================================== */
+
+.portfolio-modal-content img {
+
+    display: block;
+
+    max-width:
+        min(900px, 84vw);
+
+    max-height:
+        78vh;
+
+    width: auto;
+
+    height: auto;
+
+    object-fit: contain;
+
+    border-radius: 14px;
+
+    background: white;
+
+    box-shadow:
+        0 25px 70px
+        rgba(0, 0, 0, 0.38);
+
+}
+
+
+
+/* =====================================================
+   TÍTULO DE LA IMAGEN
+===================================================== */
+
+.portfolio-modal-content h3 {
+
+    margin-top: 15px;
+
+    margin-bottom: 0;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    text-align: center;
+
+}
+
+
+
+/* =====================================================
+   BOTÓN CERRAR
+===================================================== */
+
+.portfolio-modal-close {
+
+    position: fixed;
+
+    top: 25px;
+
+    right: 30px;
+
+    width: 48px;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        2px solid
+        rgba(255,255,255,0.85);
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 30px;
+
+    font-weight: 300;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    z-index: 100000;
+
+    transition:
+        0.25s ease;
+
+}
+
+
+
+.portfolio-modal-close:hover {
+
+    background: white;
+
+    color:
+        var(--portfolio-purple);
+
+    transform:
+        rotate(90deg);
 
 }
 
@@ -1108,6 +1363,50 @@
     .portfolio-cta h2 {
 
         font-size: 29px;
+
+    }
+
+
+    /* MODAL EN CELULAR */
+
+    .portfolio-modal {
+
+        padding: 20px;
+
+    }
+
+
+    .portfolio-modal-content img {
+
+        max-width: 92vw;
+
+        max-height: 74vh;
+
+        border-radius: 10px;
+
+    }
+
+
+    .portfolio-modal-close {
+
+        width: 42px;
+
+        height: 42px;
+
+        top: 15px;
+
+        right: 15px;
+
+        font-size: 26px;
+
+    }
+
+
+    .portfolio-modal-content h3 {
+
+        font-size: 16px;
+
+        margin-top: 12px;
 
     }
 
