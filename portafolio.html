@@ -141,23 +141,13 @@
 
                 </p>
 
-
-                <a
-                    href="#trabajos"
-                    class="portfolio-button"
-                >
-
-                    Ver portafolio
-
-                    <span>→</span>
-
-                </a>
-
             </div>
 
 
 
-            <!-- ILUSTRACIÓN -->
+            <!-- =================================================
+                 ILUSTRACIÓN
+            ================================================== -->
 
             <div class="portfolio-cat">
 
@@ -189,9 +179,11 @@
                         ☆
                     </span>
 
+
                     <span class="notebook-smile">
                         ☺
                     </span>
+
 
                     <span class="notebook-heart">
                         ♡
@@ -235,13 +227,14 @@
         <div class="portfolio-grid">
 
 
-            <!-- ==========================================
+            <!-- =================================================
                  PERSONAJES
-            =========================================== -->
+            ================================================= -->
 
-            <a
-                href="solicitud.html"
+            <div
                 class="portfolio-card"
+                data-image="img/portfolio/personajes.png"
+                data-title="Personajes"
             >
 
                 <div class="portfolio-number">
@@ -277,17 +270,18 @@
                     →
                 </span>
 
-            </a>
+            </div>
 
 
 
-            <!-- ==========================================
+            <!-- =================================================
                  ESCENARIOS
-            =========================================== -->
+            ================================================== -->
 
-            <a
-                href="solicitud.html"
+            <div
                 class="portfolio-card"
+                data-image="img/portfolio/escenarios.png"
+                data-title="Escenarios"
             >
 
                 <div class="portfolio-number">
@@ -323,17 +317,18 @@
                     →
                 </span>
 
-            </a>
+            </div>
 
 
 
-            <!-- ==========================================
+            <!-- =================================================
                  LOGOTIPOS
-            =========================================== -->
+            ================================================== -->
 
-            <a
-                href="solicitud.html"
+            <div
                 class="portfolio-card"
+                data-image="img/portfolio/logotipos.png"
+                data-title="Logotipos"
             >
 
                 <div class="portfolio-number">
@@ -369,17 +364,18 @@
                     →
                 </span>
 
-            </a>
+            </div>
 
 
 
-            <!-- ==========================================
+            <!-- =================================================
                  PIXEL ART
-            =========================================== -->
+            ================================================== -->
 
-            <a
-                href="solicitud.html"
+            <div
                 class="portfolio-card"
+                data-image="img/portfolio/pixelart.png"
+                data-title="Pixel Art"
             >
 
                 <div class="portfolio-number">
@@ -415,7 +411,7 @@
                     →
                 </span>
 
-            </a>
+            </div>
 
 
         </div>
@@ -461,6 +457,51 @@
 
 
 </main>
+
+
+
+<!-- =====================================================
+     VISOR / MODAL DE IMÁGENES
+===================================================== -->
+
+<div
+    class="portfolio-modal"
+    id="portfolioModal"
+>
+
+
+    <!-- BOTÓN CERRAR -->
+
+    <button
+        class="portfolio-modal-close"
+        id="portfolioModalClose"
+        aria-label="Cerrar imagen"
+    >
+
+        ×
+
+    </button>
+
+
+
+    <!-- CONTENIDO -->
+
+    <div class="portfolio-modal-content">
+
+
+        <img
+            id="portfolioModalImage"
+            src=""
+            alt="Vista ampliada"
+        >
+
+
+        <h3 id="portfolioModalTitle"></h3>
+
+
+    </div>
+
+</div>
 
 
 
@@ -530,7 +571,9 @@
         id="chatbotButton"
     >
 
-        <span>✦</span>
+        <span>
+            ✦
+        </span>
 
     </button>
 
@@ -608,10 +651,145 @@
 
 
 <!-- =====================================================
-     JAVASCRIPT
+     JAVASCRIPT GENERAL
 ===================================================== -->
 
 <script src="js/script.js"></script>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT DEL PORTAFOLIO
+===================================================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /* =================================================
+       ELEMENTOS
+    ================================================= */
+
+    const modal =
+        document.getElementById("portfolioModal");
+
+    const modalImage =
+        document.getElementById("portfolioModalImage");
+
+    const modalTitle =
+        document.getElementById("portfolioModalTitle");
+
+    const closeButton =
+        document.getElementById("portfolioModalClose");
+
+    const portfolioCards =
+        document.querySelectorAll(".portfolio-card");
+
+
+
+    /* =================================================
+       ABRIR IMAGEN
+    ================================================= */
+
+    portfolioCards.forEach(function (card) {
+
+        card.addEventListener("click", function () {
+
+
+            const image =
+                card.getAttribute("data-image");
+
+            const title =
+                card.getAttribute("data-title");
+
+
+            modalImage.src = image;
+
+            modalImage.alt = title;
+
+            modalTitle.textContent = title;
+
+
+            modal.classList.add("show");
+
+
+            /* Bloqueamos el scroll de la página */
+
+            document.body.style.overflow = "hidden";
+
+
+        });
+
+    });
+
+
+
+    /* =================================================
+       CERRAR CON X
+    ================================================= */
+
+    closeButton.addEventListener(
+        "click",
+        closePortfolioModal
+    );
+
+
+
+    /* =================================================
+       CERRAR HACIENDO CLIC EN EL FONDO
+    ================================================= */
+
+    modal.addEventListener(
+        "click",
+        function (event) {
+
+            if (event.target === modal) {
+
+                closePortfolioModal();
+
+            }
+
+        }
+    );
+
+
+
+    /* =================================================
+       CERRAR CON ESC
+    ================================================= */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Escape") {
+
+                closePortfolioModal();
+
+            }
+
+        }
+    );
+
+
+
+    /* =================================================
+       CERRAR MODAL
+    ================================================= */
+
+    function closePortfolioModal() {
+
+        modal.classList.remove("show");
+
+        document.body.style.overflow = "";
+
+    }
+
+
+});
+
+</script>
 
 
 </body>
