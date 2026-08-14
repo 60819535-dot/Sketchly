@@ -4,214 +4,35 @@
 ===================================================== */
 
 
-* {
-    box-sizing: border-box;
-}
-
-
-body {
-    margin: 0;
-
-    font-family: 'Inter', sans-serif;
-
-    color: #151515;
-
-    background: #f8f5ff;
-}
-
-
 /* =====================================================
-   HEADER
+   SECCIÓN PRINCIPAL
 ===================================================== */
 
-.solicitud-header {
+.request-section {
 
-    width: 100%;
-
-    height: 101px;
-
-    padding: 0 5.3%;
-
-    background: #ffffff;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    border-top: 4px solid #242424;
-
-    position: relative;
-
-    z-index: 50;
-
-    box-shadow:
-        0 3px 12px rgba(40, 30, 60, 0.03);
-}
-
-
-/* =====================================================
-   LOGO
-===================================================== */
-
-.solicitud-logo {
-
-    display: flex;
-
-    align-items: center;
-
-    width: 245px;
-
-    height: 75px;
-}
-
-
-.solicitud-logo img {
-
-    width: 190px;
-
-    height: auto;
-
-    display: block;
-
-    object-fit: contain;
-}
-
-
-/* =====================================================
-   NAV
-===================================================== */
-
-.solicitud-nav {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 42px;
-
-    margin-left: auto;
-
-    margin-right: 42px;
-
-    height: 100%;
-}
-
-
-.solicitud-nav a {
-
-    height: 100%;
-
-    display: flex;
-
-    align-items: center;
-
-    position: relative;
-
-    color: #111111;
-
-    font-size: 16px;
-
-    font-weight: 600;
-
-    white-space: nowrap;
-
-    transition: color 0.25s ease;
-}
-
-
-.solicitud-nav a:hover {
-
-    color: #6137d9;
-}
-
-
-.solicitud-nav a.active {
-
-    color: #6137d9;
-}
-
-
-.solicitud-nav a.active::after {
-
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-
-    right: 0;
-
-    bottom: 27px;
-
-    height: 3px;
-
-    border-radius: 5px;
-
-    background: #6137d9;
-}
-
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-.solicitud-login {
-
-    width: 50px;
-
-    height: 50px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    transition:
-        transform 0.25s ease;
-}
-
-
-.solicitud-login img {
-
-    width: 50px;
-
-    height: 50px;
-
-    object-fit: contain;
-
-    display: block;
-}
-
-
-.solicitud-login:hover {
-
-    transform: scale(1.06);
-}
-
-
-/* =====================================================
-   PÁGINA
-===================================================== */
-
-.solicitud-page {
-
-    min-height: calc(100vh - 101px);
+    min-height: calc(100vh - 76px);
 
     position: relative;
 
     overflow: hidden;
 
+    display: grid;
+
+    grid-template-columns:
+        minmax(420px, 0.85fr)
+        minmax(650px, 1.15fr);
+
+    align-items: center;
+
+    gap: 55px;
+
+    padding: 55px 6% 70px;
+
     background:
         linear-gradient(
             120deg,
-            #f7f2ff 0%,
-            #fbf9ff 48%,
-            #f5efff 100%
+            #f5efff,
+            #fbf9ff
         );
 }
 
@@ -220,11 +41,14 @@ body {
    DECORACIONES
 ===================================================== */
 
-.solicitud-bg {
+.request-bg {
 
     position: absolute;
 
     border-radius: 50%;
+
+    background:
+        rgba(178, 151, 239, 0.18);
 
     pointer-events: none;
 }
@@ -232,165 +56,115 @@ body {
 
 .bg-left {
 
-    width: 420px;
+    width: 400px;
 
-    height: 210px;
+    height: 220px;
 
     left: -100px;
 
-    top: -115px;
+    top: -120px;
 
-    background:
-        rgba(184, 157, 239, 0.25);
-
-    transform:
-        rotate(-10deg);
 }
 
 
 .bg-right {
 
-    width: 430px;
+    width: 440px;
 
-    height: 270px;
+    height: 250px;
 
     right: -120px;
 
-    bottom: -155px;
+    bottom: -140px;
 
-    background:
-        rgba(184, 157, 239, 0.20);
 }
 
 
+
 /* =====================================================
-   CONTENEDOR PRINCIPAL
+   INTRODUCCIÓN
 ===================================================== */
 
-.solicitud-container {
-
-    width: min(
-        1330px,
-        92%
-    );
-
-    min-height: 800px;
-
-    margin: 0 auto;
-
-    padding:
-        60px
-        20px
-        65px;
-
-    display: grid;
-
-    grid-template-columns:
-        0.85fr
-        1.15fr;
-
-    align-items: center;
-
-    gap: 45px;
+.request-intro {
 
     position: relative;
 
     z-index: 2;
+
+    max-width: 500px;
+
+    justify-self: center;
+
+    width: 100%;
+
 }
 
 
-/* =====================================================
-   IZQUIERDA
-===================================================== */
+.request-label {
 
-.solicitud-left {
+    display: inline-block;
 
-    min-height: 700px;
+    margin-bottom: 14px;
 
-    display: flex;
+    font-size: 11px;
 
-    flex-direction: column;
+    font-weight: 800;
 
-    justify-content: center;
+    letter-spacing: 2px;
 
-    position: relative;
+    color: #6137d9;
+
 }
 
 
-/* =====================================================
-   TÍTULO
-===================================================== */
-
-.solicitud-title {
-
-    position: relative;
-
-    z-index: 5;
-
-    margin-left: 12px;
-
-    margin-top: -25px;
-}
-
-
-.solicitud-title h1 {
-
-    margin: 0;
+.request-intro h1 {
 
     font-size:
-        clamp(
-            48px,
-            4.3vw,
-            68px
-        );
+        clamp(48px, 5vw, 64px);
 
-    line-height: 1;
+    line-height: 0.98;
 
     letter-spacing: -3px;
 
     font-weight: 800;
 
-    color: #101010;
 }
 
 
-.solicitud-title h1 span {
+.request-intro h1 span {
 
     color: #6137d9;
+
 }
 
 
-.solicitud-title p {
+.request-description {
 
     margin-top: 20px;
 
-    font-size: 21px;
+    color: #666575;
 
-    line-height: 1.55;
+    font-size: 18px;
 
-    color: #686678;
+    line-height: 1.6;
 
-    font-weight: 400;
 }
+
 
 
 /* =====================================================
    GATO
 ===================================================== */
 
-.solicitud-cat {
+.request-cat {
 
-    width: 590px;
-
-    max-width: 100%;
+    width: 430px;
 
     height: 430px;
 
-    margin-top: 15px;
-
-    margin-left: -5px;
-
     position: relative;
+
+    margin-top: 8px;
 
     display: flex;
 
@@ -399,45 +173,16 @@ body {
     justify-content: center;
 
     animation:
-        solicitudCatFloat
-        4.2s
-        ease-in-out
-        infinite;
+        requestCatFloat 4.5s ease-in-out infinite;
+
 }
 
 
-/* LUZ DEL GATO */
+.request-cat img {
 
-.cat-light {
-
-    position: absolute;
-
-    width: 390px;
-
-    height: 300px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(175, 144, 238, 0.20);
-
-    filter: blur(35px);
-
-    z-index: 0;
-}
-
-
-/* IMAGEN */
-
-.solicitud-cat img {
-
-    width: 570px;
+    width: 410px;
 
     max-width: 100%;
-
-    height: auto;
-
-    display: block;
 
     position: relative;
 
@@ -445,50 +190,40 @@ body {
 
     filter:
         drop-shadow(
-            0 24px 25px
-            rgba(72, 48, 130, 0.18)
+            0 20px 22px
+            rgba(76, 43, 140, 0.18)
         );
+
 }
 
 
-/* =====================================================
-   ANIMACIÓN DEL GATO
-===================================================== */
 
-@keyframes solicitudCatFloat {
+/* LUZ DETRÁS DEL GATO */
 
-    0% {
+.request-cat-glow {
 
-        transform:
-            translateY(0)
-            rotate(0deg);
+    width: 300px;
 
-    }
+    height: 300px;
 
-    25% {
+    border-radius: 50%;
 
-        transform:
-            translateY(-7px)
-            rotate(-0.8deg);
+    background:
+        rgba(174, 145, 238, 0.20);
 
-    }
+    filter: blur(32px);
 
-    50% {
+    position: absolute;
 
-        transform:
-            translateY(-17px)
-            rotate(0.7deg);
+}
 
-    }
 
-    75% {
 
-        transform:
-            translateY(-7px)
-            rotate(-0.5deg);
+/* ANIMACIÓN */
 
-    }
+@keyframes requestCatFloat {
 
+    0%,
     100% {
 
         transform:
@@ -497,72 +232,50 @@ body {
 
     }
 
+    50% {
+
+        transform:
+            translateY(-13px)
+            rotate(1deg);
+
+    }
+
 }
 
 
+
 /* =====================================================
-   FORMULARIO BLANCO
+   TARJETA DEL FORMULARIO
 ===================================================== */
 
-/*
-   IMPORTANTE:
-
-   Este es el rectángulo principal.
-   Lo mantenemos grande, blanco y redondeado.
-*/
-
-.solicitud-form-box {
-
-    width: 100%;
-
-    min-height: 790px;
-
-    padding:
-        42px
-        40px
-        38px;
-
-    background: rgba(
-        255,
-        255,
-        255,
-        0.92
-    );
-
-    border-radius: 17px;
-
-    box-shadow:
-        0 18px 45px
-        rgba(
-            70,
-            50,
-            110,
-            0.08
-        );
-
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.8
-        );
+.request-card {
 
     position: relative;
 
-    z-index: 5;
-}
-
-
-/* =====================================================
-   FORMULARIO
-===================================================== */
-
-.solicitud-form {
+    z-index: 3;
 
     width: 100%;
+
+    max-width: 800px;
+
+    justify-self: start;
+
+    padding: 42px 40px;
+
+    background:
+        rgba(255, 255, 255, 0.94);
+
+    border-radius: 18px;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.8);
+
+    box-shadow:
+        0 20px 55px
+        rgba(65, 35, 120, 0.09);
+
 }
+
 
 
 /* =====================================================
@@ -574,20 +287,22 @@ body {
     display: grid;
 
     grid-template-columns:
-        1fr
-        1fr;
+        1fr 1fr;
 
     gap: 28px;
 
-    margin-bottom: 28px;
 }
 
 
+
+/* =====================================================
+   GRUPOS
+===================================================== */
+
 .form-group {
 
-    width: 100%;
-
     margin-bottom: 27px;
+
 }
 
 
@@ -595,24 +310,27 @@ body {
 
     display: block;
 
-    margin-bottom: 10px;
-
-    color: #151515;
+    margin-bottom: 9px;
 
     font-size: 16px;
 
     font-weight: 700;
+
+    color: #171717;
+
 }
 
 
 .form-group label span {
 
-    color: #77727f;
-
-    font-size: 15px;
+    color: #777;
 
     font-weight: 500;
+
+    font-size: 14px;
+
 }
+
 
 
 /* =====================================================
@@ -625,15 +343,13 @@ body {
 
     width: 100%;
 
-    border:
-        1.5px solid
-        #cbb6f4;
+    border: 1px solid #cdbcf4;
 
-    border-radius: 11px;
+    border-radius: 10px;
 
-    background: #ffffff;
+    background: rgba(255,255,255,0.8);
 
-    color: #34313c;
+    color: #222;
 
     font-family: 'Inter', sans-serif;
 
@@ -644,152 +360,116 @@ body {
     transition:
         border-color 0.2s ease,
         box-shadow 0.2s ease;
+
 }
 
 
-/* INPUT */
-
-.form-group input {
-
-    height: 53px;
-
-    padding:
-        0 18px;
-}
-
-
-/* SELECT */
-
+.form-group input,
 .form-group select {
 
-    height: 53px;
+    height: 52px;
 
     padding:
-        0 48px
         0 18px;
 
-    appearance: none;
-
-    cursor: pointer;
 }
 
-
-/* SELECT WRAPPER */
-
-.select-wrapper {
-
-    position: relative;
-}
-
-
-.select-wrapper::after {
-
-    content: "";
-
-    width: 9px;
-
-    height: 9px;
-
-    border-right:
-        2px solid
-        #8059e9;
-
-    border-bottom:
-        2px solid
-        #8059e9;
-
-    transform:
-        rotate(45deg);
-
-    position: absolute;
-
-    right: 21px;
-
-    top: 19px;
-
-    pointer-events: none;
-}
-
-
-/* TEXTAREA */
 
 .form-group textarea {
 
     height: 140px;
 
-    padding:
-        16px
-        18px;
+    padding: 16px 18px;
 
     resize: vertical;
 
     min-height: 120px;
+
 }
 
-
-/* PLACEHOLDER */
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
 
-    color: #777684;
+    color: #737383;
 
-    opacity: 1;
 }
 
-
-/* FOCUS */
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
 
-    border-color: #865ce8;
+    border-color: #6137d9;
 
     box-shadow:
         0 0 0 3px
-        rgba(
-            125,
-            82,
-            220,
-            0.08
-        );
+        rgba(97,55,217,0.08);
+
 }
+
+
+
+/* =====================================================
+   SELECT
+===================================================== */
+
+.form-group select {
+
+    appearance: none;
+
+    cursor: pointer;
+
+    background-image:
+
+        linear-gradient(
+            45deg,
+            transparent 50%,
+            #8060df 50%
+        ),
+
+        linear-gradient(
+            135deg,
+            #8060df 50%,
+            transparent 50%
+        );
+
+    background-position:
+
+        calc(100% - 22px) 22px,
+        calc(100% - 16px) 22px;
+
+    background-size:
+        7px 7px,
+        7px 7px;
+
+    background-repeat: no-repeat;
+
+}
+
 
 
 /* =====================================================
    FECHA
 ===================================================== */
 
-input[type="date"] {
+.form-group input[type="date"] {
 
-    color: #777684;
-
-    cursor: pointer;
-}
-
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-
-    width: 20px;
-
-    height: 20px;
+    color: #666575;
 
     cursor: pointer;
 
-    opacity: 0.9;
 }
+
 
 
 /* =====================================================
-   ARCHIVOS
+   ARCHIVO
 ===================================================== */
 
 .file-input {
 
-    width: 100%;
-
-    height: 53px;
+    height: 52px;
 
     position: relative;
 
@@ -797,44 +477,37 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     align-items: center;
 
-    gap: 16px;
+    gap: 14px;
 
-    padding:
-        0 16px;
+    padding: 0 15px;
 
     border:
-        1.5px solid
-        #cbb6f4;
+        1px solid #cdbcf4;
 
-    border-radius: 11px;
+    border-radius: 10px;
 
-    background: white;
+    background:
+        rgba(255,255,255,0.8);
 
     overflow: hidden;
+
+    cursor: pointer;
+
 }
 
 
 .file-icon {
 
-    width: 28px;
+    color: #8b68e8;
 
-    height: 28px;
+    font-size: 25px;
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    color: #8963e8;
-
-    font-size: 24px;
 }
 
 
-.file-input span {
+.file-text {
 
-    color: #777684;
+    color: #707080;
 
     font-size: 15px;
 
@@ -843,6 +516,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     overflow: hidden;
 
     text-overflow: ellipsis;
+
 }
 
 
@@ -859,40 +533,32 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0;
 
     cursor: pointer;
+
 }
 
 
+
 /* =====================================================
-   BOTÓN
+   BOTÓN ENVIAR
 ===================================================== */
 
 .submit-button {
 
-    min-width: 250px;
-
-    height: 58px;
-
-    margin-top: -1px;
+    border: none;
 
     padding:
-        0 27px;
-
-    border: none;
+        15px 28px;
 
     border-radius: 10px;
 
     background:
-        linear-gradient(
-            135deg,
-            #6330e8,
-            #5425d2
-        );
+        #6137d9;
 
     color: white;
 
     font-family: 'Inter', sans-serif;
 
-    font-size: 16px;
+    font-size: 15px;
 
     font-weight: 700;
 
@@ -906,77 +572,37 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     gap: 10px;
 
-    box-shadow:
-        0 10px 22px
-        rgba(
-            91,
-            48,
-            208,
-            0.22
-        );
-
     transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
-}
+        0.25s ease;
 
+    box-shadow:
+        0 10px 25px
+        rgba(97,55,217,0.20);
 
-.submit-button span {
-
-    font-size: 20px;
-
-    transform:
-        rotate(-8deg);
 }
 
 
 .submit-button:hover {
 
+    background:
+        #4f29bd;
+
     transform:
-        translateY(-3px);
+        translateY(-2px);
 
     box-shadow:
-        0 14px 27px
-        rgba(
-            91,
-            48,
-            208,
-            0.28
-        );
+        0 14px 30px
+        rgba(97,55,217,0.25);
+
 }
 
 
-.submit-button:active {
+.submit-button span {
 
-    transform:
-        translateY(0);
+    font-size: 19px;
+
 }
 
-
-/* =====================================================
-   MENSAJE
-===================================================== */
-
-.form-message {
-
-    margin-top: 15px;
-
-    color: #5c46a0;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    opacity: 0;
-
-    transition: opacity 0.25s ease;
-}
-
-
-.form-message.show {
-
-    opacity: 1;
-}
 
 
 /* =====================================================
@@ -987,19 +613,23 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     position: fixed;
 
-    right: 28px;
+    right: 25px;
 
-    bottom: 28px;
+    bottom: 25px;
 
     z-index: 9999;
+
 }
 
 
+
+/* BOTÓN */
+
 .chatbot-button {
 
-    width: 60px;
+    width: 58px;
 
-    height: 60px;
+    height: 58px;
 
     border: none;
 
@@ -1010,28 +640,24 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     color: white;
 
+    font-size: 23px;
+
+    cursor: pointer;
+
     display: flex;
 
     align-items: center;
 
     justify-content: center;
 
-    cursor: pointer;
-
-    font-size: 24px;
-
     box-shadow:
         0 10px 30px
-        rgba(
-            80,
-            50,
-            160,
-            0.3
-        );
+        rgba(80,50,160,0.30);
 
     transition:
         transform 0.25s ease,
         background 0.25s ease;
+
 }
 
 
@@ -1042,13 +668,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     background:
         #4f29bd;
+
 }
 
 
 .chatbot-button span {
 
     pointer-events: none;
+
 }
+
 
 
 /* =====================================================
@@ -1057,19 +686,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .chatbot-window {
 
-    width: 330px;
+    width: 320px;
 
     position: absolute;
 
     right: 0;
 
-    bottom: 73px;
+    bottom: 72px;
 
     background: white;
 
     border:
-        1px solid
-        #e5def2;
+        1px solid #e7e1f2;
 
     border-radius: 18px;
 
@@ -1077,14 +705,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     box-shadow:
         0 20px 50px
-        rgba(
-            30,
-            20,
-            60,
-            0.18
-        );
+        rgba(30,20,60,0.18);
 
     display: none;
+
 }
 
 
@@ -1093,13 +717,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: block;
 
     animation:
-        chatAppear
-        0.25s
-        ease;
+        chatOpen 0.25s ease;
+
 }
 
 
-@keyframes chatAppear {
+@keyframes chatOpen {
 
     from {
 
@@ -1108,6 +731,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         transform:
             translateY(12px)
             scale(0.97);
+
     }
 
     to {
@@ -1117,20 +741,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         transform:
             translateY(0)
             scale(1);
+
     }
 
 }
 
 
+
 /* =====================================================
-   CHAT HEADER
+   HEADER CHAT
 ===================================================== */
 
 .chatbot-header {
 
     padding:
-        16px
-        18px;
+        16px 18px;
 
     display: flex;
 
@@ -1139,7 +764,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     justify-content: space-between;
 
     background:
-        #f5f0ff;
+        #f6f2ff;
+
 }
 
 
@@ -1148,14 +774,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: block;
 
     font-size: 15px;
+
 }
 
 
 .chatbot-header small {
 
+    display: block;
+
+    margin-top: 3px;
+
     color: #777;
 
     font-size: 11px;
+
 }
 
 
@@ -1163,14 +795,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     border: none;
 
-    background: transparent;
+    background: none;
+
+    color: #333;
 
     font-size: 24px;
 
     cursor: pointer;
 
-    color: #333;
 }
+
 
 
 /* =====================================================
@@ -1181,47 +815,77 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     padding: 18px;
 
-    min-height: 120px;
+    min-height: 125px;
 
-    max-height: 230px;
+    max-height: 220px;
 
     overflow-y: auto;
+
 }
 
 
 .bot-message {
 
-    max-width: 92%;
+    max-width: 90%;
 
     padding:
-        12px
-        14px;
+        12px 14px;
 
     border-radius: 12px;
 
     background:
-        #f2eefb;
+        #f3effb;
 
     color: #393342;
 
     font-size: 13px;
 
     line-height: 1.5;
+
+}
+
+
+.user-message {
+
+    max-width: 90%;
+
+    margin:
+        10px 0 0 auto;
+
+    padding:
+        10px 13px;
+
+    border-radius: 12px;
+
+    background:
+        #6137d9;
+
+    color: white;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
 }
 
 
 .chatbot-answer {
 
     margin-top: 10px;
+
 }
 
 
 .chatbot-answer a {
 
-    color: #6137d9;
+    color:
+        #6137d9;
 
-    font-weight: 700;
+    font-weight:
+        700;
+
 }
+
 
 
 /* =====================================================
@@ -1233,14 +897,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 12px;
 
     border-top:
-        1px solid
-        #eeeeee;
+        1px solid #eeeeee;
 
     display: flex;
 
     flex-direction: column;
 
     gap: 7px;
+
 }
 
 
@@ -1249,28 +913,29 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 10px;
 
     border:
-        1px solid
-        #e3dcef;
+        1px solid #e4dff0;
 
     border-radius: 9px;
 
     background: white;
 
-    color: #4e3a91;
+    color:
+        #4e3a91;
 
-    font-family: inherit;
+    font-family:
+        'Inter', sans-serif;
 
     font-size: 12px;
 
     font-weight: 600;
 
-    text-align: left;
-
     cursor: pointer;
 
+    text-align: left;
+
     transition:
-        background 0.2s ease,
-        border-color 0.2s ease;
+        0.2s ease;
+
 }
 
 
@@ -1281,7 +946,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     border-color:
         #cfc1ea;
+
 }
+
 
 
 /* =====================================================
@@ -1290,285 +957,121 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 @media (max-width: 1100px) {
 
-
-    .solicitud-header {
-
-        padding:
-            0 30px;
-    }
-
-
-    .solicitud-nav {
-
-        gap: 23px;
-
-        margin-right: 25px;
-    }
-
-
-    .solicitud-nav a {
-
-        font-size: 14px;
-    }
-
-
-    .solicitud-container {
-
-        width: 94%;
+    .request-section {
 
         grid-template-columns:
-            0.8fr
-            1.2fr;
-
-        gap: 25px;
+            1fr;
 
         padding:
-            45px
-            10px
-            55px;
+            55px 7%;
+
     }
 
 
-    .solicitud-form-box {
-
-        padding:
-            35px
-            30px;
-    }
-
-
-    .solicitud-cat img {
-
-        width: 500px;
-    }
-
-}
-
-
-/* =====================================================
-   TABLET
-===================================================== */
-
-@media (max-width: 850px) {
-
-
-    .solicitud-header {
-
-        height: auto;
-
-        min-height: 85px;
-
-        padding:
-            12px
-            25px;
-
-        flex-wrap: wrap;
-    }
-
-
-    .solicitud-logo {
-
-        width: 190px;
-    }
-
-
-    .solicitud-logo img {
-
-        width: 170px;
-    }
-
-
-    .solicitud-nav {
-
-        order: 3;
-
-        width: 100%;
-
-        height: 45px;
-
-        margin: 0;
-
-        gap: 25px;
-
-        overflow-x: auto;
-
-        justify-content: center;
-    }
-
-
-    .solicitud-nav a {
-
-        height: 45px;
-
-        flex-shrink: 0;
-    }
-
-
-    .solicitud-nav a.active::after {
-
-        bottom: 2px;
-    }
-
-
-    .solicitud-container {
-
-        grid-template-columns: 1fr;
-
-        padding-top: 55px;
-    }
-
-
-    .solicitud-left {
-
-        min-height: auto;
+    .request-intro {
 
         text-align: center;
+
+        justify-self: center;
+
     }
 
 
-    .solicitud-title {
+    .request-cat {
 
         margin:
-            0 auto;
+            15px auto 0;
+
+        width: 360px;
+
+        height: 360px;
+
     }
 
 
-    .solicitud-title h1 {
+    .request-cat img {
 
-        font-size: 52px;
+        width: 350px;
+
     }
 
 
-    .solicitud-cat {
+    .request-card {
 
-        margin:
-            10px auto
-            0;
+        justify-self: center;
 
-        height: 350px;
-    }
+        max-width: 800px;
 
-
-    .solicitud-form-box {
-
-        min-height: auto;
     }
 
 }
 
 
-/* =====================================================
-   CELULAR
-===================================================== */
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 
-
-    .solicitud-header {
+    .request-section {
 
         padding:
-            10px
-            18px;
+            45px 20px 60px;
+
     }
 
 
-    .solicitud-logo {
+    .request-intro h1 {
 
-        width: 160px;
+        font-size: 46px;
 
-        height: 55px;
     }
 
 
-    .solicitud-logo img {
+    .request-description {
 
-        width: 150px;
+        font-size: 16px;
+
     }
 
 
-    .solicitud-login,
-    .solicitud-login img {
+    .request-cat {
 
-        width: 43px;
+        width: 300px;
 
-        height: 43px;
+        height: 300px;
+
     }
 
 
-    .solicitud-nav {
+    .request-cat img {
 
-        justify-content: flex-start;
+        width: 290px;
 
-        gap: 20px;
     }
 
 
-    .solicitud-page {
-
-        min-height: auto;
-    }
-
-
-    .solicitud-container {
-
-        width: 100%;
+    .request-card {
 
         padding:
-            45px
-            15px
-            50px;
-    }
+            30px 22px;
 
+        border-radius: 16px;
 
-    .solicitud-title h1 {
-
-        font-size: 43px;
-
-        letter-spacing: -2px;
-    }
-
-
-    .solicitud-title p {
-
-        font-size: 17px;
-    }
-
-
-    .solicitud-cat {
-
-        width: 100%;
-
-        height: 290px;
-    }
-
-
-    .solicitud-cat img {
-
-        width: 360px;
-    }
-
-
-    .solicitud-form-box {
-
-        padding:
-            28px
-            20px;
-
-        border-radius: 15px;
     }
 
 
     .form-row {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
 
         gap: 0;
+
     }
 
 
     .form-group label {
 
-        font-size: 14px;
+        font-size: 15px;
+
     }
 
 
@@ -1577,29 +1080,25 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     .form-group textarea {
 
         font-size: 14px;
+
     }
 
 
     .submit-button {
 
         width: 100%;
-    }
 
-
-    .chatbot {
-
-        right: 18px;
-
-        bottom: 18px;
     }
 
 
     .chatbot-window {
 
         width:
-            calc(100vw - 36px);
+            calc(100vw - 40px);
 
-        right: -2px;
+        right:
+            -5px;
+
     }
 
 }
