@@ -1,47 +1,191 @@
-document.addEventListener("DOMContentLoaded", () => {
+/* =====================================================
+   SKETCHLY
+   JAVASCRIPT PRINCIPAL
+===================================================== */
 
-    console.log("Sketchly iniciado correctamente.");
 
-    // Animación suave para enlaces internos
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
+/* =====================================================
+   CHATBOT
+===================================================== */
 
-        link.addEventListener("click", function(event) {
+document.addEventListener("DOMContentLoaded", function () {
 
-            const target = document.querySelector(
-                this.getAttribute("href")
-            );
+    const chatbotButton =
+        document.getElementById("chatbotButton");
 
-            if (target) {
+    const chatbotWindow =
+        document.getElementById("chatbotWindow");
 
-                event.preventDefault();
+    const closeChat =
+        document.getElementById("closeChat");
 
-                target.scrollIntoView({
-                    behavior: "smooth"
-                });
 
-            }
+    /*
+       Comprobamos que los elementos existan.
+       Esto evita errores si alguna otra página
+       no tiene chatbot.
+    */
 
-        });
+    if (!chatbotButton || !chatbotWindow) {
+        return;
+    }
+
+
+    /* =========================
+       ABRIR / CERRAR CHAT
+    ========================= */
+
+    chatbotButton.addEventListener("click", function () {
+
+        chatbotWindow.classList.toggle("show");
 
     });
 
 
-    // Efecto pequeño al hacer scroll
-    const header = document.querySelector(".header");
+    /* =========================
+       BOTÓN X
+    ========================= */
 
-    window.addEventListener("scroll", () => {
+    if (closeChat) {
 
-        if (window.scrollY > 20) {
+        closeChat.addEventListener("click", function () {
 
-            header.style.boxShadow =
-                "0 5px 25px rgba(0,0,0,.06)";
+            chatbotWindow.classList.remove("show");
 
-        } else {
+        });
 
-            header.style.boxShadow = "none";
+    }
+
+
+    /* =========================
+       CERRAR AL HACER CLICK
+       FUERA DEL CHAT
+    ========================= */
+
+    document.addEventListener("click", function (event) {
+
+        const chatbot =
+            document.querySelector(".chatbot");
+
+        if (!chatbot.contains(event.target)) {
+
+            chatbotWindow.classList.remove("show");
 
         }
 
     });
 
 });
+
+
+/* =====================================================
+   RESPUESTAS DEL CHATBOT
+===================================================== */
+
+function botReply(option) {
+
+    const messages =
+        document.getElementById("chatMessages");
+
+
+    if (!messages) {
+        return;
+    }
+
+
+    let response = "";
+
+
+    /* =========================
+       PORTAFOLIO
+    ========================= */
+
+    if (option === "portafolio") {
+
+        response = `
+            Puedes explorar nuestros estilos:
+            <br><br>
+
+            ✦ Personajes<br>
+            ◇ Escenarios<br>
+            ◎ Logotipos<br>
+            ▦ Pixel Art
+
+            <br><br>
+
+            <a href="portafolio.html">
+                Ver portafolio →
+            </a>
+        `;
+
+    }
+
+
+    /* =========================
+       SOLICITUD
+    ========================= */
+
+    else if (option === "solicitud") {
+
+        response = `
+            ¡Perfecto! ✨
+
+            <br><br>
+
+            Puedes contarnos tu idea,
+            agregar referencias y elegir
+            el tipo de diseño que necesitas.
+
+            <br><br>
+
+            <a href="solicitud.html">
+                Crear solicitud →
+            </a>
+        `;
+
+    }
+
+
+    /* =========================
+       CONTACTO
+    ========================= */
+
+    else if (option === "contacto") {
+
+        response = `
+            Puedes comunicarte con el artista
+            desde nuestra sección de contacto.
+
+            <br><br>
+
+            <a href="contacto.html">
+                Contactar →
+            </a>
+        `;
+
+    }
+
+
+    /* =========================
+       AGREGAR RESPUESTA
+    ========================= */
+
+    messages.insertAdjacentHTML(
+        "beforeend",
+
+        `
+        <div class="bot-message chatbot-answer">
+            ${response}
+        </div>
+        `
+    );
+
+
+    /* =========================
+       BAJAR SCROLL
+    ========================= */
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+}
