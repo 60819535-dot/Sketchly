@@ -1,41 +1,113 @@
 
-<form id="registro-form">
-  <label for="nombre">Nombre completo</label>
-  <input id="nombre" type="text" required />
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear cuenta | Sketchly</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
 
-  <label for="email">Correo electrónico</label>
-  <input id="email" type="email" required />
+    <main class="auth-container">
+        <section class="auth-card">
+            <h1>Crear cuenta</h1>
+            <p>Regístrate para solicitar tu diseño en Sketchly.</p>
 
-  <label for="password">Contraseña</label>
-  <input id="password" type="password" minlength="8" required />
+            <form id="registro-form">
+                <label for="nombre">Nombre completo</label>
+                <input
+                    id="nombre"
+                    name="nombre"
+                    type="text"
+                    autocomplete="name"
+                    required
+                >
 
-  <button type="submit">Crear cuenta</button>
-  <p id="mensaje" role="status"></p>
-</form>
+                <label for="email">Correo electrónico</label>
+                <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    required
+                >
 
-<script type="module">
-  import { registrarCliente } from './js/sketchly.js';
+                <label for="password">Contraseña</label>
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    minlength="8"
+                    autocomplete="new-password"
+                    required
+                >
 
-  const formulario = document.getElementById('registro-form');
-  const mensaje = document.getElementById('mensaje');
+                <button id="registro-boton" type="submit">
+                    Crear cuenta
+                </button>
 
-  formulario.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    mensaje.textContent = 'Registrando...';
+                <p id="mensaje" role="status" aria-live="polite"></p>
+            </form>
 
-    try {
-      const nombre = document.getElementById('nombre').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
+            <p>
+                ¿Ya tienes cuenta?
+                <a href="login.html">Inicia sesión</a>
+            </p>
 
-      const resultado = await registrarCliente(nombre, email, password);
+            <a href="index.html">Volver a Sketchly</a>
+        </section>
+    </main>
 
-      mensaje.textContent = resultado.session
-        ? 'Cuenta creada correctamente.'
-        : 'Revisa tu correo para confirmar la cuenta.';
-    } catch (error) {
-      mensaje.textContent = error.message;
-    }
-  });
-</script>
+    <script type="module">
+        import { registrarCliente } from './js/sketchly.js';
 
+        const formulario = document.getElementById('registro-form');
+        const mensaje = document.getElementById('mensaje');
+        const boton = document.getElementById('registro-boton');
+
+        formulario.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const nombre = document.getElementById('nombre').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            mensaje.textContent = '';
+            boton.disabled = true;
+            boton.textContent = 'Creando cuenta...';
+
+            try {
+                const resultado = await registrarCliente(
+                    nombre,
+                    email,
+                    password
+                );
+
+                if (resultado.session) {
+                    mensaje.textContent =
+                        'Cuenta creada correctamente. Ya puedes iniciar sesión.';
+
+                    formulario.reset();
+
+                    setTimeout(() => {
+                        window.location.href = 'solicitud.html';
+                    }, 1200);
+                } else {
+                    mensaje.textContent =
+                        'Cuenta registrada. Revisa tu correo para confirmar la cuenta antes de iniciar sesión.';
+                }
+            } catch (error) {
+                console.error('Error de registro:', error);
+
+                mensaje.textContent =
+                    error.message || 'No se pudo crear la cuenta.';
+            } finally {
+                boton.disabled = false;
+                boton.textContent = 'Crear cuenta';
+            }
+        });
+    </script>
+
+</body>
+</html>
