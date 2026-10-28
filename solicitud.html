@@ -102,6 +102,7 @@
     <!-- DECORACIONES -->
 
     <div class="request-bg bg-left"></div>
+
     <div class="request-bg bg-right"></div>
 
 
@@ -153,7 +154,6 @@
     ================================================== -->
 
     <div class="request-card">
-
 
         <form id="designForm">
 
@@ -320,6 +320,16 @@
 
 
 
+            <!-- MENSAJE DE ESTADO -->
+
+            <p
+                id="solicitudMensaje"
+                role="status"
+                aria-live="polite"
+            ></p>
+
+
+
             <!-- BOTÓN -->
 
             <button
@@ -450,121 +460,550 @@
 
 
 <!-- =====================================================
-     JAVASCRIPT
+     JAVASCRIPT CON SUPABASE
 ===================================================== -->
 
-<script>
+<script type="module">
 
-document.addEventListener("DOMContentLoaded", function () {
-
-
-    /* ==========================================
-       CHATBOT
-    ========================================== */
-
-    const chatbotButton =
-        document.getElementById("chatbotButton");
-
-    const chatbotWindow =
-        document.getElementById("chatbotWindow");
-
-    const closeChat =
-        document.getElementById("closeChat");
+import { supabase } from './js/supabase.js';
 
 
-    chatbotButton.addEventListener("click", function () {
+/* =====================================================
+   ELEMENTOS DEL FORMULARIO
+===================================================== */
 
-        chatbotWindow.classList.toggle("show");
+const form = document.getElementById('designForm');
 
-    });
+const nombreInput = document.getElementById('nombre');
 
+const correoInput = document.getElementById('correo');
 
-    closeChat.addEventListener("click", function () {
+const tipoInput = document.getElementById('tipo');
 
-        chatbotWindow.classList.remove("show");
+const descripcionInput = document.getElementById('descripcion');
 
-    });
+const fechaInput = document.getElementById('fecha');
 
+const fileInput = document.getElementById('referencias');
 
+const fileText = document.getElementById('fileText');
 
-    /* ==========================================
-       ARCHIVO
-    ========================================== */
+const mensaje = document.getElementById('solicitudMensaje');
 
-    const fileInput =
-        document.getElementById("referencias");
-
-    const fileText =
-        document.getElementById("fileText");
+const botonEnviar = form.querySelector('button[type="submit"]');
 
 
-    fileInput.addEventListener("change", function () {
+/* =====================================================
+   CONFIGURACIÓN DE ARCHIVOS
+===================================================== */
 
-        if (fileInput.files.length > 0) {
+const TAMANO_MAXIMO = 10 * 1024 * 1024;
 
-            fileText.textContent =
-                fileInput.files[0].name;
+const TIPOS_PERMITIDOS = [
+    'image/jpeg',
+    'image/png',
+    'image/webp'
+];
 
-        } else {
+const BUCKET_REFERENCIAS = 'sketchly-files';
 
-            fileText.textContent =
-                "Ningún archivo seleccionado";
+
+/* =====================================================
+   MOSTRAR MENSAJES
+===================================================== */
+
+function mostrarMensaje(texto, tipo = 'info') {
+
+    mensaje.textContent = texto;
+
+    mensaje.dataset.tipo = tipo;
+
+}
+
+
+/* =====================================================
+   FECHA MÍNIMA
+===================================================== */
+
+const fechaActual = new Date();
+
+const anio = fechaActual.getFullYear();
+
+const mes = String(
+    fechaActual.getMonth() + 1
+).padStart(2, '0');
+
+const dia = String(
+    fechaActual.getDate()
+).padStart(2, '0');
+
+fechaInput.min = `${anio}-${mes}-${dia}`;
+
+
+/* =====================================================
+   COMPROBAR SESIÓN Y RELLENAR DATOS
+===================================================== */
+
+async function comprobarSesion() {
+
+    try {
+
+        const { data, error } = await supabase.auth.getUser();
+
+        if (error) {
+            throw error;
+        }
+
+        const usuario = data.user;
+
+        if (!usuario) {
+
+            window.location.href =
+                'login.html?next=solicitud.html';
+
+            return null;
 
         }
 
-    });
+        nombreInput.value =
+            usuario.user_metadata?.full_name ||
+            usuario.user_metadata?.name ||
+            '';
 
+        correoInput.value =
+            usuario.email || '';
 
+        nombreInput.readOnly = true;
 
-    /* ==========================================
-       FORMULARIO
-    ========================================== */
+        correoInput.readOnly = true;
 
-    const form =
-        document.getElementById("designForm");
+        return usuario;
 
+    } catch (error) {
 
-    form.addEventListener("submit", function (event) {
-
-        event.preventDefault();
-
-
-        alert(
-            "¡Solicitud enviada correctamente! ✦"
+        console.error(
+            'Error al comprobar la sesión:',
+            error
         );
 
+        mostrarMensaje(
+            'No se pudo comprobar tu sesión. Recarga la página o vuelve a iniciar sesión.',
+            'error'
+        );
 
-        form.reset();
+        return null;
+
+    }
+
+}
+
+
+/* =====================================================
+   ACTUALIZAR NOMBRE DEL ARCHIVO
+===================================================== */
+
+fileInput.addEventListener('change', function () {
+
+    const archivo = fileInput.files[0];
+
+    if (!archivo) {
 
         fileText.textContent =
-            "Ningún archivo seleccionado";
+            'Ningún archivo seleccionado';
 
-    });
+        mostrarMensaje('');
 
+        return;
+
+    }
+
+    fileText.textContent = archivo.name;
+
+    const errorArchivo = validarImagen(archivo);
+
+    if (errorArchivo) {
+
+        mostrarMensaje(errorArchivo, 'error');
+
+        return;
+
+    }
+
+    mostrarMensaje(
+        'Imagen seleccionada correctamente.',
+        'success'
+    );
 
 });
 
 
+/* =====================================================
+   VALIDAR IMAGEN
+===================================================== */
 
-/* ==========================================
+function validarImagen(archivo) {
+
+    if (!archivo) {
+        return null;
+    }
+
+    if (!TIPOS_PERMITIDOS.includes(archivo.type)) {
+
+        return 'Formato no permitido. Selecciona una imagen JPG, PNG o WEBP.';
+
+    }
+
+    if (archivo.size > TAMANO_MAXIMO) {
+
+        return 'La imagen no debe superar los 10 MB.';
+
+    }
+
+    return null;
+
+}
+
+
+/* =====================================================
+   SUBIR IMAGEN DE REFERENCIA
+===================================================== */
+
+async function subirImagen(archivo, usuarioId) {
+
+    if (!archivo) {
+        return null;
+    }
+
+    const errorArchivo = validarImagen(archivo);
+
+    if (errorArchivo) {
+        throw new Error(errorArchivo);
+    }
+
+    const extensionPorTipo = {
+        'image/jpeg': 'jpg',
+        'image/png': 'png',
+        'image/webp': 'webp'
+    };
+
+    const extension = extensionPorTipo[archivo.type];
+
+    const rutaArchivo =
+        `${usuarioId}/${crypto.randomUUID()}.${extension}`;
+
+    const { error } = await supabase.storage
+        .from(BUCKET_REFERENCIAS)
+        .upload(rutaArchivo, archivo, {
+            contentType: archivo.type,
+            upsert: false
+        });
+
+    if (error) {
+        throw error;
+    }
+
+    return rutaArchivo;
+
+}
+
+
+/* =====================================================
+   ENVIAR SOLICITUD
+===================================================== */
+
+form.addEventListener('submit', async function (event) {
+
+    event.preventDefault();
+
+    mostrarMensaje('');
+
+    const nombre = nombreInput.value.trim();
+
+    const correo = correoInput.value.trim();
+
+    const tipo = tipoInput.value;
+
+    const descripcion = descripcionInput.value.trim();
+
+    const fecha = fechaInput.value;
+
+    const archivo = fileInput.files[0] || null;
+
+
+    /* VALIDAR CAMPOS */
+
+    if (
+        !nombre ||
+        !correo ||
+        !tipo ||
+        !descripcion ||
+        !fecha
+    ) {
+
+        mostrarMensaje(
+            'Completa todos los campos obligatorios.',
+            'error'
+        );
+
+        return;
+
+    }
+
+
+    /* VALIDAR FECHA */
+
+    if (fecha < fechaInput.min) {
+
+        mostrarMensaje(
+            'La fecha límite no puede ser anterior a hoy.',
+            'error'
+        );
+
+        return;
+
+    }
+
+
+    /* VALIDAR IMAGEN */
+
+    if (archivo) {
+
+        const errorArchivo = validarImagen(archivo);
+
+        if (errorArchivo) {
+
+            mostrarMensaje(
+                errorArchivo,
+                'error'
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    botonEnviar.disabled = true;
+
+    botonEnviar.textContent = 'Enviando solicitud...';
+
+
+    let rutaSubida = null;
+
+    let solicitudCreada = false;
+
+    try {
+
+        /* COMPROBAR SESIÓN */
+
+        const { data: usuarioData, error: usuarioError } =
+            await supabase.auth.getUser();
+
+        if (usuarioError) {
+            throw usuarioError;
+        }
+
+        const usuario = usuarioData.user;
+
+        if (!usuario) {
+
+            window.location.href =
+                'login.html?next=solicitud.html';
+
+            return;
+
+        }
+
+
+        /* SUBIR IMAGEN SI EXISTE */
+
+        if (archivo) {
+
+            mostrarMensaje(
+                'Subiendo imagen de referencia...',
+                'info'
+            );
+
+            rutaSubida = await subirImagen(
+                archivo,
+                usuario.id
+            );
+
+        }
+
+
+        /* REGISTRAR SOLICITUD EN SUPABASE */
+
+        mostrarMensaje(
+            'Registrando tu solicitud...',
+            'info'
+        );
+
+        const datosSolicitud = {
+            user_id: usuario.id,
+            title: tipo,
+            description: descripcion,
+            customer_name: nombre,
+            customer_email: correo,
+            design_type: tipo,
+            due_date: fecha,
+            reference_path: rutaSubida,
+            status: 'pendiente'
+        };
+
+        const { data, error } = await supabase
+            .from('orders')
+            .insert(datosSolicitud)
+            .select()
+            .single();
+
+        if (error) {
+            throw error;
+        }
+
+        solicitudCreada = true;
+
+
+        /* CONFIRMAR ENVÍO */
+
+        mostrarMensaje(
+            '¡Solicitud enviada correctamente! ✦',
+            'success'
+        );
+
+        form.reset();
+
+        fileText.textContent =
+            'Ningún archivo seleccionado';
+
+        nombreInput.value = nombre;
+
+        correoInput.value = correo;
+
+    } catch (error) {
+
+        console.error(
+            'Error al enviar la solicitud:',
+            error
+        );
+
+
+        /*
+         * Si la imagen se subió pero la solicitud falló,
+         * intentamos eliminar el archivo para evitar
+         * dejar referencias sin una solicitud asociada.
+         */
+
+        if (rutaSubida && !solicitudCreada) {
+
+            const { error: errorEliminacion } =
+                await supabase.storage
+                    .from(BUCKET_REFERENCIAS)
+                    .remove([rutaSubida]);
+
+            if (errorEliminacion) {
+
+                console.error(
+                    'No se pudo eliminar la imagen subida:',
+                    errorEliminacion
+                );
+
+            }
+
+        }
+
+
+        if (
+            error.message &&
+            error.message.toLowerCase().includes('row-level security')
+        ) {
+
+            mostrarMensaje(
+                'Supabase bloqueó el registro. Revisa las políticas RLS de la tabla orders y del bucket sketchly-files.',
+                'error'
+            );
+
+        } else {
+
+            mostrarMensaje(
+                'No se pudo enviar la solicitud. Verifica tu conexión y la configuración de Supabase.',
+                'error'
+            );
+
+        }
+
+    } finally {
+
+        botonEnviar.disabled = false;
+
+        botonEnviar.innerHTML =
+            '<span>➤</span> Enviar solicitud';
+
+    }
+
+});
+
+
+/* =====================================================
+   INICIAR PÁGINA
+===================================================== */
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    comprobarSesion();
+
+});
+
+
+/* =====================================================
+   CHATBOT
+===================================================== */
+
+const chatbotButton =
+    document.getElementById('chatbotButton');
+
+const chatbotWindow =
+    document.getElementById('chatbotWindow');
+
+const closeChat =
+    document.getElementById('closeChat');
+
+
+chatbotButton.addEventListener('click', function () {
+
+    chatbotWindow.classList.toggle('show');
+
+});
+
+
+closeChat.addEventListener('click', function () {
+
+    chatbotWindow.classList.remove('show');
+
+});
+
+
+/* =====================================================
    RESPUESTAS DEL CHATBOT
-========================================== */
+   Se usa window.botReply porque este script es un módulo
+   y los botones HTML utilizan onclick.
+===================================================== */
 
-function botReply(type) {
-
+window.botReply = function (type) {
 
     const messages =
-        document.getElementById("chatMessages");
+        document.getElementById('chatMessages');
+
+    let userText = '';
+
+    let botText = '';
 
 
-    let userText = "";
-    let botText = "";
-
-
-    if (type === "portafolio") {
+    if (type === 'portafolio') {
 
         userText =
-            "Quiero ver los estilos.";
+            'Quiero ver los estilos.';
 
         botText =
             'Puedes explorar nuestros estilos en <a href="portafolio.html">Portafolio →</a>';
@@ -572,10 +1011,10 @@ function botReply(type) {
     }
 
 
-    if (type === "solicitud") {
+    if (type === 'solicitud') {
 
         userText =
-            "Quiero solicitar un diseño.";
+            'Quiero solicitar un diseño.';
 
         botText =
             '¡Perfecto! Ya estás en la sección para solicitar tu diseño. Completa el formulario y cuéntanos tu idea.';
@@ -583,10 +1022,10 @@ function botReply(type) {
     }
 
 
-    if (type === "contacto") {
+    if (type === 'contacto') {
 
         userText =
-            "Quiero contactar al artista.";
+            'Quiero contactar al artista.';
 
         botText =
             'Puedes comunicarte con el artista desde <a href="contacto.html">Contacto →</a>';
@@ -594,23 +1033,32 @@ function botReply(type) {
     }
 
 
-    messages.innerHTML += `
+    const userMessage =
+        document.createElement('div');
 
-        <div class="user-message">
-            ${userText}
-        </div>
+    userMessage.className = 'user-message';
 
-        <div class="bot-message chatbot-answer">
-            ${botText}
-        </div>
+    userMessage.textContent = userText;
 
-    `;
+
+    const botMessage =
+        document.createElement('div');
+
+    botMessage.className =
+        'bot-message chatbot-answer';
+
+    botMessage.innerHTML = botText;
+
+
+    messages.appendChild(userMessage);
+
+    messages.appendChild(botMessage);
 
 
     messages.scrollTop =
         messages.scrollHeight;
 
-}
+};
 
 </script>
 
