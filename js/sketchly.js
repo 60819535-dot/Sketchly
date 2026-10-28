@@ -1,216 +1,233 @@
 
 import { supabase } from './supabase.js';
 
-// REGISTRAR CLIENTE
+// ==========================================
+// REGISTRO DE CLIENTES
+// ==========================================
 export async function registrarCliente(nombre, email, password) {
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      data: { full_name: nombre },
-      emailRedirectTo: window.location.origin
-    }
-  });
+    const nombreLimpio = nombre.trim();
+    const correoLimpio = email.trim().toLowerCase();
 
-  if (error) throw error;
-  return data;
+    if (!nombreLimpio || !correoLimpio || !password) {
+        throw new Error('Completa todos los campos.');
+    }
+
+    if (password.length < 8) {
+        throw new Error('La contraseña debe tener al menos 8 caracteres.');
+    }
+
+    const { data, error } = await supabase.auth.signUp({
+        email: correoLimpio,
+        password,
+        options: {
+            data: {
+                full_name: nombreLimpio
+            }
+        }
+    });
+
+    if (error) {
+        throw error;
+    }
+
+    return data;
 }
 
-// INICIAR SESIÓN
+// ==========================================
+// INICIO DE SESIÓN
+// ==========================================
 export async function iniciarSesion(email, password) {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password
-  });
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email: email.trim().toLowerCase(),
+        password
+    });
 
-  if (error) throw error;
-  return data;
+    if (error) {
+        throw error;
+    }
+
+    return data;
 }
 
+// ==========================================
 // CERRAR SESIÓN
+// ==========================================
 export async function cerrarSesion() {
-  const { error } = await supabase.auth.signOut();
-  if (error) throw error;
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+        throw error;
+    }
 }
 
+// ==========================================
 // OBTENER USUARIO ACTUAL
+// ==========================================
 export async function obtenerUsuario() {
-  const { data, error } = await supabase.auth.getUser();
-  if (error) throw error;
-  return data.user;
-}
+    const { data, error } = await supabase.auth.getUser();
 
-// CREAR PEDIDO
-export async function crearPedido({
-  titulo,
-  descripcion,
-  presupuesto = null,
-  designId = null
-}) {
-  const usuario = await obtenerUsuario();
-
-  if (!usuario) {
-    throw new Error('Inicia sesión antes de solicitar un diseño.');
-  }
-
-  const { data, error } = await supabase
-    .from('orders')
-    .insert({
-      user_id: usuario.id,
-      title: titulo,
-      description: descripcion,
-      budget: presupuesto,
-      design_id: designId
-    })
-    .select()
-    .single();
-
-  if (error) throw error;
-  return data;
-}
-
-// CONSULTAR MIS PEDIDOS
-export async function consultarMisPedidos() {
-  const { data, error } = await supabase
-    .from('orders')
-    .select('*')
-    .order('created_at', { ascending: false });
-
-  if (error) throw error;
-  return data;
-}
-
-// CONSULTAR PORTAFOLIO PÚBLICO
-export async function consultarDisenos() {
-  const { data, error } = await supabase
-    .from('designs')
-    .select('*')
-    .eq('is_published', true)
-    .order('created_at', { ascending: false });
-
-  if (error) throw error;
-  return data;
-}
-
-// SUBIR REFERENCIA A STORAGE
-export async function subirReferencia(orderId, archivo) {
-  const usuario = await obtenerUsuario();
-
-  if (!usuario) {
-    throw new Error('Debes iniciar sesión.');
-  }
-
-  if (!archivo) {
-    throw new Error('Selecciona un archivo.');
-  }
-
-  const permitidos = [
-    'image/jpeg',
-    'image/png',
-    'image/webp',
-    'application/pdf'
-  ];
-
-  if (!permitidos.includes(archivo.type)) {
-    throw new Error('Solo se permiten JPG, PNG, WEBP o PDF.');
-  }
-
-  if (archivo.size > 10 * 1024 * 1024) {
-    throw new Error('El archivo no puede superar los 10 MB.');
-  }
-
-  const extension = archivo.name.split('.').pop().toLowerCase();
-  const ruta = `${usuario.id}/${crypto.randomUUID()}.${extension}`;
-
-  const { error: uploadError } = await supabase.storage
-    .from('sketchly-files')
-    .upload(ruta, archivo, { upsert: false });
-
-  if (uploadError) throw uploadError;
-
-  const { data, error } = await supabase
-    .from('order_files')
-    .insert({
-      order_id: orderId,
-      user_id: usuario.id,
-      file_path: ruta,
-      file_type: 'reference'
-    })
-    .select()
-    .single();
-
-  if (error) {
-    // Limpieza si no se pudo registrar la referencia.
-    await supabase.storage.from('sketchly-files').remove([ruta]);
-    throw error;
-  }
-
-  return data;
-}
-
-// OBTENER ENLACE TEMPORAL DE UN ARCHIVO
-export async function obtenerEnlaceTemporal(ruta) {
-  const { data, error } = await supabase.storage
-    .from('sketchly-files')
-    .createSignedUrl(ruta, 60);
-
-  if (error) throw error;
-  return data.signedUrl;
-}
-
-// REGISTRAR UN PAGO PENDIENTE
-export async function registrarPago(orderId, importe, metodo, comprobante = null) {
-  const usuario = await obtenerUsuario();
-
-  if (!usuario) {
-    throw new Error('Debes iniciar sesión.');
-  }
-
-  let rutaComprobante = null;
-
-  if (comprobante) {
-    const permitidos = ['image/jpeg', 'image/png', 'application/pdf'];
-
-    if (!permitidos.includes(comprobante.type)) {
-      throw new Error('El comprobante debe ser JPG, PNG o PDF.');
+    if (error) {
+        throw error;
     }
 
-    if (comprobante.size > 10 * 1024 * 1024) {
-      throw new Error('El comprobante no puede superar los 10 MB.');
-    }
-
-    const extension = comprobante.name.split('.').pop().toLowerCase();
-    rutaComprobante =
-      `${usuario.id}/${crypto.randomUUID()}.${extension}`;
-
-    const { error } = await supabase.storage
-      .from('sketchly-files')
-      .upload(rutaComprobante, comprobante);
-
-    if (error) throw error;
-  }
-
-  const { data, error } = await supabase
-    .from('payments')
-    .insert({
-      order_id: orderId,
-      user_id: usuario.id,
-      amount: importe,
-      method: metodo,
-      receipt_path: rutaComprobante,
-      status: 'pending'
-    })
-    .select()
-    .single();
-
-  if (error) throw error;
-  return data;
+    return data.user;
 }
 
+// ==========================================
 // ESCUCHAR CAMBIOS DE SESIÓN
+// ==========================================
 export function escucharSesion(callback) {
-  return supabase.auth.onAuthStateChange((event, session) => {
-    callback(event, session);
-  });
+    const { data } = supabase.auth.onAuthStateChange(
+        (event, session) => {
+            callback(session?.user ?? null, event);
+        }
+    );
+
+    return data.subscription;
 }
 
+// ==========================================
+// CREAR SOLICITUD DE DISEÑO
+// ==========================================
+export async function crearPedido({
+    nombre,
+    correo,
+    tipo,
+    descripcion,
+    fecha,
+    archivo = null
+}) {
+    const usuario = await obtenerUsuario();
+
+    if (!usuario) {
+        throw new Error(
+            'Debes iniciar sesión para enviar una solicitud.'
+        );
+    }
+
+    if (!nombre?.trim() || !correo?.trim() || !tipo ||
+        !descripcion?.trim() || !fecha) {
+        throw new Error('Completa todos los campos obligatorios.');
+    }
+
+    if (correo.trim().toLowerCase() !== usuario.email?.toLowerCase()) {
+        throw new Error('El correo no coincide con tu cuenta.');
+    }
+
+    let rutaImagen = null;
+
+    // La imagen de referencia es opcional.
+    if (archivo) {
+        const tiposPermitidos = [
+            'image/jpeg',
+            'image/png',
+            'image/webp',
+            'image/gif'
+        ];
+
+        if (!tiposPermitidos.includes(archivo.type)) {
+            throw new Error('La imagen debe ser JPG, PNG, WEBP o GIF.');
+        }
+
+        if (archivo.size > 10 * 1024 * 1024) {
+            throw new Error('La imagen no puede superar los 10 MB.');
+        }
+
+        const extension = archivo.name.split('.').pop().toLowerCase();
+
+        // La ruta comienza con el ID del usuario para aplicar RLS.
+        rutaImagen = `${usuario.id}/${crypto.randomUUID()}.${extension}`;
+
+        const { error: errorSubida } = await supabase.storage
+            .from('sketchly-files')
+            .upload(rutaImagen, archivo, {
+                upsert: false,
+                contentType: archivo.type
+            });
+
+        if (errorSubida) {
+            throw errorSubida;
+        }
+    }
+
+    const { data, error } = await supabase
+        .from('orders')
+        .insert({
+            user_id: usuario.id,
+            title: `Solicitud: ${tipo}`,
+            description: descripcion.trim(),
+            customer_name: nombre.trim(),
+            customer_email: usuario.email,
+            design_type: tipo,
+            due_date: fecha,
+            reference_path: rutaImagen,
+            status: 'pending'
+        })
+        .select()
+        .single();
+
+    // Si falla el registro, intenta eliminar la imagen subida.
+    if (error) {
+        if (rutaImagen) {
+            const { error: errorLimpieza } = await supabase.storage
+                .from('sketchly-files')
+                .remove([rutaImagen]);
+
+            if (errorLimpieza) {
+                console.error('Error al limpiar la imagen:', errorLimpieza);
+            }
+        }
+
+        throw error;
+    }
+
+    return data;
+}
+
+// ==========================================
+// CONSULTAR SOLICITUDES DEL CLIENTE
+// ==========================================
+export async function consultarMisPedidos() {
+    const usuario = await obtenerUsuario();
+
+    if (!usuario) {
+        throw new Error('Debes iniciar sesión.');
+    }
+
+    const { data, error } = await supabase
+        .from('orders')
+        .select('*')
+        .eq('user_id', usuario.id)
+        .order('created_at', { ascending: false });
+
+    if (error) {
+        throw error;
+    }
+
+    return data;
+}
+
+// ==========================================
+// OBTENER ENLACE TEMPORAL DE UNA IMAGEN
+// ==========================================
+export async function obtenerEnlaceTemporal(ruta) {
+    if (!ruta) {
+        return null;
+    }
+
+    const usuario = await obtenerUsuario();
+
+    if (!usuario || !ruta.startsWith(`${usuario.id}/`)) {
+        throw new Error('No tienes permiso para consultar este archivo.');
+    }
+
+    const { data, error } = await supabase.storage
+        .from('sketchly-files')
+        .createSignedUrl(ruta, 300);
+
+    if (error) {
+        throw error;
+    }
+
+    return data.signedUrl;
+}
