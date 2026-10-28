@@ -1,365 +1,797 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Sketchly | Portafolio</title>
 
+    <!-- CSS GENERAL -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- CSS EXCLUSIVO DEL PORTAFOLIO -->
     <link rel="stylesheet" href="css/portafolio.css">
 
+    <!-- FUENTE -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
 </head>
 
+
 <body>
-    <header class="header">
-        <a href="index.html" class="brand">
-            <img src="img/logo.png" alt="Sketchly" class="main-logo">
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <a href="index.html" class="brand">
+
+        <img
+            src="img/logo.png"
+            alt="Sketchly"
+            class="main-logo"
+        >
+
+    </a>
+
+
+    <nav class="nav">
+
+        <a href="index.html">
+            Inicio
         </a>
 
-        <nav class="nav">
-            <a href="index.html">Inicio</a>
-            <a href="portafolio.html" class="active">Portafolio</a>
-            <a href="solicitud.html">Solicitar diseño</a>
-            <a href="historial.html">Historial</a>
-            <a href="contacto.html">Contacto</a>
-        </nav>
-
-        <a href="login.html" class="user-button" title="Iniciar sesión">
-            <img src="img/login.png" alt="Iniciar sesión">
+        <a href="portafolio.html" class="active">
+            Portafolio
         </a>
-    </header>
 
-    <main class="portfolio-page">
-        <section class="portfolio-hero">
-            <div class="portfolio-decoration decoration-left"></div>
-            <div class="portfolio-decoration decoration-right"></div>
+        <a href="solicitud.html">
+            Solicitar diseño
+        </a>
 
-            <div class="portfolio-hero-content">
-                <div class="portfolio-text">
-                    <span class="portfolio-label">PORTAFOLIO</span>
-                    <h1>Explora nuestros<br><strong>estilos.</strong></h1>
-                    <p>Descubre diferentes estilos de diseño<br>y encuentra la inspiración para tu idea.</p>
-                </div>
+        <a href="historial.html">
+            Historial
+        </a>
 
-                <div class="portfolio-cat">
-                    <div class="cat-purple-glow"></div>
-                    <img src="img/gato.png" alt="Mascota de Sketchly">
+        <a href="contacto.html">
+            Contacto
+        </a>
 
-                    <div class="portfolio-notebook">
-                        <div class="notebook-ring ring-1"></div>
-                        <div class="notebook-ring ring-2"></div>
-                        <div class="notebook-ring ring-3"></div>
-                        <div class="notebook-ring ring-4"></div>
-                        <div class="notebook-ring ring-5"></div>
-                        <div class="notebook-ring ring-6"></div>
-                        <span class="notebook-star">☆</span>
-                        <span class="notebook-smile">☺</span>
-                        <span class="notebook-heart">♡</span>
-                    </div>
+    </nav>
 
-                    <div class="spark spark-1">✦</div>
-                    <div class="spark spark-2">✦</div>
-                    <div class="spark spark-3">✦</div>
-                </div>
+
+    <!-- LOGIN -->
+
+    <a
+        href="login.html"
+        class="user-button"
+        title="Iniciar sesión"
+    >
+
+        <img
+            src="img/login.png"
+            alt="Iniciar sesión"
+        >
+
+    </a>
+
+</header>
+
+
+
+<!-- =====================================================
+     PORTAFOLIO
+===================================================== -->
+
+<main class="portfolio-page">
+
+
+    <!-- =================================================
+         HERO DEL PORTAFOLIO
+    ================================================== -->
+
+    <section class="portfolio-hero">
+
+
+        <!-- DECORACIÓN -->
+
+        <div class="portfolio-decoration decoration-left"></div>
+
+        <div class="portfolio-decoration decoration-right"></div>
+
+
+        <div class="portfolio-hero-content">
+
+
+            <!-- TEXTO -->
+
+            <div class="portfolio-text">
+
+                <span class="portfolio-label">
+                    PORTAFOLIO
+                </span>
+
+
+                <h1>
+
+                    Explora nuestros
+                    <br>
+
+                    <strong>estilos.</strong>
+
+                </h1>
+
+
+                <p>
+
+                    Descubre diferentes estilos de diseño
+                    <br>
+                    y encuentra la inspiración para tu idea.
+
+                </p>
+
             </div>
-        </section>
 
-        <section class="portfolio-works" id="trabajos">
-            <div class="portfolio-grid">
-                <div class="portfolio-card"
-                     data-image="img/portfolio/personajes.png"
-                     data-title="Personajes">
-                    <div class="portfolio-number">01</div>
-                    <div class="portfolio-image">
-                        <img src="img/portfolio/personajes.png" alt="Diseño de personajes">
-                    </div>
-                    <div class="portfolio-card-content">
-                        <h2>Personajes</h2>
-                        <p>Diseños personalizados para dar vida a tus personajes.</p>
-                    </div>
-                    <span class="portfolio-arrow">→</span>
+
+
+            <!-- =================================================
+                 ILUSTRACIÓN
+            ================================================== -->
+
+            <div class="portfolio-cat">
+
+
+                <div class="cat-purple-glow"></div>
+
+
+                <!-- GATO -->
+
+                <img
+                    src="img/gato.png"
+                    alt="Mascota de Sketchly"
+                >
+
+
+                <!-- CUADERNO -->
+
+                <div class="portfolio-notebook">
+
+                    <div class="notebook-ring ring-1"></div>
+                    <div class="notebook-ring ring-2"></div>
+                    <div class="notebook-ring ring-3"></div>
+                    <div class="notebook-ring ring-4"></div>
+                    <div class="notebook-ring ring-5"></div>
+                    <div class="notebook-ring ring-6"></div>
+
+
+                    <span class="notebook-star">
+                        ☆
+                    </span>
+
+
+                    <span class="notebook-smile">
+                        ☺
+                    </span>
+
+
+                    <span class="notebook-heart">
+                        ♡
+                    </span>
+
                 </div>
 
-                <div class="portfolio-card"
-                     data-image="img/portfolio/escenarios.png"
-                     data-title="Escenarios">
-                    <div class="portfolio-number">02</div>
-                    <div class="portfolio-image">
-                        <img src="img/portfolio/escenarios.png" alt="Diseño de escenarios">
-                    </div>
-                    <div class="portfolio-card-content">
-                        <h2>Escenarios</h2>
-                        <p>Crea lugares y ambientes para acompañar tus ideas.</p>
-                    </div>
-                    <span class="portfolio-arrow">→</span>
+
+                <!-- DETALLES -->
+
+                <div class="spark spark-1">
+                    ✦
                 </div>
 
-                <div class="portfolio-card"
-                     data-image="img/portfolio/logotipos.png"
-                     data-title="Logotipos">
-                    <div class="portfolio-number">03</div>
-                    <div class="portfolio-image">
-                        <img src="img/portfolio/logotipos.png" alt="Diseño de logotipos">
-                    </div>
-                    <div class="portfolio-card-content">
-                        <h2>Logotipos</h2>
-                        <p>Identidades visuales pensadas para representar tu proyecto.</p>
-                    </div>
-                    <span class="portfolio-arrow">→</span>
+                <div class="spark spark-2">
+                    ✦
                 </div>
 
-                <div class="portfolio-card"
-                     data-image="img/portfolio/pixelart.png"
-                     data-title="Pixel Art">
-                    <div class="portfolio-number">04</div>
-                    <div class="portfolio-image">
-                        <img src="img/portfolio/pixelart.png" alt="Diseño Pixel Art">
-                    </div>
-                    <div class="portfolio-card-content">
-                        <h2>Pixel Art</h2>
-                        <p>Diseños con una estética retro y llena de personalidad.</p>
-                    </div>
-                    <span class="portfolio-arrow">→</span>
+                <div class="spark spark-3">
+                    ✦
                 </div>
+
             </div>
-        </section>
 
-        <section class="portfolio-cta">
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         TRABAJOS
+    ================================================== -->
+
+    <section
+        class="portfolio-works"
+        id="trabajos"
+    >
+
+
+        <div class="portfolio-grid">
+
+
+            <!-- =================================================
+                 PERSONAJES
+            ================================================= -->
+
+            <div
+                class="portfolio-card"
+                data-image="img/portfolio/personajes.png"
+                data-title="Personajes"
+            >
+
+                <div class="portfolio-number">
+                    01
+                </div>
+
+
+                <div class="portfolio-image">
+
+                    <img
+                        src="img/portfolio/personajes.png"
+                        alt="Diseño de personajes"
+                    >
+
+                </div>
+
+
+                <div class="portfolio-card-content">
+
+                    <h2>
+                        Personajes
+                    </h2>
+
+                    <p>
+                        Diseños personalizados para
+                        dar vida a tus personajes.
+                    </p>
+
+                </div>
+
+
+                <span class="portfolio-arrow">
+                    →
+                </span>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ESCENARIOS
+            ================================================== -->
+
+            <div
+                class="portfolio-card"
+                data-image="img/portfolio/escenarios.png"
+                data-title="Escenarios"
+            >
+
+                <div class="portfolio-number">
+                    02
+                </div>
+
+
+                <div class="portfolio-image">
+
+                    <img
+                        src="img/portfolio/escenarios.png"
+                        alt="Diseño de escenarios"
+                    >
+
+                </div>
+
+
+                <div class="portfolio-card-content">
+
+                    <h2>
+                        Escenarios
+                    </h2>
+
+                    <p>
+                        Crea lugares y ambientes
+                        para acompañar tus ideas.
+                    </p>
+
+                </div>
+
+
+                <span class="portfolio-arrow">
+                    →
+                </span>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 LOGOTIPOS
+            ================================================== -->
+
+            <div
+                class="portfolio-card"
+                data-image="img/portfolio/logotipos.png"
+                data-title="Logotipos"
+            >
+
+                <div class="portfolio-number">
+                    03
+                </div>
+
+
+                <div class="portfolio-image">
+
+                    <img
+                        src="img/portfolio/logotipos.png"
+                        alt="Diseño de logotipos"
+                    >
+
+                </div>
+
+
+                <div class="portfolio-card-content">
+
+                    <h2>
+                        Logotipos
+                    </h2>
+
+                    <p>
+                        Identidades visuales pensadas
+                        para representar tu proyecto.
+                    </p>
+
+                </div>
+
+
+                <span class="portfolio-arrow">
+                    →
+                </span>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PIXEL ART
+            ================================================== -->
+
+            <div
+                class="portfolio-card"
+                data-image="img/portfolio/pixelart.png"
+                data-title="Pixel Art"
+            >
+
+                <div class="portfolio-number">
+                    04
+                </div>
+
+
+                <div class="portfolio-image">
+
+                    <img
+                        src="img/portfolio/pixelart.png"
+                        alt="Diseño Pixel Art"
+                    >
+
+                </div>
+
+
+                <div class="portfolio-card-content">
+
+                    <h2>
+                        Pixel Art
+                    </h2>
+
+                    <p>
+                        Diseños con una estética retro
+                        y llena de personalidad.
+                    </p>
+
+                </div>
+
+
+                <span class="portfolio-arrow">
+                    →
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         CTA
+    ================================================== -->
+
+    <section class="portfolio-cta">
+
+        <div>
+
+            <span>
+                ¿TIENES UNA IDEA?
+            </span>
+
+            <h2>
+                Hagámosla realidad.
+            </h2>
+
+            <p>
+                Cuéntanos qué tienes en mente
+                y empieza tu proyecto.
+            </p>
+
+        </div>
+
+
+        <a
+            href="solicitud.html"
+            class="portfolio-cta-button"
+        >
+
+            Solicitar diseño →
+
+        </a>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     VISOR / MODAL DE IMÁGENES
+===================================================== -->
+
+<div
+    class="portfolio-modal"
+    id="portfolioModal"
+>
+
+
+    <!-- BOTÓN CERRAR -->
+
+    <button
+        class="portfolio-modal-close"
+        id="portfolioModalClose"
+        aria-label="Cerrar imagen"
+    >
+
+        ×
+
+    </button>
+
+
+
+    <!-- CONTENIDO -->
+
+    <div class="portfolio-modal-content">
+
+
+        <img
+            id="portfolioModalImage"
+            src=""
+            alt="Vista ampliada"
+        >
+
+
+        <h3 id="portfolioModalTitle"></h3>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+
+    <div class="footer-brand">
+
+        <img
+            src="img/logo.png"
+            alt="Sketchly"
+        >
+
+        <p>
+            Dale vida a tus ideas.
+        </p>
+
+    </div>
+
+
+    <div class="footer-links">
+
+        <a href="index.html">
+            Inicio
+        </a>
+
+        <a href="portafolio.html">
+            Portafolio
+        </a>
+
+        <a href="solicitud.html">
+            Solicitar diseño
+        </a>
+
+        <a href="contacto.html">
+            Contacto
+        </a>
+
+    </div>
+
+
+    <p class="copyright">
+
+        © 2026 Sketchly.
+        Todos los derechos reservados.
+
+    </p>
+
+
+</footer>
+
+
+
+<!-- =====================================================
+     CHATBOT
+===================================================== -->
+
+<div class="chatbot">
+
+
+    <button
+        class="chatbot-button"
+        id="chatbotButton"
+    >
+
+        <span>
+            ✦
+        </span>
+
+    </button>
+
+
+    <div
+        class="chatbot-window"
+        id="chatbotWindow"
+    >
+
+
+        <div class="chatbot-header">
+
             <div>
-                <span>¿TIENES UNA IDEA?</span>
-                <h2>Hagámosla realidad.</h2>
-                <p>Cuéntanos qué tienes en mente y empieza tu proyecto.</p>
+
+                <strong>
+                    Sketchly
+                </strong>
+
+                <small>
+                    Asistente virtual
+                </small>
+
             </div>
 
-            <a href="solicitud.html" class="portfolio-cta-button">
-                Solicitar diseño →
-            </a>
-        </section>
-    </main>
 
-    <div class="portfolio-modal" id="portfolioModal">
-        <button class="portfolio-modal-close" id="portfolioModalClose" aria-label="Cerrar imagen">×</button>
+            <button id="closeChat">
+                ×
+            </button>
 
-        <div class="portfolio-modal-content">
-            <img id="portfolioModalImage" src="" alt="Vista ampliada">
-            <h3 id="portfolioModalTitle"></h3>
         </div>
+
+
+
+        <div
+            class="chatbot-messages"
+            id="chatMessages"
+        >
+
+            <div class="bot-message">
+
+                ¡Hola! 👋
+
+                <br><br>
+
+                Soy el asistente de Sketchly.
+                ¿En qué puedo ayudarte?
+
+            </div>
+
+        </div>
+
+
+
+        <div class="chatbot-options">
+
+            <button onclick="botReply('portafolio')">
+                🎨 Ver estilos
+            </button>
+
+            <button onclick="botReply('solicitud')">
+                ✎ Solicitar diseño
+            </button>
+
+            <button onclick="botReply('contacto')">
+                💬 Contactar artista
+            </button>
+
+        </div>
+
+
     </div>
 
-    <footer>
-        <div class="footer-brand">
-            <img src="img/logo.png" alt="Sketchly">
-            <p>Dale vida a tus ideas.</p>
-        </div>
+</div>
 
-        <div class="footer-links">
-            <a href="index.html">Inicio</a>
-            <a href="portafolio.html">Portafolio</a>
-            <a href="solicitud.html">Solicitar diseño</a>
-            <a href="contacto.html">Contacto</a>
-        </div>
 
-        <p class="copyright">© 2026 Sketchly. Todos los derechos reservados.</p>
-    </footer>
 
-    <div class="chatbot">
-        <button class="chatbot-button" id="chatbotButton">
-            <span>✦</span>
-        </button>
+<!-- =====================================================
+     JAVASCRIPT GENERAL
+===================================================== -->
 
-        <div class="chatbot-window" id="chatbotWindow">
-            <div class="chatbot-header">
-                <div>
-                    <strong>Sketchly</strong>
-                    <small>Asistente virtual</small>
-                </div>
-                <button id="closeChat">×</button>
-            </div>
+<script src="js/script.js"></script>
 
-            <div class="chatbot-messages" id="chatMessages">
-                <div class="bot-message">
-                    ¡Hola! 👋
-                    <br><br>
-                    Soy el asistente de Sketchly. ¿En qué puedo ayudarte?
-                </div>
-            </div>
 
-            <div class="chatbot-options">
-                <button onclick="botReply('portafolio')">🎨 Ver estilos</button>
-                <button onclick="botReply('solicitud')">✎ Solicitar diseño</button>
-                <button onclick="botReply('contacto')">💬 Contactar artista</button>
-            </div>
-        </div>
-    </div>
 
-    <script src="js/script.js"></script>
+<!-- =====================================================
+     JAVASCRIPT DEL PORTAFOLIO
+===================================================== -->
 
-    <script type="module">
-        import { supabase } from './js/supabase.js';
+<script>
 
-        document.addEventListener("DOMContentLoaded", async function () {
-            const modal = document.getElementById("portfolioModal");
-            const modalImage = document.getElementById("portfolioModalImage");
-            const modalTitle = document.getElementById("portfolioModalTitle");
-            const closeButton = document.getElementById("portfolioModalClose");
-            const grid = document.querySelector(".portfolio-grid");
+document.addEventListener("DOMContentLoaded", function () {
 
-            const fallbackImages = {
-                "personajes": "img/portfolio/personajes.png",
-                "escenarios": "img/portfolio/escenarios.png",
-                "logotipos": "img/portfolio/logotipos.png",
-                "pixel art": "img/portfolio/pixelart.png",
-                "pixel-art": "img/portfolio/pixelart.png",
-                "pixelart": "img/portfolio/pixelart.png"
-            };
 
-            function getFallbackImage(category, title) {
-                const key = String(category || title || "").trim().toLowerCase();
-                return fallbackImages[key] || "img/portfolio/personajes.png";
-            }
+    /* =================================================
+       ELEMENTOS
+    ================================================= */
 
-            function openModal(image, title) {
-                if (!image) return;
+    const modal =
+        document.getElementById("portfolioModal");
 
-                modalImage.src = image;
-                modalImage.alt = title || "Diseño de Sketchly";
-                modalTitle.textContent = title || "Diseño";
-                modal.classList.add("show");
-                document.body.style.overflow = "hidden";
-            }
+    const modalImage =
+        document.getElementById("portfolioModalImage");
 
-            function closePortfolioModal() {
-                modal.classList.remove("show");
-                document.body.style.overflow = "";
-            }
+    const modalTitle =
+        document.getElementById("portfolioModalTitle");
 
-            grid.addEventListener("click", function (event) {
-                const card = event.target.closest(".portfolio-card");
+    const closeButton =
+        document.getElementById("portfolioModalClose");
 
-                if (!card || !grid.contains(card)) return;
+    const portfolioCards =
+        document.querySelectorAll(".portfolio-card");
 
-                openModal(
-                    card.getAttribute("data-image"),
-                    card.getAttribute("data-title")
-                );
-            });
 
-            closeButton.addEventListener("click", closePortfolioModal);
 
-            modal.addEventListener("click", function (event) {
-                if (event.target === modal) {
-                    closePortfolioModal();
-                }
-            });
+    /* =================================================
+       ABRIR IMAGEN
+    ================================================= */
 
-            document.addEventListener("keydown", function (event) {
-                if (event.key === "Escape") {
-                    closePortfolioModal();
-                }
-            });
+    portfolioCards.forEach(function (card) {
 
-            function createCard(design, index) {
-                const title = design.title || "Diseño de Sketchly";
-                const description = design.description || design.category || "Diseño personalizado.";
-                const category = design.category || "";
+        card.addEventListener("click", function () {
 
-                const image = (
-                    typeof design.image_url === "string" &&
-                    design.image_url.trim()
-                )
-                    ? design.image_url.trim()
-                    : getFallbackImage(category, title);
 
-                const card = document.createElement("div");
-                card.className = "portfolio-card";
-                card.dataset.image = image;
-                card.dataset.title = title;
+            const image =
+                card.getAttribute("data-image");
 
-                const number = document.createElement("div");
-                number.className = "portfolio-number";
-                number.textContent = String(index + 1).padStart(2, "0");
+            const title =
+                card.getAttribute("data-title");
 
-                const imageWrap = document.createElement("div");
-                imageWrap.className = "portfolio-image";
 
-                const img = document.createElement("img");
-                img.src = image;
-                img.alt = title;
-                img.loading = "lazy";
+            modalImage.src = image;
 
-                img.addEventListener("error", function () {
-                    img.src = getFallbackImage(category, title);
-                }, { once: true });
+            modalImage.alt = title;
 
-                imageWrap.appendChild(img);
+            modalTitle.textContent = title;
 
-                const content = document.createElement("div");
-                content.className = "portfolio-card-content";
 
-                const heading = document.createElement("h2");
-                heading.textContent = title;
+            modal.classList.add("show");
 
-                const paragraph = document.createElement("p");
-                paragraph.textContent = description;
 
-                content.append(heading, paragraph);
+            /* Bloqueamos el scroll de la página */
 
-                if (
-                    design.price !== null &&
-                    design.price !== undefined &&
-                    design.price !== ""
-                ) {
-                    const price = Number(design.price);
+            document.body.style.overflow = "hidden";
 
-                    if (Number.isFinite(price)) {
-                        const priceText = document.createElement("p");
-                        priceText.textContent = `Precio: S/ ${price.toFixed(2)}`;
-                        content.appendChild(priceText);
-                    }
-                }
 
-                const arrow = document.createElement("span");
-                arrow.className = "portfolio-arrow";
-                arrow.textContent = "→";
-
-                card.append(number, imageWrap, content, arrow);
-
-                return card;
-            }
-
-            try {
-                const { data, error } = await supabase
-                    .from("designs")
-                    .select("id, title, description, category, image_url, price")
-                    .order("title", { ascending: true });
-
-                if (error) throw error;
-
-                if (Array.isArray(data) && data.length > 0) {
-                    grid.replaceChildren();
-
-                    data.forEach(function (design, index) {
-                        grid.appendChild(createCard(design, index));
-                    });
-
-                    console.info(
-                        `Sketchly: ${data.length} diseño(s) cargado(s) desde Supabase.`
-                    );
-                } else {
-                    console.info(
-                        "Sketchly: la tabla designs está vacía; se mantienen las tarjetas de ejemplo."
-                    );
-                }
-            } catch (error) {
-                console.error(
-                    "No se pudieron cargar los diseños desde Supabase:",
-                    error.message
-                );
-            }
         });
-    </script>
+
+    });
+
+
+
+    /* =================================================
+       CERRAR CON X
+    ================================================= */
+
+    closeButton.addEventListener(
+        "click",
+        closePortfolioModal
+    );
+
+
+
+    /* =================================================
+       CERRAR HACIENDO CLIC EN EL FONDO
+    ================================================= */
+
+    modal.addEventListener(
+        "click",
+        function (event) {
+
+            if (event.target === modal) {
+
+                closePortfolioModal();
+
+            }
+
+        }
+    );
+
+
+
+    /* =================================================
+       CERRAR CON ESC
+    ================================================= */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Escape") {
+
+                closePortfolioModal();
+
+            }
+
+        }
+    );
+
+
+
+    /* =================================================
+       CERRAR MODAL
+    ================================================= */
+
+    function closePortfolioModal() {
+
+        modal.classList.remove("show");
+
+        document.body.style.overflow = "";
+
+    }
+
+
+});
+
+</script>
+
+
 </body>
+
 </html>
