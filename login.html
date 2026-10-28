@@ -579,7 +579,9 @@
      JAVASCRIPT
 ===================================================== -->
 
-<script>
+<script type="module">
+
+import { iniciarSesion } from './js/sketchly.js';
 
 
 /* =====================================================
@@ -725,45 +727,66 @@ function togglePassword(inputId, button) {
 
 
 /* =====================================================
-   LOGIN
+   LOGIN CON SUPABASE
 ===================================================== */
 
-loginForm.addEventListener(
-    "submit",
-    function(event) {
+loginForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
 
-        event.preventDefault();
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const mensaje = document.getElementById('loginMessage');
+    const boton = loginForm.querySelector('button[type="submit"]');
 
-
-        const email =
-            document.getElementById("loginEmail").value;
-
-        const password =
-            document.getElementById("loginPassword").value;
-
-
-        if (!email || !password) {
-
-            alert(
-                "Completa todos los campos."
-            );
-
-            return;
-
-        }
-
-
-        alert(
-            "¡Inicio de sesión realizado correctamente! ✦"
-        );
-
+    if (mensaje) {
+        mensaje.textContent = '';
     }
-);
+
+    if (boton) {
+        boton.disabled = true;
+        boton.textContent = 'Ingresando...';
+    }
+
+    try {
+        await iniciarSesion(email, password);
+
+        const parametros = new URLSearchParams(window.location.search);
+        const destino = parametros.get('next');
+
+        // Solo se permiten destinos locales conocidos.
+        const paginasPermitidas = [
+            'solicitud.html',
+            'index.html',
+            'portafolio.html',
+            'contacto.html'
+        ];
+
+        const paginaDestino = paginasPermitidas.includes(destino)
+            ? destino
+            : 'solicitud.html';
+
+        window.location.href = paginaDestino;
+    } catch (error) {
+        console.error('Error al iniciar sesión:', error);
+
+        if (mensaje) {
+            mensaje.textContent =
+                'No se pudo iniciar sesión. Verifica tu correo y contraseña.';
+        } else {
+            alert('No se pudo iniciar sesión. Verifica tu correo y contraseña.');
+        }
+    } finally {
+        if (boton) {
+            boton.disabled = false;
+            boton.textContent = 'Iniciar sesión';
+        }
+    }
+});
 
 
 
 /* =====================================================
-   REGISTRO
+   REGISTRO ORIGINAL
 ===================================================== */
 
 registerForm.addEventListener(
@@ -850,7 +873,7 @@ registerForm.addEventListener(
 
 
 /* =====================================================
-   GOOGLE
+   GOOGLE ORIGINAL
 ===================================================== */
 
 document.getElementById(
@@ -883,7 +906,7 @@ document.getElementById(
 
 
 /* =====================================================
-   RECUPERAR CONTRASEÑA
+   RECUPERAR CONTRASEÑA ORIGINAL
 ===================================================== */
 
 document.getElementById(
