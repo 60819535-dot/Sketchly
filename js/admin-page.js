@@ -195,14 +195,20 @@ function renderOrder(order) {
   }
   addActionButton(actions, '▣  Ver QR de Yape', () => showImagePreview('img/qr-yape.png', 'QR de Yape de Sketchly'));
   if (order.payment_proof_path) {
-    addActionButton(actions, '✓  Ver comprobante de pago', () => openReference(order.payment_proof_path, 'payment-proofs', 'Comprobante de pago del cliente'));
+    addActionButton(actions, '✓  Ver captura de pago', () => openReference(order.payment_proof_path, 'payment-proofs', 'Captura del pago enviada por el cliente'));
+  } else {
+    const proofNote = makeElement('span', 'delivery-help',
+      order.payment_status === 'submitted'
+        ? 'El cliente figura como enviado, pero no hay ruta de captura guardada.'
+        : 'Todavía no hay captura de pago registrada.');
+    actions.append(proofNote);
   }
   if (order.customer_email) {
     const email = makeElement('a', 'order-action-button', '✉  Escribir correo');
     email.href = 'mailto:' + order.customer_email + '?subject=' + encodeURIComponent('Tu pedido de Sketchly');
     actions.append(email);
   }
-  if (order.reference_path || order.customer_email) card.append(actions);
+  card.append(actions);
 
   const deliveryWrap = makeElement('div', 'order-actions');
   const fileInput = makeElement('input');
