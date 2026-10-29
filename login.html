@@ -581,7 +581,7 @@
 
 <script type="module">
 
-import { iniciarSesion } from './js/sketchly.js';
+import { iniciarSesion, registrarCliente } from './js/sketchly.js';
 
 
 /* =====================================================
@@ -786,90 +786,70 @@ loginForm.addEventListener('submit', async (event) => {
 
 
 /* =====================================================
-   REGISTRO ORIGINAL
+   REGISTRO CON SUPABASE
 ===================================================== */
 
-registerForm.addEventListener(
-    "submit",
-    function(event) {
+registerForm.addEventListener('submit', async function (event) {
 
-        event.preventDefault();
+    event.preventDefault();
 
+    const name = document.getElementById("registerName").value.trim();
+    const email = document.getElementById("registerEmail").value.trim();
+    const password = document.getElementById("registerPassword").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+    const boton = registerForm.querySelector('button[type="submit"]');
 
-        const name =
-            document.getElementById("registerName").value.trim();
+    if (!name || !email || !password || !confirmPassword) {
+        alert("Completa todos los campos.");
+        return;
+    }
 
-        const email =
-            document.getElementById("registerEmail").value.trim();
+    if (password.length < 8) {
+        alert("La contraseña debe tener al menos 8 caracteres.");
+        return;
+    }
 
-        const password =
-            document.getElementById("registerPassword").value;
+    if (password !== confirmPassword) {
+        alert("Las contraseñas no coinciden.");
+        return;
+    }
 
-        const confirmPassword =
-            document.getElementById("confirmPassword").value;
+    const textoOriginal = boton.innerHTML;
+    boton.disabled = true;
+    boton.textContent = "Creando cuenta...";
 
+    try {
 
-        /* VALIDAR */
+        const resultado = await registrarCliente(name, email, password);
 
-        if (
-            !name ||
-            !email ||
-            !password ||
-            !confirmPassword
-        ) {
+        if (resultado.session) {
 
-            alert(
-                "Completa todos los campos."
-            );
+            alert("¡Tu cuenta se creó correctamente! ✦");
+            window.location.href = "solicitud.html";
 
-            return;
+        } else {
 
-        }
+            alert("Tu cuenta se registró. Revisa tu correo para confirmar la cuenta y luego inicia sesión.");
 
-
-        if (password.length < 6) {
-
-            alert(
-                "La contraseña debe tener al menos 6 caracteres."
-            );
-
-            return;
-
-        }
-
-
-        if (password !== confirmPassword) {
-
-            alert(
-                "Las contraseñas no coinciden."
-            );
-
-            return;
+            document.getElementById("loginEmail").value = email;
+            registerForm.reset();
+            showLogin();
 
         }
 
+    } catch (error) {
 
-        /* REGISTRO DE DEMOSTRACIÓN */
+        console.error("Error al crear la cuenta:", error);
+        alert(error.message || "No se pudo crear la cuenta. Inténtalo nuevamente.");
 
-        alert(
-            "¡Cuenta creada correctamente! ✦"
-        );
+    } finally {
 
-
-        registerForm.reset();
-
-
-        showLogin();
-
-
-        document.getElementById(
-            "loginEmail"
-        ).value = email;
-
+        boton.disabled = false;
+        boton.innerHTML = textoOriginal;
 
     }
-);
 
+});
 
 
 /* =====================================================
