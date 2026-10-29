@@ -444,6 +444,31 @@ function crearTarjeta(order, index) {
             </div>
             <span class="order-status" data-status><span data-icon></span><span data-label></span></span>
         </div>
+        <div class="order-actions" data-order-actions hidden>
+            <button type="button" class="order-action-button edit-order-button" data-edit-order>Editar pedido</button>
+            <button type="button" class="order-action-button cancel-order-button" data-cancel-order>Cancelar pedido</button>
+        </div>
+        <form class="order-edit-form" data-order-edit hidden>
+            <h4>Editar tu solicitud</h4>
+            <label>Tipo de diseño
+                <input type="text" data-edit-type maxlength="100" required>
+            </label>
+            <label>Descripción
+                <textarea data-edit-description rows="4" maxlength="3000" required></textarea>
+            </label>
+            <label>Fecha deseada de entrega
+                <input type="date" data-edit-date required>
+            </label>
+            <label>Cambiar imagen de referencia (opcional)
+                <input type="file" data-edit-image accept="image/png,image/jpeg,image/webp,image/gif">
+            </label>
+            <p class="order-edit-note">Si no eliges una imagen nueva, conservaremos la actual.</p>
+            <div class="order-edit-buttons">
+                <button type="submit" class="order-action-button edit-order-button" data-save-edit>Guardar cambios</button>
+                <button type="button" class="order-action-button secondary-order-button" data-close-edit>Volver</button>
+            </div>
+            <p class="order-action-feedback" data-edit-feedback aria-live="polite"></p>
+        </form>
         <p class="order-description" data-description></p>
         <div class="order-info">
             <div><span>SOLICITADO</span><strong data-created></strong></div>
@@ -519,6 +544,7 @@ function crearTarjeta(order, index) {
     }
 
     configurarPago(tarjeta, order);
+    configurarAccionesPedido(tarjeta, order);
 
     const progreso = estado.progress;
     tarjeta.querySelector('[data-progress-label]').textContent = progreso + '%';
@@ -644,6 +670,189 @@ function configurarPago(tarjeta, order) {
             }
         });
     }
+}
+
+
+function configurarAccionesPedido(tarjeta, order) {
+    const acciones = tarjeta.querySelector('[data-order-actions]');
+    const formulario = tarjeta.querySelector('[data-order-edit]');
+    const feedback = tarjeta.querySelector('[data-edit-feedback]');
+    const botonEditar = tarjeta.querySelector('[data-edit-order]');
+    const botonCancelar = tarjeta.querySelector('[data-cancel-order]');
+    const botonCerrar = tarjeta.querySelector('[data-close-edit]');
+    const estado = String(order.status || '').toLowerCase();
+    const estadosEditables = ['pending', 'reviewing', 'quoted', 'awaiting_payment'];
+    const pagoBloqueado = ['submitted', 'verified', 'paid', 'completed'].includes(
+        String(order.payment_status || '').toLowerCase()
+    ) || Boolean(order.payment_proof_path);
+    const puedeModificar = estadosEditables.includes(estado) && !pagoBloqueado;
+
+    if (!puedeModificar) return;
+    acciones.hidden = false;
+
+    tarjeta.querySelector('[data-edit-type]').value =
+        order.design_type || (order.title || '').replace(/^Solicitud:\\s*/i, '');
+    tarjeta.querySelector('[data-edit-description]').value = order.description || '';
+    tarjeta.querySelector('[data-edit-date]').value =
+        /^\\d{4}-\\d{2}-\\d{2}$/.test(order.due_date || '') ? order.due_date : '';
+
+    botonEditar.addEventListener('click', () => {
+        formulario.hidden = !formulario.hidden;
+        feedback.textContent = '';
+        if (!formulario.hidden) formulario.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    botonCerrar.addEventListener('click', () => {
+        formulario.hidden = true;
+        feedback.textContent = '';
+    });
+
+    formulario.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const usuario = await obtenerUsuario();
+        const tipo = tarjeta.querySelector('[data-edit-type]').value.trim();
+        const descripcion = tarjeta.querySelector('[data-edit-description]').value.trim();
+        const fechaEntrega = tarjeta.querySelector('[data-edit-date]').value;
+        const archivo = tarjeta.querySelector('[data-edit-image]').files?.[0];
+        const guardar = tarjeta.querySelector('[data-save-edit]');
+        let nuevaRuta = null;
+
+        if (!usuario) {
+            feedback.textContent = 'Inicia sesión para editar tu pedido.';
+            return;
+        }
+        if (!tipo || !descripcion || !fechaEntrega) {
+            feedback.textContent = 'Completa el tipo, la descripción y la fecha.';
+            return;
+        }
+        if (archivo) {
+            if (!['image/png', 'image/jpeg', 'image/webp', 'image/gif'].includes(archivo.type)) {
+                feedback.textContent = 'La imagen debe ser PNG, JPG, WEBP o GIF.';
+                return;
+            }
+            if (archivo.size > 10 * 1024 * 1024) {
+                feedback.textContent = 'La imagen no puede superar los 10 MB.';
+                return;
+            }
+        }
+
+        guardar.disabled = true;
+        guardar.textContent = 'Guardando…';
+        feedback.textContent = 'Guardando los cambios…';
+
+        try {
+            if (archivo) {
+                const extension = (archivo.name.split('.').pop() || 'png').toLowerCase();
+                nuevaRuta = `${usuario.id}/${crypto.randomUUID()}.${extension}`;
+                const { error: uploadError } = await supabase.storage
+                    .from('sketchly-files')
+                    .upload(nuevaRuta, archivo, { upsert: false, contentType: archivo.type });
+                if (uploadError) throw uploadError;
+            }
+
+            const cambios = {
+                design_type: tipo,
+                title: `Solicitud: ${tipo}`,
+                description: descripcion,
+                due_date: fechaEntrega
+            };
+            if (nuevaRuta) cambios.reference_path = nuevaRuta;
+
+            const { data, error } = await supabase
+                .from('orders')
+                .update(cambios)
+                .eq('id', order.id)
+                .eq('user_id', usuario.id)
+                .in('status', estadosEditables)
+                .select('id')
+                .maybeSingle();
+
+            if (error) throw error;
+            if (!data) {
+                throw new Error('El pedido ya no está disponible para editarse. Actualiza la página.');
+            }
+
+            if (nuevaRuta && order.reference_path && order.reference_path.startsWith(`${usuario.id}/`)) {
+                const { error: removeError } = await supabase.storage
+                    .from('sketchly-files')
+                    .remove([order.reference_path]);
+                if (removeError) console.warn('No se pudo retirar la imagen anterior:', removeError);
+            }
+
+            feedback.textContent = 'Cambios guardados. Actualizando tu pedido…';
+            await cargarPedidos();
+        } catch (error) {
+            console.error('No se pudo editar el pedido:', error);
+            if (nuevaRuta) {
+                await supabase.storage.from('sketchly-files').remove([nuevaRuta]);
+            }
+            feedback.textContent = error.message || 'No se pudieron guardar los cambios. Inténtalo nuevamente.';
+            guardar.disabled = false;
+            guardar.textContent = 'Guardar cambios';
+        }
+    });
+
+    botonCancelar.addEventListener('click', async () => {
+        const confirmar = window.confirm(
+            '¿Quieres cancelar y eliminar este pedido? Esta acción no se puede deshacer. Tu cuenta y los demás pedidos no se modificarán.'
+        );
+        if (!confirmar) return;
+
+        const usuario = await obtenerUsuario();
+        if (!usuario) {
+            window.alert('Inicia sesión para cancelar tu pedido.');
+            return;
+        }
+
+        botonCancelar.disabled = true;
+        botonCancelar.textContent = 'Cancelando…';
+
+        try {
+            // Limpia archivos relacionados si la tabla existe; no toca la cuenta del cliente.
+            const { error: filesError } = await supabase
+                .from('order_files')
+                .delete()
+                .eq('order_id', order.id)
+                .eq('user_id', usuario.id);
+
+            if (filesError && !['42P01', 'PGRST205'].includes(filesError.code)) {
+                throw filesError;
+            }
+
+            const { data, error } = await supabase
+                .from('orders')
+                .delete()
+                .eq('id', order.id)
+                .eq('user_id', usuario.id)
+                .in('status', estadosEditables)
+                .select('id')
+                .maybeSingle();
+
+            if (error) throw error;
+            if (!data) {
+                throw new Error('Este pedido ya no se puede cancelar. Actualiza la página.');
+            }
+
+            const rutas = [order.reference_path, order.payment_proof_path]
+                .filter(ruta => ruta && ruta.startsWith(`${usuario.id}/`));
+            if (rutas.length) {
+                const { error: storageError } = await supabase.storage
+                    .from('sketchly-files')
+                    .remove(rutas);
+                if (storageError) console.warn('El pedido se eliminó, pero no se pudo limpiar algún archivo:', storageError);
+            }
+
+            window.alert('Pedido cancelado y eliminado. Tu cuenta sigue intacta.');
+            await cargarPedidos();
+        } catch (error) {
+            console.error('No se pudo cancelar el pedido:', error);
+            window.alert(
+                error.message || 'No se pudo cancelar el pedido. Comprueba los permisos de Supabase e inténtalo otra vez.'
+            );
+            botonCancelar.disabled = false;
+            botonCancelar.textContent = 'Cancelar pedido';
+        }
+    });
 }
 
 async function agregarEnlaceArchivo(contenedor, ruta, titulo, userId, esImagen = false) {

@@ -1489,3 +1489,120 @@
         width: 100%;
     }
 }
+
+
+/* =====================================================
+   ACCIONES PARA EDITAR O CANCELAR PEDIDOS
+===================================================== */
+.order-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 18px 0 4px;
+}
+.order-actions[hidden],
+.order-edit-form[hidden] {
+    display: none;
+}
+.order-action-button {
+    padding: 10px 15px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .2s ease, transform .2s ease;
+}
+.order-action-button:hover {
+    transform: translateY(-1px);
+}
+.order-action-button:disabled {
+    opacity: .6;
+    cursor: wait;
+    transform: none;
+}
+.edit-order-button {
+    background: #6137d9;
+    color: #fff;
+}
+.edit-order-button:hover {
+    background: #5130bd;
+}
+.cancel-order-button {
+    background: #fff;
+    color: #a52e4b;
+    border-color: #f0cbd5;
+}
+.cancel-order-button:hover {
+    background: #fff1f4;
+}
+.secondary-order-button {
+    background: #f1edf8;
+    color: #51466c;
+}
+.order-edit-form {
+    display: grid;
+    gap: 13px;
+    margin-top: 16px;
+    padding: 20px;
+    border: 1px solid #e4dafb;
+    border-radius: 13px;
+    background: #fbf9ff;
+}
+.order-edit-form h4 {
+    margin: 0 0 2px;
+    color: #211342;
+    font-size: 17px;
+}
+.order-edit-form label {
+    display: grid;
+    gap: 7px;
+    color: #51466c;
+    font-size: 12px;
+    font-weight: 700;
+}
+.order-edit-form input,
+.order-edit-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 12px;
+    border: 1px solid #ded5ef;
+    border-radius: 8px;
+    background: #fff;
+    color: #282236;
+    font: inherit;
+    font-size: 13px;
+}
+.order-edit-form textarea {
+    resize: vertical;
+    line-height: 1.5;
+}
+.order-edit-note {
+    margin: 0;
+    color: #777083;
+    font-size: 11px;
+}
+.order-edit-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+.order-action-feedback {
+    margin: 0;
+    color: #5d4a86;
+    font-size: 12px;
+    line-height: 1.5;
+}
+@media (max-width: 600px) {
+    .order-actions,
+    .order-edit-buttons {
+        flex-direction: column;
+    }
+    .order-action-button {
+        width: 100%;
+    }
+    .order-edit-form {
+        padding: 15px;
+    }
+}
