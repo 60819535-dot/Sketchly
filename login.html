@@ -584,28 +584,46 @@
 
 import { iniciarSesion, registrarCliente } from './js/sketchly.js';
 
-// Mensajes claros para enlaces de confirmación inválidos o vencidos.
+// Mensajes amigables para enlaces de confirmación inválidos o vencidos.
 (function mostrarErrorDeAutenticacion() {
     const parametros = new URLSearchParams(window.location.hash.slice(1));
     const codigo = parametros.get('error_code');
     if (!codigo) return;
 
-    const mensajes = {
-        otp_expired: 'El enlace de confirmación ya venció o fue utilizado. Solicita uno nuevo desde tu correo y ábrelo una sola vez.',
-        access_denied: 'No se pudo confirmar tu correo. Solicita un nuevo enlace de confirmación.'
-    };
-
-    const texto = mensajes[codigo] ||
-        'No se pudo completar la confirmación. Inténtalo nuevamente desde Sketchly.';
-
-    const aviso = document.createElement('p');
+    const vencido = codigo === 'otp_expired';
+    const aviso = document.createElement('section');
     aviso.setAttribute('role', 'alert');
-    aviso.textContent = texto;
-    aviso.style.cssText = 'margin:16px 0;padding:12px 14px;border-radius:10px;background:#fff1f0;color:#9f2424;font-size:14px;line-height:1.5;';
+    aviso.setAttribute('aria-live', 'polite');
+    aviso.style.cssText = 'margin:0 0 20px;padding:22px 20px;border:1px solid #f0d8cf;border-radius:16px;background:#fffaf7;color:#40332f;text-align:center;box-sizing:border-box;';
+
+    const icono = document.createElement('div');
+    icono.textContent = vencido ? '✉️' : '💛';
+    icono.style.cssText = 'font-size:30px;margin-bottom:10px;';
+
+    const titulo = document.createElement('h2');
+    titulo.textContent = vencido ? 'Tu enlace ha vencido' : 'No pudimos confirmar tu correo';
+    titulo.style.cssText = 'font-size:19px;margin:0 0 10px;color:#292524;';
+
+    const detalle = document.createElement('p');
+    detalle.textContent = vencido
+        ? 'No te preocupes, los enlaces de confirmación pueden caducar o utilizarse una sola vez. Vuelve a registrarte o solicita un nuevo correo de confirmación.'
+        : 'No te preocupes. Puedes volver a Sketchly e intentarlo otra vez con un enlace de confirmación nuevo.';
+    detalle.style.cssText = 'font-size:14px;line-height:1.6;margin:0 0 16px;color:#655954;';
+
+    const boton = document.createElement('button');
+    boton.type = 'button';
+    boton.textContent = 'Volver a iniciar sesión';
+    boton.style.cssText = 'border:0;border-radius:10px;padding:12px 18px;background:#292524;color:#fff;font:inherit;font-weight:600;cursor:pointer;';
+    boton.addEventListener('click', () => {
+        aviso.remove();
+        if (typeof showLogin === 'function') showLogin();
+    });
+
+    aviso.append(icono, titulo, detalle, boton);
     const tarjeta = document.querySelector('.auth-card');
     if (tarjeta) tarjeta.prepend(aviso);
 
-    // Quita el token/error de la barra de direcciones después de leerlo.
+    // Quita el código técnico de error de la barra de direcciones.
     window.history.replaceState({}, document.title, window.location.pathname + window.location.search);
 })();
 
