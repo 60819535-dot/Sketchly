@@ -657,14 +657,17 @@ function configurarPago(tarjeta, order) {
             boton.textContent = 'Enviando…';
             feedback.textContent = 'Subiendo comprobante…';
 
+            let etapaEnvio = 'subir la imagen al almacenamiento payment-proofs';
+            let ruta = null;
             try {
                 const extension = archivo.name.split('.').pop().toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg';
-                const ruta = usuario.id + '/' + order.id + '/comprobante-' + Date.now() + '.' + extension;
+                ruta = usuario.id + '/' + order.id + '/comprobante-' + Date.now() + '.' + extension;
                 const { error: uploadError } = await supabase.storage
                     .from('payment-proofs')
                     .upload(ruta, archivo, { upsert: true, contentType: archivo.type });
                 if (uploadError) throw uploadError;
 
+                etapaEnvio = 'guardar la ruta de la captura en el pedido (orders)';
                 const { data: updatedOrder, error: updateError } = await supabase
                     .from('orders')
                     .update({ payment_proof_path: ruta, payment_status: 'submitted' })
@@ -692,8 +695,8 @@ function configurarPago(tarjeta, order) {
             } catch (error) {
                 console.error('Error al enviar comprobante:', error);
                 feedback.textContent =
-                    'No se pudo enviar: ' + (error?.message || 'error desconocido') +
-                    '. Revisa los permisos del bucket payment-proofs y los permisos de actualización de orders en Supabase.';
+                    'Falló al ' + etapaEnvio + ': ' + (error?.message || 'error desconocido') +
+                    '. Si falla el almacenamiento, ejecuta supabase/fix-payment-proofs-rls.sql en Supabase SQL Editor; si falla orders, revisa sus políticas RLS.';
 
                 boton.disabled = false;
                 boton.textContent = 'Enviar comprobante';
