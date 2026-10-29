@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mis pedidos | Sketchly</title>
+
+    <!-- CSS GENERAL -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- CSS DEL HISTORIAL -->
+    <link rel="stylesheet" href="css/mis-pedidos.css">
+
+    <!-- FUENTE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER ORIGINAL
+===================================================== -->
+
+<header class="header">
+
+    <a href="index.html" class="brand">
+
+        <img
+            src="img/logo.png"
+            alt="Sketchly"
+            class="main-logo"
+        >
+
+    </a>
+
+
+    <nav class="nav">
+
+        <a href="index.html">
+            Inicio
+        </a>
+
+        <a href="portafolio.html">
+            Portafolio
+        </a>
+
+        <a href="solicitud.html">
+            Solicitar diseño
+        </a>
+
+        <a href="mis-pedidos.html" class="active">
+            Mis pedidos
+        </a>
+
+        <a href="contacto.html">
+            Contacto
+        </a>
+
+    </nav>
+
+
+    <a
+        href="login.html"
+        class="user-button"
+        title="Iniciar sesión"
+    >
+
+        <img
+            src="img/login.png"
+            alt="Iniciar sesión"
+        >
+
+    </a>
+
+</header>
+
+
+
+<!-- =====================================================
+     HISTORIAL
+===================================================== -->
+
+<main class="history-page">
+
+
+    <!-- DECORACIONES -->
+
+    <div class="history-bg history-bg-left"></div>
+
+    <div class="history-bg history-bg-right"></div>
+
+
+
+    <!-- =================================================
+         ENCABEZADO
+    ================================================== -->
+
+    <section class="history-header">
+
+        <div>
+
+            <span class="history-label">
+                MIS SOLICITUDES
+            </span>
+
+            <h1>
+                Mis pedidos
+                <span>de diseños.</span>
+            </h1>
+
+            <p>
+                Consulta tus pedidos, revisa su progreso
+                y conoce el estado de cada diseño.
+            </p>
+
+        </div>
+
+
+        <a
+            href="solicitud.html"
+            class="new-request-button"
+        >
+
+            <span>✦</span>
+
+            Nueva solicitud
+
+        </a>
+
+    </section>
+
+
+
+    <!-- =================================================
+         RESUMEN
+    ================================================== -->
+
+    <section class="history-summary">
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                ✦
+            </div>
+
+            <div>
+
+                <span>
+                    PEDIDOS
+                </span>
+
+                <strong id="totalOrders">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                ◷
+            </div>
+
+            <div>
+
+                <span>
+                    EN PROCESO
+                </span>
+
+                <strong id="activeOrders">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    FINALIZADOS
+                </span>
+
+                <strong id="finishedOrders">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         LISTA DE PEDIDOS
+    ================================================== -->
+
+    <section class="orders-section">
+
+
+        <div class="orders-title">
+
+            <div>
+
+                <span>
+                    SEGUIMIENTO
+                </span>
+
+                <h2>
+                    Tus pedidos
+                </h2>
+
+            </div>
+
+            <button type="button" class="demo-note refresh-orders" id="refreshOrders">Actualizar</button>
+            <span class="demo-note" id="demoNote">Pedidos vinculados a tu cuenta</span>
+
+        </div>
+
+
+
+        <div
+            class="orders-list"
+            id="ordersList"
+        >
+
+            <!-- LOS PEDIDOS SE CREAN CON JAVASCRIPT -->
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     CHATBOT
+===================================================== -->
+
+<div class="chatbot">
+
+    <button
+        class="chatbot-button"
+        id="chatbotButton"
+        type="button"
+        aria-label="Abrir asistente"
+    >
+
+        <span>✦</span>
+
+    </button>
+
+
+    <div
+        class="chatbot-window"
+        id="chatbotWindow"
+    >
+
+        <div class="chatbot-header">
+
+            <div>
+
+                <strong>
+                    Sketchly
+                </strong>
+
+                <small>
+                    Asistente virtual
+                </small>
+
+            </div>
+
+            <button
+                id="closeChat"
+                type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div
+            class="chatbot-messages"
+            id="chatMessages"
+        >
+
+            <div class="bot-message">
+
+                ¡Hola! 👋
+                <br><br>
+
+                Puedes consultar aquí el estado
+                de tus solicitudes.
+
+            </div>
+
+        </div>
+
+
+        <div class="chatbot-options">
+
+            <button
+                type="button"
+                onclick="historyBot('estado')"
+            >
+                ◷ ¿Cómo va mi pedido?
+            </button>
+
+            <button
+                type="button"
+                onclick="historyBot('solicitud')"
+            >
+                ✎ Nueva solicitud
+            </button>
+
+            <button
+                type="button"
+                onclick="historyBot('contacto')"
+            >
+                💬 Contactar artista
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script type="module">
+import { consultarMisPedidos, obtenerEnlaceTemporal, obtenerUsuario } from './js/sketchly.js';
+import { supabase } from './js/supabase.js';
+
+const estados = {
+    pending: { label: 'En revisión', progress: 20, icon: '◷', className: 'status-pending' },
+    reviewing: { label: 'En revisión', progress: 20, icon: '◷', className: 'status-pending' },
+    quoted: { label: 'Esperando pago', progress: 35, icon: '$', className: 'status-pending' },
+    in_progress: { label: 'En proceso', progress: 70, icon: '✦', className: 'status-process' },
+    completed: { label: 'Entregado', progress: 100, icon: '✓', className: 'status-finished' },
+    cancelled: { label: 'Cancelado', progress: 0, icon: '×', className: 'status-pending' },
+    'En revisión': { label: 'En revisión', progress: 20, icon: '◷', className: 'status-pending' },
+    'En proceso': { label: 'En proceso', progress: 70, icon: '✦', className: 'status-process' },
+    'Finalizado': { label: 'Entregado', progress: 100, icon: '✓', className: 'status-finished' }
+};
+
+const ordersList = document.getElementById('ordersList');
+const demoNote = document.getElementById('demoNote');
+
+function texto(elemento, valor) {
+    elemento.textContent = valor == null || valor === '' ? 'Por confirmar' : String(valor);
+}
+
+function fecha(valor) {
+    if (!valor) return 'Por confirmar';
+    const fechaLocal = /^\d{4}-\d{2}-\d{2}$/.test(valor)
+        ? new Date(valor + 'T00:00:00')
+        : new Date(valor);
+    if (Number.isNaN(fechaLocal.getTime())) return 'Por confirmar';
+    return fechaLocal.toLocaleDateString('es-PE', {
+        day: '2-digit', month: 'short', year: 'numeric'
+    });
+}
+
+function dinero(valor) {
+    if (valor === null || valor === undefined || valor === '') return 'Por confirmar';
+    const numero = Number(valor);
+    if (!Number.isFinite(numero)) return String(valor);
+    return numero.toLocaleString('es-PE', {
+        style: 'currency', currency: 'PEN'
+    });
+}
+
+function crearEstadoVacio(titulo, descripcion, mostrarLogin = false) {
+    ordersList.innerHTML = '';
+    const caja = document.createElement('div');
+    caja.className = 'orders-empty';
+    const icono = document.createElement('div');
+    icono.className = 'orders-empty-icon';
+    icono.textContent = mostrarLogin ? '↗' : '✦';
+    const h3 = document.createElement('h3');
+    h3.textContent = titulo;
+    const p = document.createElement('p');
+    p.textContent = descripcion;
+    caja.append(icono, h3, p);
+    if (mostrarLogin) {
+        const enlace = document.createElement('a');
+        enlace.href = 'login.html';
+        enlace.className = 'new-request-button';
+        enlace.textContent = 'Iniciar sesión';
+        caja.append(enlace);
+    } else {
+        const enlace = document.createElement('a');
+        enlace.href = 'solicitud.html';
+        enlace.className = 'new-request-button';
+        enlace.textContent = 'Solicitar un diseño';
+        caja.append(enlace);
+    }
+    ordersList.append(caja);
+}
+
+function crearTarjeta(order, index) {
+    const tarjeta = document.createElement('article');
+    tarjeta.className = 'order-card';
+    tarjeta.innerHTML = `
+        <div class="order-top">
+            <div>
+                <span class="order-number"></span>
+                <h3 class="order-name"></h3>
+            </div>
+            <span class="order-status" data-status><span data-icon></span><span data-label></span></span>
+        </div>
+        <p class="order-description" data-description></p>
+        <div class="order-info">
+            <div><span>SOLICITADO</span><strong data-created></strong></div>
+            <div><span>FECHA DE ENTREGA</span><strong data-deadline></strong></div>
+            <div><span>MONTO</span><strong data-price></strong></div>
+        </div>
+        <div class="artist-message" data-message hidden>
+            <strong>Mensaje del artista</strong>
+            <p></p>
+        </div>
+        <div class="order-files" data-reference></div>
+        <div class="order-files" data-delivery></div>
+        <div class="progress-area">
+            <div class="progress-header"><span>Progreso del pedido</span><strong data-progress-label></strong></div>
+            <div class="progress-bar"><div class="progress-fill" data-progress></div></div>
+        </div>
+        <div class="order-timeline">
+            <div class="timeline-step completed"><div class="timeline-dot">✓</div><span>Solicitud recibida</span></div>
+            <div class="timeline-line" data-line-one></div>
+            <div class="timeline-step" data-step-two><div class="timeline-dot" data-dot-two>2</div><span>En revisión</span></div>
+            <div class="timeline-line" data-line-two></div>
+            <div class="timeline-step" data-step-three><div class="timeline-dot" data-dot-three>3</div><span>En proceso</span></div>
+            <div class="timeline-line" data-line-three></div>
+            <div class="timeline-step" data-step-four><div class="timeline-dot" data-dot-four>4</div><span>Entregado</span></div>
+        </div>
+    `;
+
+    const estado = estados[order.status] || estados.pending;
+    tarjeta.querySelector('.order-number').textContent = 'PEDIDO #' + (order.id ?? index + 1);
+    tarjeta.querySelector('.order-name').textContent =
+        order.design_type || (order.title || 'Diseño personalizado').replace(/^Solicitud:\s*/i, '');
+    tarjeta.querySelector('[data-description]').textContent =
+        order.description || 'No se añadió una descripción.';
+    tarjeta.querySelector('[data-created]').textContent = fecha(order.created_at);
+    tarjeta.querySelector('[data-deadline]').textContent =
+        fecha(order.agreed_due_date || order.delivery_date || order.due_date);
+    tarjeta.querySelector('[data-price]').textContent =
+        dinero(order.amount ?? order.price ?? order.total_amount);
+
+    const statusEl = tarjeta.querySelector('[data-status]');
+    statusEl.classList.add(estado.className);
+    tarjeta.querySelector('[data-icon]').textContent = estado.icon;
+    tarjeta.querySelector('[data-label]').textContent = estado.label;
+
+    const mensaje = order.artist_message || order.admin_message || order.message;
+    if (mensaje) {
+        const mensajeEl = tarjeta.querySelector('[data-message]');
+        mensajeEl.hidden = false;
+        mensajeEl.querySelector('p').textContent = mensaje;
+    }
+
+    const progreso = estado.progress;
+    tarjeta.querySelector('[data-progress-label]').textContent = progreso + '%';
+    tarjeta.querySelector('[data-progress]').style.width = progreso + '%';
+    if (progreso >= 20) {
+        tarjeta.querySelector('[data-line-one]').classList.add('line-active');
+        tarjeta.querySelector('[data-step-two]').classList.add('completed');
+        tarjeta.querySelector('[data-dot-two]').textContent = '✓';
+    }
+    if (progreso >= 60) {
+        tarjeta.querySelector('[data-line-two]').classList.add('line-active');
+        tarjeta.querySelector('[data-step-three]').classList.add('completed');
+        tarjeta.querySelector('[data-dot-three]').textContent = '✓';
+    }
+    if (progreso >= 100) {
+        tarjeta.querySelector('[data-line-three]').classList.add('line-active');
+        tarjeta.querySelector('[data-step-four]').classList.add('completed');
+        tarjeta.querySelector('[data-dot-four]').textContent = '✓';
+    }
+    if (order.status === 'cancelled') {
+        tarjeta.querySelector('[data-progress-label]').textContent = 'Cancelado';
+    }
+    return tarjeta;
+}
+
+async function agregarEnlaceArchivo(contenedor, ruta, titulo, userId, esImagen = false) {
+    if (!ruta) return;
+    try {
+        const url = await obtenerEnlaceTemporal(ruta);
+        const bloque = document.createElement('div');
+        bloque.className = 'order-file-item';
+        if (esImagen) {
+            const imagen = document.createElement('img');
+            imagen.src = url;
+            imagen.alt = titulo;
+            imagen.loading = 'lazy';
+            bloque.append(imagen);
+        }
+        const enlace = document.createElement('a');
+        enlace.href = url;
+        enlace.target = '_blank';
+        enlace.rel = 'noopener noreferrer';
+        enlace.textContent = titulo;
+        enlace.className = 'order-file-link';
+        bloque.append(enlace);
+        contenedor.append(bloque);
+    } catch (error) {
+        console.warn('No se pudo abrir un archivo privado:', error);
+        const aviso = document.createElement('p');
+        aviso.className = 'file-unavailable';
+        aviso.textContent = 'El archivo adjunto no está disponible temporalmente.';
+        contenedor.append(aviso);
+    }
+}
+
+async function agregarEntregas(tarjeta, order, userId) {
+    if (order.delivery_path || order.final_file_path) {
+        await agregarEnlaceArchivo(
+            tarjeta.querySelector('[data-delivery]'),
+            order.delivery_path || order.final_file_path,
+            'Descargar diseño entregado',
+            userId
+        );
+    }
+    try {
+        const { data, error } = await supabase
+            .from('order_files')
+            .select('file_path')
+            .eq('order_id', order.id)
+            .eq('user_id', userId)
+            .eq('file_type', 'delivery');
+        if (error || !Array.isArray(data)) return;
+        for (const archivo of data) {
+            await agregarEnlaceArchivo(
+                tarjeta.querySelector('[data-delivery]'),
+                archivo.file_path,
+                'Descargar diseño entregado',
+                userId
+            );
+        }
+    } catch (error) {
+        // La página sigue funcionando aunque la tabla de entregas aún no esté configurada.
+        console.info('Las entregas se habilitarán cuando esté configurada la tabla correspondiente.');
+    }
+}
+
+async function cargarPedidos() {
+    ordersList.innerHTML = '';
+    demoNote.textContent = 'Consultando tu cuenta…';
+
+    try {
+        const usuario = await obtenerUsuario();
+        if (!usuario) {
+            demoNote.textContent = 'Acceso a pedidos personales';
+            crearEstadoVacio(
+                'Inicia sesión para ver tus pedidos',
+                'Tus solicitudes y entregas solo aparecen cuando ingresas a tu cuenta de Sketchly.',
+                true
+            );
+            actualizarResumen([]);
+            return;
+        }
+
+        const pedidos = await consultarMisPedidos();
+        demoNote.textContent = 'Pedidos vinculados a tu cuenta';
+
+        if (!pedidos || pedidos.length === 0) {
+            crearEstadoVacio(
+                'Aún no tienes pedidos',
+                'Cuando envíes una solicitud de diseño, podrás consultar aquí su estado y su entrega.'
+            );
+            actualizarResumen([]);
+            return;
+        }
+
+        const tarjetas = await Promise.all(pedidos.map(async (pedido, indice) => {
+            const tarjeta = crearTarjeta(pedido, indice);
+            if (pedido.reference_path) {
+                await agregarEnlaceArchivo(
+                    tarjeta.querySelector('[data-reference]'),
+                    pedido.reference_path,
+                    'Ver imagen de referencia',
+                    usuario.id,
+                    true
+                );
+            }
+            await agregarEntregas(tarjeta, pedido, usuario.id);
+            return tarjeta;
+        }));
+
+        tarjetas.forEach(tarjeta => ordersList.append(tarjeta));
+        actualizarResumen(pedidos);
+    } catch (error) {
+        console.error('Error al cargar los pedidos:', error);
+        demoNote.textContent = 'No se pudieron cargar los pedidos';
+        crearEstadoVacio(
+            'No pudimos cargar tus pedidos',
+            'Revisa tu conexión e inténtalo nuevamente. Si el problema continúa, inicia sesión otra vez.'
+        );
+        const boton = document.createElement('button');
+        boton.type = 'button';
+        boton.className = 'new-request-button';
+        boton.textContent = 'Volver a intentar';
+        boton.addEventListener('click', cargarPedidos);
+        ordersList.querySelector('.orders-empty')?.append(boton);
+        actualizarResumen([]);
+    }
+}
+
+function actualizarResumen(pedidos) {
+    document.getElementById('totalOrders').textContent = pedidos.length;
+    document.getElementById('activeOrders').textContent = pedidos.filter(p =>
+        ['pending', 'reviewing', 'quoted', 'in_progress', 'En revisión', 'En proceso'].includes(p.status)
+    ).length;
+    document.getElementById('finishedOrders').textContent = pedidos.filter(p =>
+        ['completed', 'Finalizado'].includes(p.status)
+    ).length;
+}
+
+function historyBot(tipo) {
+    const mensajes = document.getElementById('chatMessages');
+    let consulta = '';
+    let respuesta = '';
+    if (tipo === 'estado') {
+        consulta = '¿Cómo va mi pedido?';
+        respuesta = 'Puedes revisar el estado, el monto y los archivos disponibles en Mis pedidos. ✦';
+    } else if (tipo === 'solicitud') {
+        consulta = 'Quiero hacer una nueva solicitud.';
+        respuesta = '¡Perfecto! Puedes crearla desde <a href="solicitud.html">Solicitar diseño →</a>';
+    } else {
+        consulta = 'Quiero contactar a la artista.';
+        respuesta = 'Puedes comunicarte desde <a href="contacto.html">Contacto →</a>';
+    }
+    const usuario = document.createElement('div');
+    usuario.className = 'user-message';
+    usuario.textContent = consulta;
+    const bot = document.createElement('div');
+    bot.className = 'bot-message chatbot-answer';
+    bot.innerHTML = respuesta;
+    mensajes.append(usuario, bot);
+    mensajes.scrollTop = mensajes.scrollHeight;
+}
+window.historyBot = historyBot;
+
+document.getElementById('chatbotButton')?.addEventListener('click', () => {
+    document.getElementById('chatbotWindow')?.classList.toggle('show');
+});
+document.getElementById('closeChat')?.addEventListener('click', () => {
+    document.getElementById('chatbotWindow')?.classList.remove('show');
+});
+document.getElementById('refreshOrders')?.addEventListener('click', cargarPedidos);
+
+cargarPedidos();
+</script>
+
+
+</body>
+
+</html>
