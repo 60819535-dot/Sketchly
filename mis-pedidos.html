@@ -665,14 +665,25 @@ function configurarPago(tarjeta, order) {
                     .upload(ruta, archivo, { upsert: true, contentType: archivo.type });
                 if (uploadError) throw uploadError;
 
-                const { error: updateError } = await supabase
+                const { data: updatedOrder, error: updateError } = await supabase
                     .from('orders')
                     .update({ payment_proof_path: ruta, payment_status: 'submitted' })
                     .eq('id', order.id)
-                    .eq('user_id', usuario.id);
-                if (updateError) throw updateError;
+                    .eq('user_id', usuario.id)
+                    .select('id, payment_proof_path, payment_status')
+                    .maybeSingle();
 
-                feedback.textContent = '¡Comprobante enviado! El artista revisará tu pago.';
+                if (updateError) {
+                    // Evita dejar una captura huérfana si no se pudo registrar en el pedido.
+                    await supabase.storage.from('payment-proofs').remove([ruta]);
+                    throw updateError;
+                }
+                if (!updatedOrder?.payment_proof_path || updatedOrder.payment_status !== 'submitted') {
+                    await supabase.storage.from('payment-proofs').remove([ruta]);
+                    throw new Error('Supabase no confirmó el registro de la captura en el pedido. Revisa las políticas RLS de UPDATE de orders.');
+                }
+
+                feedback.textContent = '¡Comprobante enviado y registrado! El artista podrá revisarlo desde el panel de administración.';
                 tarjeta.querySelector('[data-payment-state]').textContent = 'Comprobante enviado';
                 tarjeta.querySelector('[data-payment-proof-sent]').hidden = false;
                 tarjeta.querySelector('[data-payment-form]').hidden = true;
