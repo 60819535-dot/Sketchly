@@ -669,21 +669,19 @@ function configurarPago(tarjeta, order) {
 
                 etapaEnvio = 'guardar la ruta de la captura en el pedido (orders)';
                 const { data: updatedOrder, error: updateError } = await supabase
-                    .from('orders')
-                    .update({ payment_proof_path: ruta, payment_status: 'submitted' })
-                    .eq('id', order.id)
-                    .eq('user_id', usuario.id)
-                    .select('id, payment_proof_path, payment_status')
-                    .maybeSingle();
+                    .rpc('submit_payment_proof', {
+                    p_order_id: String(order.id),
+                    p_path: ruta
+                });
 
                 if (updateError) {
                     // Evita dejar una captura huérfana si no se pudo registrar en el pedido.
                     await supabase.storage.from('payment-proofs').remove([ruta]);
                     throw updateError;
                 }
-                if (!updatedOrder?.payment_proof_path || updatedOrder.payment_status !== 'submitted') {
+                if (updatedOrder !== true) {
                     await supabase.storage.from('payment-proofs').remove([ruta]);
-                    throw new Error('Supabase no confirmó el registro de la captura en el pedido. Revisa las políticas RLS de UPDATE de orders.');
+                    throw new Error('Supabase no encontró un pedido tuyo habilitado para registrar el comprobante.');
                 }
 
                 feedback.textContent = '¡Comprobante enviado y registrado! El artista podrá revisarlo desde el panel de administración.';
