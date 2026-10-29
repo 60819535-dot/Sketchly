@@ -163,7 +163,11 @@ function renderOrder(order) {
 
   const actions = makeElement('div', 'order-actions');
   if (order.reference_path) {
-    addActionButton(actions, '▧  Ver imagen de referencia', () => openReference(order.reference_path));
+    addActionButton(actions, '▧  Ver imagen de referencia', () => openReference(order.reference_path, 'sketchly-files', 'Imagen de referencia del cliente'));
+  }
+  addActionButton(actions, '▣  Ver QR de Yape', () => showImagePreview('img/qr-yape.png', 'QR de Yape de Sketchly'));
+  if (order.payment_proof_path) {
+    addActionButton(actions, '✓  Ver comprobante de pago', () => openReference(order.payment_proof_path, 'payment-proofs', 'Comprobante de pago del cliente'));
   }
   if (order.customer_email) {
     const email = makeElement('a', 'order-action-button', '✉  Escribir correo');
