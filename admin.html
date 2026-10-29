@@ -1,1 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8f5ff">
+  <title>Gestión de pedidos | Sketchly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-page">
+  <header class="header admin-header">
+    <a href="index.html" class="brand" aria-label="Volver a Sketchly">
+      <img src="img/logo.png" alt="Sketchly" class="main-logo">
+    </a>
+    <nav class="nav" aria-label="Navegación principal">
+      <a href="index.html">Inicio</a>
+      <a href="solicitud.html">Solicitar diseño</a>
+      <a href="mis-pedidos.html">Mis pedidos</a>
+      <a href="admin.html" class="active">Gestión de pedidos</a>
+    </nav>
+    <button type="button" id="adminSignOut" class="admin-signout" hidden>Cerrar sesión</button>
+  </header>
 
+  <main class="admin-main">
+    <section class="admin-welcome">
+      <div>
+        <span class="admin-eyebrow">PANEL DEL ARTISTA</span>
+        <h1>Gestión de <span>pedidos</span></h1>
+        <p>Revisa las solicitudes de tus clientes y actualiza el avance de cada diseño desde un solo lugar.</p>
+      </div>
+      <button type="button" id="refreshOrders" class="admin-refresh"><span aria-hidden="true">↻</span> Actualizar pedidos</button>
+    </section>
+
+    <div id="adminMessage" class="admin-message" role="status">Comprobando acceso…</div>
+
+    <section id="adminDashboard" hidden>
+      <div class="admin-stats" aria-label="Resumen de pedidos">
+        <article class="admin-stat"><span class="stat-icon">✦</span><div><span class="stat-label">Total de pedidos</span><strong id="totalOrders">0</strong></div></article>
+        <article class="admin-stat"><span class="stat-icon stat-pending">◷</span><div><span class="stat-label">Por revisar</span><strong id="pendingOrders">0</strong></div></article>
+        <article class="admin-stat"><span class="stat-icon stat-progress">✎</span><div><span class="stat-label">En proceso</span><strong id="progressOrders">0</strong></div></article>
+        <article class="admin-stat"><span class="stat-icon stat-done">✓</span><div><span class="stat-label">Completados</span><strong id="completedOrders">0</strong></div></article>
+      </div>
+
+      <section class="admin-list-panel">
+        <div class="admin-list-heading">
+          <div><h2>Pedidos recibidos</h2><p>Las solicitudes nuevas aparecerán aquí después de que el cliente las envíe.</p></div>
+          <span id="resultsCount" class="results-count">0 pedidos</span>
+        </div>
+        <div class="admin-filters">
+          <label class="admin-search"><span aria-hidden="true">⌕</span><input id="orderSearch" type="search" placeholder="Buscar por cliente, correo o diseño…" autocomplete="off"></label>
+          <label class="admin-filter-label" for="statusFilter">Estado</label>
+          <select id="statusFilter">
+            <option value="all">Todos los estados</option>
+            <option value="pending">Por revisar</option>
+            <option value="reviewing">En revisión</option>
+            <option value="quoted">Cotizado</option>
+            <option value="in_progress">En proceso</option>
+            <option value="completed">Completado</option>
+            <option value="cancelled">Cancelado</option>
+          </select>
+        </div>
+        <div id="ordersList" class="orders-list"></div>
+        <div id="emptyOrders" class="admin-empty" hidden><span>✧</span><h3>No hay pedidos para mostrar</h3><p>Cuando un cliente envíe una solicitud, aparecerá en este apartado.</p></div>
+      </section>
+    </section>
+  </main>
+  <script type="module" src="js/admin-page.js"></script>
+</body>
+</html>
