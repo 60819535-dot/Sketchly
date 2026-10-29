@@ -454,6 +454,29 @@ function crearTarjeta(order, index) {
             <strong>Mensaje del artista</strong>
             <p></p>
         </div>
+        <section class="payment-panel" data-payment>
+            <div class="payment-heading">
+                <span class="payment-eyebrow">PAGO DEL DISEÑO</span>
+                <span class="payment-state" data-payment-state>Por confirmar</span>
+            </div>
+            <p class="payment-intro" data-payment-intro>El artista revisará tu solicitud y confirmará el precio.</p>
+            <div class="payment-amount">
+                <span>MONTO A PAGAR</span>
+                <strong data-payment-amount>S/ —</strong>
+            </div>
+            <div class="payment-qr-area" data-payment-qr-area hidden>
+                <img src="img/qr-yape.png" alt="Código QR de Yape para pagar el diseño" class="payment-qr">
+                <p>Escanea el QR con Yape y realiza el pago indicado.</p>
+            </div>
+            <p class="payment-waiting" data-payment-waiting>El QR aparecerá cuando el artista confirme el pedido y el monto.</p>
+            <form class="payment-proof-form" data-payment-form hidden>
+                <label for="paymentProof">Después de pagar, adjunta una captura del comprobante.</label>
+                <input type="file" id="paymentProof" accept="image/png,image/jpeg,image/webp" data-payment-file>
+                <button type="submit" class="payment-upload-button">Enviar comprobante</button>
+                <p class="payment-feedback" data-payment-feedback aria-live="polite"></p>
+            </form>
+            <div class="payment-proof-sent" data-payment-proof-sent hidden>Comprobante enviado. El artista revisará tu pago.</div>
+        </section>
         <div class="order-files" data-reference></div>
         <div class="order-files" data-delivery></div>
         <div class="progress-area">
@@ -495,6 +518,8 @@ function crearTarjeta(order, index) {
         mensajeEl.querySelector('p').textContent = mensaje;
     }
 
+    configurarPago(tarjeta, order);
+
     const progreso = estado.progress;
     tarjeta.querySelector('[data-progress-label]').textContent = progreso + '%';
     tarjeta.querySelector('[data-progress]').style.width = progreso + '%';
@@ -517,6 +542,108 @@ function crearTarjeta(order, index) {
         tarjeta.querySelector('[data-progress-label]').textContent = 'Cancelado';
     }
     return tarjeta;
+}
+
+function configurarPago(tarjeta, order) {
+    const panel = tarjeta.querySelector('[data-payment]');
+    const amount = order.amount ?? order.price ?? order.total_amount;
+    const estadoPedido = String(order.status || '').toLowerCase();
+    const montoConfirmado = amount !== null && amount !== undefined && amount !== '' && Number.isFinite(Number(amount));
+    const pagoConfirmado = ['quoted', 'awaiting_payment', 'in_progress', 'completed'].includes(estadoPedido);
+
+    tarjeta.querySelector('[data-payment-amount]').textContent =
+        montoConfirmado ? dinero(amount) : 'S/ —';
+
+    if (!pagoConfirmado || !montoConfirmado) {
+        tarjeta.querySelector('[data-payment-state]').textContent = 'Por confirmar';
+        tarjeta.querySelector('[data-payment-intro]').textContent =
+            'El artista revisará tu solicitud y confirmará el precio.';
+        tarjeta.querySelector('[data-payment-qr-area]').hidden = true;
+        tarjeta.querySelector('[data-payment-waiting]').hidden = false;
+        tarjeta.querySelector('[data-payment-waiting]').textContent =
+            'El QR aparecerá cuando el artista confirme el pedido y el monto.';
+        return;
+    }
+
+    tarjeta.querySelector('[data-payment-state]').textContent =
+        order.payment_status === 'submitted' ? 'Comprobante enviado' : 'Listo para pagar';
+    tarjeta.querySelector('[data-payment-intro]').textContent =
+        'El artista confirmó el precio de tu diseño. Puedes realizar el pago con Yape.';
+    tarjeta.querySelector('[data-payment-qr-area]').hidden = false;
+    tarjeta.querySelector('[data-payment-waiting]').hidden = true;
+
+    if (order.payment_proof_path || order.payment_status === 'submitted' || order.payment_status === 'verified') {
+        tarjeta.querySelector('[data-payment-proof-sent]').hidden = false;
+        tarjeta.querySelector('[data-payment-form]').hidden = true;
+        tarjeta.querySelector('[data-payment-proof-sent]').textContent =
+            order.payment_status === 'verified'
+                ? 'Pago verificado. El artista continuará con tu pedido.'
+                : 'Comprobante enviado. El artista revisará tu pago.';
+        return;
+    }
+
+    if (estadoPedido === 'quoted' || estadoPedido === 'awaiting_payment') {
+        const form = tarjeta.querySelector('[data-payment-form]');
+        form.hidden = false;
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const input = tarjeta.querySelector('[data-payment-file]');
+            const feedback = tarjeta.querySelector('[data-payment-feedback]');
+            const boton = form.querySelector('button[type="submit"]');
+            const usuario = await obtenerUsuario();
+            const archivo = input.files?.[0];
+
+            if (!usuario) {
+                feedback.textContent = 'Inicia sesión para enviar tu comprobante.';
+                return;
+            }
+            if (!archivo) {
+                feedback.textContent = 'Selecciona la captura de tu pago.';
+                return;
+            }
+            if (!['image/png', 'image/jpeg', 'image/webp'].includes(archivo.type)) {
+                feedback.textContent = 'Usa una imagen PNG, JPG o WEBP.';
+                return;
+            }
+            if (archivo.size > 5 * 1024 * 1024) {
+                feedback.textContent = 'La imagen debe pesar menos de 5 MB.';
+                return;
+            }
+
+            boton.disabled = true;
+            boton.textContent = 'Enviando…';
+            feedback.textContent = 'Subiendo comprobante…';
+
+            try {
+                const extension = archivo.name.split('.').pop().toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg';
+                const ruta = usuario.id + '/' + order.id + '/comprobante-' + Date.now() + '.' + extension;
+                const { error: uploadError } = await supabase.storage
+                    .from('payment-proofs')
+                    .upload(ruta, archivo, { upsert: true, contentType: archivo.type });
+                if (uploadError) throw uploadError;
+
+                const { error: updateError } = await supabase
+                    .from('orders')
+                    .update({ payment_proof_path: ruta, payment_status: 'submitted' })
+                    .eq('id', order.id)
+                    .eq('user_id', usuario.id);
+                if (updateError) throw updateError;
+
+                feedback.textContent = '¡Comprobante enviado! El artista revisará tu pago.';
+                tarjeta.querySelector('[data-payment-state]').textContent = 'Comprobante enviado';
+                tarjeta.querySelector('[data-payment-proof-sent]').hidden = false;
+                tarjeta.querySelector('[data-payment-form]').hidden = true;
+                tarjeta.querySelector('[data-payment-proof-sent]').textContent =
+                    'Comprobante enviado. El artista revisará tu pago.';
+            } catch (error) {
+                console.error('Error al enviar comprobante:', error);
+                feedback.textContent =
+                    'No se pudo enviar. Verifica que Supabase tenga configurado el almacenamiento de comprobantes y vuelve a intentarlo.';
+                boton.disabled = false;
+                boton.textContent = 'Enviar comprobante';
+            }
+        });
+    }
 }
 
 async function agregarEnlaceArchivo(contenedor, ruta, titulo, userId, esImagen = false) {
