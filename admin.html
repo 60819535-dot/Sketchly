@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f8f5ff">
-  <title>Gestión de pedidos | Sketchly</title>
+  <meta name="description" content="Panel privado de administración de pedidos de Sketchly.">
+  <title>Panel de administración | Sketchly</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,39 +21,40 @@
       <a href="index.html">Inicio</a>
       <a href="solicitud.html">Solicitar diseño</a>
       <a href="mis-pedidos.html">Mis pedidos</a>
-      <a href="admin.html" class="active">Gestión de pedidos</a>
+      <a href="admin.html" class="active">Panel admin</a>
     </nav>
     <button type="button" id="adminSignOut" class="admin-signout" hidden>Cerrar sesión</button>
   </header>
 
   <main class="admin-main">
     <section class="admin-welcome">
-      <div>
-        <span class="admin-eyebrow">PANEL DEL ARTISTA</span>
-        <h1>Gestión de <span>pedidos</span></h1>
-        <p>Revisa las solicitudes de tus clientes y actualiza el avance de cada diseño desde un solo lugar.</p>
+      <div class="admin-welcome-copy">
+        <span class="admin-eyebrow"><span class="admin-eyebrow-dot"></span> ESPACIO PRIVADO · SKETCHLY</span>
+        <h1>Tu centro de <span>pedidos.</span></h1>
+        <p>Todo el trabajo de tu estudio, organizado en un solo lugar. Revisa solicitudes, coordina con tus clientes y acompaña cada diseño hasta la entrega.</p>
+        <div class="admin-welcome-note"><span aria-hidden="true">✦</span> Tus pedidos se cargan desde la base de datos de Sketchly.</div>
       </div>
-      <button type="button" id="refreshOrders" class="admin-refresh"><span aria-hidden="true">↻</span> Actualizar pedidos</button>
+      <button type="button" id="refreshOrders" class="admin-refresh"><span aria-hidden="true">↻</span> Actualizar</button>
     </section>
 
     <div id="adminMessage" class="admin-message" role="status">Comprobando acceso…</div>
 
     <section id="adminDashboard" hidden>
       <div class="admin-stats" aria-label="Resumen de pedidos">
-        <article class="admin-stat"><span class="stat-icon">✦</span><div><span class="stat-label">Total de pedidos</span><strong id="totalOrders">0</strong></div></article>
-        <article class="admin-stat"><span class="stat-icon stat-pending">◷</span><div><span class="stat-label">Por revisar</span><strong id="pendingOrders">0</strong></div></article>
-        <article class="admin-stat"><span class="stat-icon stat-progress">✎</span><div><span class="stat-label">En proceso</span><strong id="progressOrders">0</strong></div></article>
-        <article class="admin-stat"><span class="stat-icon stat-done">✓</span><div><span class="stat-label">Completados</span><strong id="completedOrders">0</strong></div></article>
+        <article class="admin-stat"><span class="stat-icon">✦</span><div><span class="stat-label">Todos los pedidos</span><strong id="totalOrders">0</strong></div><span class="stat-caption">Historial</span></article>
+        <article class="admin-stat"><span class="stat-icon stat-pending">◷</span><div><span class="stat-label">Por revisar</span><strong id="pendingOrders">0</strong></div><span class="stat-caption">Pendientes</span></article>
+        <article class="admin-stat"><span class="stat-icon stat-progress">✎</span><div><span class="stat-label">En marcha</span><strong id="progressOrders">0</strong></div><span class="stat-caption">En proceso</span></article>
+        <article class="admin-stat"><span class="stat-icon stat-done">✓</span><div><span class="stat-label">Entregados</span><strong id="completedOrders">0</strong></div><span class="stat-caption">Completados</span></article>
       </div>
 
       <section class="admin-list-panel">
         <div class="admin-list-heading">
-          <div><h2>Pedidos recibidos</h2><p>Las solicitudes nuevas aparecerán aquí después de que el cliente las envíe.</p></div>
+          <div><span class="section-kicker">TU BANDEJA DE TRABAJO</span><h2>Pedidos recibidos</h2><p>Busca un encargo, revisa sus detalles y actualiza su avance.</p></div>
           <span id="resultsCount" class="results-count">0 pedidos</span>
         </div>
         <div class="admin-filters">
-          <label class="admin-search"><span aria-hidden="true">⌕</span><input id="orderSearch" type="search" placeholder="Buscar por cliente, correo o diseño…" autocomplete="off"></label>
-          <label class="admin-filter-label" for="statusFilter">Estado</label>
+          <label class="admin-search"><span aria-hidden="true">⌕</span><input id="orderSearch" type="search" placeholder="Buscar cliente, correo o diseño…" autocomplete="off"></label>
+          <label class="admin-filter-label" for="statusFilter">Filtrar por estado</label>
           <select id="statusFilter">
             <option value="all">Todos los estados</option>
             <option value="pending">Por revisar</option>
@@ -64,8 +66,9 @@
           </select>
         </div>
         <div id="ordersList" class="orders-list"></div>
-        <div id="emptyOrders" class="admin-empty" hidden><span>✧</span><h3>No hay pedidos para mostrar</h3><p>Cuando un cliente envíe una solicitud, aparecerá en este apartado.</p></div>
+        <div id="emptyOrders" class="admin-empty" hidden><span>✧</span><h3>No hay pedidos para mostrar</h3><p>Cuando un cliente envíe una solicitud, aparecerá aquí. Si ya hay pedidos, prueba cambiar el filtro.</p></div>
       </section>
+      <p class="admin-footer-note"><span aria-hidden="true">🔒</span> Área privada. Los permisos de acceso también deben estar protegidos en Supabase.</p>
     </section>
   </main>
   <script type="module" src="js/admin-page.js"></script>

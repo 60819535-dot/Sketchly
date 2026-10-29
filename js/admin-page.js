@@ -1,5 +1,5 @@
 import { supabase } from './supabase.js';
-import { listarTodosLosPedidos, actualizarEstadoPedido } from './admin.js';
+import { listarTodosLosPedidos, actualizarEstadoPedido, entregarDiseno } from './admin.js';
 
 const $ = (selector) => document.querySelector(selector);
 const message = $('#adminMessage');
@@ -48,6 +48,29 @@ function addMeta(parent, label, value) {
   wrapper.append(makeElement('span', '', label), makeElement('strong', '', value));
   parent.append(wrapper);
 }
+function addActionButton(parent, text, callback) {
+  const button = makeElement('button', 'order-action-button', text);
+  button.type = 'button';
+  button.addEventListener('click', callback);
+  parent.append(button);
+  return button;
+}
+function openReference(path) {
+  if (!path) return;
+  if (/^https?:\/\//i.test(path)) {
+    window.open(path, '_blank', 'noopener,noreferrer');
+    return;
+  }
+  const { data: sessionData } = { data: null };
+  void sessionData;
+  supabase.storage.from('sketchly-files').createSignedUrl(path, 3600).then(({data, error}) => {
+    if (error || !data?.signedUrl) throw error || new Error('No se generó el enlace de la imagen.');
+    window.open(data.signedUrl, '_blank', 'noopener,noreferrer');
+  }).catch(error => {
+    console.error('No se pudo abrir la referencia:', error);
+    showMessage('No se pudo abrir la referencia. Verifica que la ruta exista en el bucket sketchly-files y que las políticas de Storage permitan leerla.', 'error');
+  });
+}
 function renderOrder(order) {
   const card = makeElement('article', 'order-admin-card');
   const top = makeElement('div', 'order-card-top');
@@ -58,6 +81,11 @@ function renderOrder(order) {
     makeElement('h3', '', safeText(order.title, 'Solicitud de diseño')),
     makeElement('p', '', safeText(order.customer_name, 'Cliente') + ' · ' + safeText(order.customer_email, 'Sin correo'))
   );
+  if (order.customer_email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(order.customer_email)) {
+    const contact = makeElement('a', 'order-contact-link', 'Contactar al cliente ↗');
+    contact.href = 'mailto:' + order.customer_email;
+    titleText.append(contact);
+  }
   titleWrap.append(titleText);
   top.append(titleWrap, statusBadge(order.status));
   card.append(top);
@@ -66,16 +94,62 @@ function renderOrder(order) {
   addMeta(meta, 'TIPO DE DISEÑO', safeText(order.design_type));
   addMeta(meta, 'FECHA DE SOLICITUD', formatDate(order.created_at));
   addMeta(meta, 'FECHA DESEADA', formatDate(order.due_date));
-  addMeta(meta, 'PAGO', safeText(order.payment_status, 'Pendiente'));
-  addMeta(meta, 'MONTO', order.amount ?? order.total_amount ?? order.price ? 'S/ ' + (order.amount ?? order.total_amount ?? order.price) : 'Por cotizar');
+  addMeta(meta, 'ESTADO DEL PAGO', safeText(order.payment_status, 'Pendiente / por verificar'));
+  const amount = order.amount ?? order.total_amount ?? order.price;
+  addMeta(meta, 'MONTO', amount !== null && amount !== undefined && amount !== '' ? 'S/ ' + amount : 'Por cotizar');
   addMeta(meta, 'ID DEL PEDIDO', String(order.id ?? '—'));
   card.append(meta);
   card.append(makeElement('p', 'order-description', safeText(order.description, 'El cliente no agregó una descripción.')));
 
+  const actions = makeElement('div', 'order-actions');
   if (order.reference_path) {
-    const reference = makeElement('p', 'order-inline-message', 'Este pedido incluye una imagen de referencia. Ruta: ' + order.reference_path);
-    card.append(reference);
+    addActionButton(actions, '▧  Ver imagen de referencia', () => openReference(order.reference_path));
   }
+  if (order.customer_email) {
+    const email = makeElement('a', 'order-action-button', '✉  Escribir correo');
+    email.href = 'mailto:' + order.customer_email + '?subject=' + encodeURIComponent('Tu pedido de Sketchly');
+    actions.append(email);
+  }
+  if (order.reference_path || order.customer_email) card.append(actions);
+
+  const deliveryWrap = makeElement('div', 'order-actions');
+  const fileInput = makeElement('input');
+  fileInput.type = 'file';
+  fileInput.accept = 'image/*,.pdf,.psd,.ai,.svg,.zip';
+  fileInput.setAttribute('aria-label', 'Seleccionar archivo final para entregar');
+  fileInput.id = 'delivery-' + String(order.id).replace(/[^a-zA-Z0-9_-]/g, '');
+  const uploadLabel = makeElement('label', 'delivery-upload-label', '＋  Elegir archivo final');
+  uploadLabel.htmlFor = fileInput.id;
+  uploadLabel.append(fileInput);
+  const uploadButton = makeElement('button', 'save-status-button', 'Subir entrega');
+  uploadButton.type = 'button';
+  const deliveryHelp = makeElement('span', 'delivery-help', 'Hasta 20 MB por archivo');
+  uploadButton.addEventListener('click', async () => {
+    const file = fileInput.files?.[0];
+    if (!file) {
+      showMessage('Primero elige el archivo final que vas a entregar.', 'error');
+      return;
+    }
+    if (!order.user_id) {
+      showMessage('Este pedido no tiene user_id asociado. No se puede vincular la entrega al cliente hasta corregir ese dato.', 'error');
+      return;
+    }
+    uploadButton.disabled = true;
+    uploadButton.textContent = 'Subiendo…';
+    try {
+      await entregarDiseno(order.id, file, order.user_id);
+      showMessage('Archivo subido y asociado al pedido. Confirma que las políticas de Storage y order_files permiten la operación.', 'success');
+      fileInput.value = '';
+    } catch (error) {
+      console.error('No se pudo subir la entrega:', error);
+      showMessage(error.message || 'No se pudo subir el archivo. Revisa las políticas de Storage y la tabla order_files.', 'error');
+    } finally {
+      uploadButton.disabled = false;
+      uploadButton.textContent = 'Subir entrega';
+    }
+  });
+  deliveryWrap.append(uploadLabel, uploadButton, deliveryHelp);
+  card.append(deliveryWrap);
 
   const bottom = makeElement('div', 'order-card-bottom');
   const label = makeElement('label', '', 'Actualizar estado');
@@ -138,11 +212,11 @@ async function loadOrders(showLoading = true) {
     renderStats();
     renderList();
     dashboard.hidden = false;
-    showMessage('Pedidos actualizados. Se muestran primero las solicitudes más recientes.', 'success');
+    showMessage('Panel conectado. Se muestran primero las solicitudes más recientes.', 'success');
   } catch (error) {
     console.error('No se pudieron cargar los pedidos:', error);
     dashboard.hidden = true;
-    showMessage(error.message || 'No se pudieron cargar los pedidos. Comprueba que tu perfil tenga rol de administrador y que las políticas de Supabase permitan consultar orders.', 'error');
+    showMessage(error.message || 'No se pudieron cargar los pedidos. Comprueba el rol admin y las políticas de Supabase.', 'error');
   } finally {
     refreshButton.disabled = false;
   }
@@ -165,7 +239,7 @@ async function init() {
   try {
     const { data, error } = await supabase.auth.getUser();
     if (error || !data.user) {
-      showMessage('Inicia sesión con tu cuenta de administrador para acceder a este panel.', 'error');
+      showMessage('Inicia sesión con la cuenta sketchly.draw@gmail.com después de registrarla en este proyecto de Supabase. Si aún no tiene perfil, primero crea la cuenta desde la web.', 'error');
       return;
     }
     signOutButton.hidden = false;
