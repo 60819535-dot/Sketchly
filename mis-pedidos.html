@@ -444,10 +444,27 @@ function crearTarjeta(order, index) {
             </div>
             <span class="order-status" data-status><span data-icon></span><span data-label></span></span>
         </div>
-        <div class="order-actions" data-order-actions hidden>
-            <button type="button" class="order-action-button edit-order-button" data-edit-order>Editar pedido</button>
-            <button type="button" class="order-action-button cancel-order-button" data-cancel-order>Cancelar pedido</button>
-        </div>
+        <section class="order-management" data-order-actions hidden aria-label="Gestionar pedido">
+            <div class="order-management-heading">
+                <span class="management-icon" aria-hidden="true">✦</span>
+                <div>
+                    <h4>¿Necesitas hacer un cambio?</h4>
+                    <p>Mientras tu pedido no esté pagado ni en proceso, puedes gestionarlo desde aquí.</p>
+                </div>
+            </div>
+            <div class="order-actions">
+                <button type="button" class="order-action-button edit-order-button" data-edit-order>
+                    <span class="action-symbol" aria-hidden="true">✎</span>
+                    <span class="action-copy"><strong>Editar pedido</strong><small>Modificar detalles o imagen</small></span>
+                    <span class="action-arrow" aria-hidden="true">→</span>
+                </button>
+                <button type="button" class="order-action-button cancel-order-button" data-cancel-order>
+                    <span class="action-symbol" aria-hidden="true">×</span>
+                    <span class="action-copy"><strong>Cancelar pedido</strong><small>Eliminar esta solicitud</small></span>
+                    <span class="action-arrow" aria-hidden="true">→</span>
+                </button>
+            </div>
+        </section>
         <form class="order-edit-form" data-order-edit hidden>
             <h4>Editar tu solicitud</h4>
             <label>Tipo de diseño
