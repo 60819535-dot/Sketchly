@@ -55,20 +55,48 @@ function addActionButton(parent, text, callback) {
   parent.append(button);
   return button;
 }
-function openReference(path) {
-  if (!path) return;
-  if (/^https?:\/\//i.test(path)) {
-    window.open(path, '_blank', 'noopener,noreferrer');
+function showImagePreview(url, title = 'Vista previa') {
+  const modal = $('#adminImageModal');
+  const image = $('#adminImagePreview');
+  const heading = $('#adminImageTitle');
+  if (!modal || !image || !heading) {
+    window.open(url, '_blank', 'noopener,noreferrer');
     return;
   }
-  const { data: sessionData } = { data: null };
-  void sessionData;
-  supabase.storage.from('sketchly-files').createSignedUrl(path, 3600).then(({data, error}) => {
+  image.src = url;
+  image.alt = title;
+  heading.textContent = title;
+  modal.classList.add('show');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+function closeImagePreview() {
+  const modal = $('#adminImageModal');
+  if (!modal) return;
+  modal.classList.remove('show');
+  modal.setAttribute('aria-hidden', 'true');
+  $('#adminImagePreview').src = '';
+  document.body.style.overflow = '';
+}
+$('#adminImageModalClose')?.addEventListener('click', closeImagePreview);
+$('#adminImageModal')?.addEventListener('click', (event) => {
+  if (event.target.id === 'adminImageModal') closeImagePreview();
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') closeImagePreview();
+});
+function openReference(path, bucket = 'sketchly-files', title = 'Imagen de referencia') {
+  if (!path) return;
+  if (/^https?:\/\//i.test(path)) {
+    showImagePreview(path, title);
+    return;
+  }
+  supabase.storage.from(bucket).createSignedUrl(path, 3600).then(({data, error}) => {
     if (error || !data?.signedUrl) throw error || new Error('No se generó el enlace de la imagen.');
-    window.open(data.signedUrl, '_blank', 'noopener,noreferrer');
+    showImagePreview(data.signedUrl, title);
   }).catch(error => {
-    console.error('No se pudo abrir la referencia:', error);
-    showMessage('No se pudo abrir la referencia. Verifica que la ruta exista en el bucket sketchly-files y que las políticas de Storage permitan leerla.', 'error');
+    console.error('No se pudo abrir la imagen:', error);
+    showMessage('No se pudo abrir la imagen. Comprueba que el archivo exista en el bucket correcto y que las políticas de Storage permitan leerlo.', 'error');
   });
 }
 function renderOrder(order) {
