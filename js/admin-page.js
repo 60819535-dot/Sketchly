@@ -101,6 +101,66 @@ function renderOrder(order) {
   card.append(meta);
   card.append(makeElement('p', 'order-description', safeText(order.description, 'El cliente no agregó una descripción.')));
 
+  // Cotización: guardar el monto y habilitar el panel de pago Yape del cliente.
+  const quoteBox = makeElement('div', 'order-actions');
+  quoteBox.style.alignItems = 'center';
+  quoteBox.style.flexWrap = 'wrap';
+  quoteBox.style.margin = '14px 0';
+  const priceLabel = makeElement('label', '', 'Precio del diseño (S/)');
+  priceLabel.style.display = 'flex';
+  priceLabel.style.flexDirection = 'column';
+  priceLabel.style.gap = '6px';
+  priceLabel.style.fontSize = '12px';
+  priceLabel.style.fontWeight = '700';
+  const priceInput = makeElement('input');
+  priceInput.type = 'number';
+  priceInput.min = '0.01';
+  priceInput.step = '0.01';
+  priceInput.required = true;
+  priceInput.inputMode = 'decimal';
+  priceInput.placeholder = 'Ej. 25.00';
+  priceInput.setAttribute('aria-label', 'Precio del pedido en soles');
+  priceInput.value = order.amount ?? order.price ?? order.total_amount ?? '';
+  priceInput.style.padding = '10px 12px';
+  priceInput.style.border = '1px solid #ded5ef';
+  priceInput.style.borderRadius = '10px';
+  priceInput.style.minWidth = '150px';
+  priceLabel.append(priceInput);
+  const savePrice = makeElement('button', 'save-status-button', 'Guardar precio y habilitar Yape');
+  savePrice.type = 'button';
+  savePrice.addEventListener('click', async () => {
+    const amountValue = Number(priceInput.value);
+    if (!priceInput.value.trim() || !Number.isFinite(amountValue) || amountValue <= 0) {
+      showMessage('Escribe un precio válido mayor que S/ 0.00.', 'error');
+      priceInput.focus();
+      return;
+    }
+    if (['cancelled', 'completed', 'in_progress'].includes(order.status)) {
+      showMessage('Para cotizar o cambiar el precio, primero verifica que el pedido no esté cancelado, terminado o en proceso.', 'error');
+      return;
+    }
+    savePrice.disabled = true;
+    savePrice.textContent = 'Guardando…';
+    try {
+      const changes = { amount: Math.round(amountValue * 100) / 100 };
+      if (['pending', 'reviewing'].includes(order.status)) changes.status = 'quoted';
+      const { error } = await supabase
+        .from('orders')
+        .update(changes)
+        .eq('id', order.id);
+      if (error) throw error;
+      showMessage('Precio guardado. El pedido quedó cotizado y el cliente ya puede ver el QR de Yape en “Mis pedidos”.', 'success');
+      await loadOrders(false);
+    } catch (error) {
+      console.error('No se pudo guardar el precio:', error);
+      showMessage(error.message || 'No se pudo guardar el precio. Comprueba que la tabla orders tenga la columna amount y que RLS permita actualizar pedidos como administrador.', 'error');
+      savePrice.disabled = false;
+      savePrice.textContent = 'Guardar precio y habilitar Yape';
+    }
+  });
+  quoteBox.append(priceLabel, savePrice);
+  card.append(quoteBox);
+
   const actions = makeElement('div', 'order-actions');
   if (order.reference_path) {
     addActionButton(actions, '▧  Ver imagen de referencia', () => openReference(order.reference_path));
