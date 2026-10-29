@@ -581,7 +581,33 @@
 
 <script type="module">
 
+
 import { iniciarSesion, registrarCliente } from './js/sketchly.js';
+
+// Mensajes claros para enlaces de confirmación inválidos o vencidos.
+(function mostrarErrorDeAutenticacion() {
+    const parametros = new URLSearchParams(window.location.hash.slice(1));
+    const codigo = parametros.get('error_code');
+    if (!codigo) return;
+
+    const mensajes = {
+        otp_expired: 'El enlace de confirmación ya venció o fue utilizado. Solicita uno nuevo desde tu correo y ábrelo una sola vez.',
+        access_denied: 'No se pudo confirmar tu correo. Solicita un nuevo enlace de confirmación.'
+    };
+
+    const texto = mensajes[codigo] ||
+        'No se pudo completar la confirmación. Inténtalo nuevamente desde Sketchly.';
+
+    const aviso = document.createElement('p');
+    aviso.setAttribute('role', 'alert');
+    aviso.textContent = texto;
+    aviso.style.cssText = 'margin:16px 0;padding:12px 14px;border-radius:10px;background:#fff1f0;color:#9f2424;font-size:14px;line-height:1.5;';
+    const tarjeta = document.querySelector('.auth-card');
+    if (tarjeta) tarjeta.prepend(aviso);
+
+    // Quita el token/error de la barra de direcciones después de leerlo.
+    window.history.replaceState({}, document.title, window.location.pathname + window.location.search);
+})();
 
 
 /* =====================================================
