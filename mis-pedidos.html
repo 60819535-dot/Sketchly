@@ -625,7 +625,7 @@ function configurarPago(tarjeta, order) {
         return;
     }
 
-    if (estadoPedido === 'quoted' || estadoPedido === 'awaiting_payment') {
+    if (['quoted', 'awaiting_payment', 'in_progress'].includes(estadoPedido)) {
         const form = tarjeta.querySelector('[data-payment-form]');
         form.hidden = false;
         form.addEventListener('submit', async (event) => {
@@ -681,7 +681,9 @@ function configurarPago(tarjeta, order) {
             } catch (error) {
                 console.error('Error al enviar comprobante:', error);
                 feedback.textContent =
-                    'No se pudo enviar. Verifica que Supabase tenga configurado el almacenamiento de comprobantes y vuelve a intentarlo.';
+                    'No se pudo enviar: ' + (error?.message || 'error desconocido') +
+                    '. Revisa los permisos del bucket payment-proofs y los permisos de actualización de orders en Supabase.';
+
                 boton.disabled = false;
                 boton.textContent = 'Enviar comprobante';
             }
