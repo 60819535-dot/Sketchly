@@ -16,10 +16,17 @@ export async function registrarCliente(nombre, email, password) {
         throw new Error('La contraseña debe tener al menos 8 caracteres.');
     }
 
+    // Envía la confirmación de vuelta a la página pública de Sketchly,
+    // nunca al localhost de desarrollo cuando se usa el sitio publicado.
+    const urlConfirmacion = new URL('./login.html', window.location.href);
+    urlConfirmacion.search = '';
+    urlConfirmacion.hash = '';
+
     const { data, error } = await supabase.auth.signUp({
         email: correoLimpio,
         password,
         options: {
+            emailRedirectTo: urlConfirmacion.toString(),
             data: {
                 full_name: nombreLimpio
             }
